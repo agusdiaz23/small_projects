@@ -1,0 +1,1 @@
+0.1 - 08/06/2024 - Snake will move in the array, leaving a trace behind. It wont crash with the already made trace. 

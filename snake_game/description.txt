@@ -1,0 +1,2 @@
+In this game for a college proyect, a three cells long snake will go throghout a 6x6 2d array
+The user has to hit the snake by choosing coord, but the snake itself is invisible
