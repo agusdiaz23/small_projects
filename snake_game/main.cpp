@@ -1,15 +1,25 @@
 #include <string>
 #include <cstdlib>
 #include <time.h> 
-//v_0.3
-// Snake will be tree cells long, and It will move in the array, taking different paths
+//v_0.4
+// User can type coords, and these will be saved in variables. The mark will appear in the array, too.
+// After the user type in the coords, the snake will move
+// If the user hits the snake, the score will increase
+// Ince the score reach three, program will end
 
-// Una funcion que hice para imprimir la array a voluntad, asi no tengo que poner un for loop cada vez
+// Una funcion que hice para imprimir la array y la serpiente a voluntad, asi no tengo que poner un for loop cada vez
 int print_array(char main_array[][6]) { // Summon function at will to print it out
     for (int i=0; i<6; i++)  {
         for (int u=0; u<6; u++)  {
             printf("%c", '|');
-            printf("%c", main_array[i][u]);
+            if (main_array[i][u]== ' ')
+                printf("%c", main_array[i][u]);
+            else if(main_array[i][u]=='1' || main_array[i][u]=='2') {
+                printf("%c", '$');
+            }
+            else {
+                printf("%c", '@');
+            }
         }
         printf("|\n");
     }
@@ -155,31 +165,93 @@ int do_snake_movement(char main_array[][6]) {
     return 0;
 }
 
+// Esta funcion me dice si el usuario consiguio un punto. Toma el score actual, le suma uno, y luego lo devuelve con la suma hecha
+int do_score(char main_array[][6], int pos_1, int pos_2, int score) {
+    if(main_array[pos_1][pos_2]=='0'||main_array[pos_1][pos_2]=='1'||main_array[pos_1][pos_2]=='2')
+        score++;
+
+    return score;
+}
+
+
+int limpiar_buffer(char loadedChar) {
+    while(loadedChar!='\n') {
+        loadedChar=getchar();
+    }
+    printf("%c", '\n');
+    return 0;
+}   
+
 
 // Main function
 int main() {
     srand (time(NULL));
-    char main_array[6][6];
-    int pos_1, pos_2, movimientos;
+    char main_array[6][6], loadedChar;
+    int pos_1, pos_2, movimientos, score=0;
+    bool user_input = true;
 
-    for (int i=0; i<6; i++)  { // Puts empty spaces in array
+    // Puts empty spaces in array
+    for (int i=0; i<6; i++)  { 
         for (int u=0; u<6; u++)  {
             main_array[i][u] = ' ';
         }
     }
-
     //Spawnea las tres celdas originales de la serpiente. Van a estar en una posicion al azar
     do_spawn_snake(main_array);
     print_array(main_array);
 
-    movimientos = 5; // Este loop pone a voluntad del programador la cantidad de movimientos de tres que hara la serpiente
-    for (int i=0; i<movimientos; i++) {
-        for(int u=0; u<3; u++) {
-        do_snake_movement(main_array);
+    // Esta es la pieza de codigo que repite todo el juego hasta que el usuario logra ganar o perder
+    do {
+        do {
+            printf("“Encuentre a la serpiente, indique la fila y la columna, separadas por coma:” ");
+            user_input=true; 
+
+            // Si getchar() recoge un input incorrecto, user_input cambia a false y el resto del programa no funciona
+            pos_1 = getchar(); 
+            if(pos_1<'0'||pos_1>'5') {
+                user_input=false;
+                printf("“Entrada inválida, vuelva a intentarlo:");
+            }
+            else
+                pos_2=getchar();
+
+
+            if(pos_2!=',') {
+                user_input=false;
+                printf("“Entrada inválida, vuelva a intentarlo:");
+            }
+            else if(pos_2==','&&user_input==true)
+                pos_2=getchar();
+
+            
+            if(pos_2<'0'||pos_2>'5') {
+                user_input=false;
+                printf("“Entrada inválida, vuelva a intentarlo:");
+            }
+
+            // Este parte limpia el codigo de enters si mi char actual no es ya un enter
+            if(pos_1!='\n'||pos_2!='\n') {
+                limpiar_buffer(pos_2);
+            }
+
+            // Esto convierte el input del usuario en int, si no era ya un int
+            pos_1 = pos_1 - 48;
+            pos_2 = pos_2 - 48;
+
+        }while(user_input!=true);
+
+        // Esta pieza de codigo mueve la serpiente 'u' veces
+        // Luego comprueba si la serpiente se movio a la posicion marcada por el usuario
+        // Si se movio, se aumenta un punto el score del usuario 
+        for(int u=0; u<1; u++) {
+            do_snake_movement(main_array);
         }
         print_array(main_array);
-    }
-        
-    return 0;
 
+        score = do_score(main_array, pos_1, pos_2, score);
+        printf("El puntaje actual es: %d\n", score);
+   
+    }while(score<3);
+       
+    return 0;
 }

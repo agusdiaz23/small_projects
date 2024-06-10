@@ -1,3 +1,4 @@
 0.1 - 08/06/2024 - Snake will move in the array, leaving a trace behind. It wont crash with the already made trace. 
 0.2 - 08/06/2024 - Snake will move two cells at a time, without leaving a trace behind
 0.3 - 08/06/2024 - Now snake can move three cells at a time, with a more simplier code
+0.4 - 10/06/2024 - User can hit the snake using coords, and gets points by doing so. 
