@@ -16,9 +16,8 @@ TipoRet CrearOrg(Empresa &e, Cadena cargo){
 // Originalmente la misma debería  estar vacía, en otro caso la operación quedará sin efecto.
 
 	//Creo un cargo
-	Cadena nombre_cargo = "Decano";
 	Cargo nuevo_cargo = new(nodo_cargo);
-	nuevo_cargo->nombre=nombre_cargo;
+	nuevo_cargo->nombre=cargo;
 	nuevo_cargo->sig=NULL;
 
 	//Creo la empresa y le asigno el cargo
