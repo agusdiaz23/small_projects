@@ -1,3 +1,7 @@
+//Nombre: Federico Alonso
+//CI: 54501547
+//Email: federico.alonso.redes@gmail.com
+
 #include <string>
 #include <cstdlib>
 #include <time.h> 
@@ -6,7 +10,7 @@
 // Si el usuario anota 3 puntos antes que la serpiente, ganara
 
 // Una funcion que hice para imprimir la serpiente
-int print_snake(char main_array[][6]) {
+void print_snake(char main_array[][6]) {
     char row='0';
 
     // Este loop imprime coordenadas en la parte superior de la array
@@ -16,7 +20,7 @@ int print_snake(char main_array[][6]) {
     }
     printf("\n");
 
-
+    // Este loop imprime la serpiente
     for (int i=0; i<6; i++)  {
         printf("%c ", row+i);
         for (int u=0; u<6; u++)  {
@@ -34,11 +38,10 @@ int print_snake(char main_array[][6]) {
         printf("|\n");
     }
     printf("________________________\n");
-    return 0;
 }
 
 
-int print_apples(char apple_array[][6]) {
+void print_apples(char apple_array[][6]) {
     char row='0';
 
     // Este loop imprime coordenadas en la parte superior de la array
@@ -48,6 +51,7 @@ int print_apples(char apple_array[][6]) {
     }
     printf("\n");
     
+    // Este loop imprime manzanas
     for(int i=0; i<6; i++) {
         printf("%c ", row+i);
         for(int u=0; u<6; u++) {
@@ -62,11 +66,10 @@ int print_apples(char apple_array[][6]) {
         printf("|\n");
     }
     printf("________________________\n");
-    return 0;
 }
 
 // Hace aparecer la serpiente
-int do_spawn_snake(char main_array[][6], char apple_array[][6]) {
+void do_spawn_snake(char main_array[][6], char apple_array[][6]) {
     int temp_num, pos_1, pos_2, ant_pos_1, ant_pos_2, position_name=0;
     
     pos_1=rand()%6;   
@@ -76,6 +79,7 @@ int do_spawn_snake(char main_array[][6], char apple_array[][6]) {
     
 
     //Este while busca posiciones vecinas a mi posicion cargada
+    //Funciona para cada parte de la serpiente
     for(int i = 0; i < 2;i++) {
         ant_pos_1=pos_1; // Esta es la posicion original de mi posicion, guardada para recuperarla bajo ciertas condiciones
         ant_pos_2=pos_2;
@@ -109,21 +113,23 @@ int do_spawn_snake(char main_array[][6], char apple_array[][6]) {
                 }
             }
 
+            // Si tras el loop no encontre una posicion viable, regreso a mi backup y vuelvo a intentar
             if (main_array[pos_1][pos_2] != ' ') {
                 pos_1 = ant_pos_1;
                 pos_2 = ant_pos_2;
             }
         }
         position_name++;
+
+        //Por cada loop, genero una nueva parte de la serpiente
         main_array[pos_1][pos_2]='0' + position_name;
     }
     
-    
-    return 0;
+
 }
 
 
-int do_spawn_apples(char apple_array[][6], char main_array[][6]) {
+void do_spawn_apples(char apple_array[][6], char main_array[][6]) {
     int pos_1, pos_2;
     
     for(int i=0; i<4; i++) {
@@ -134,12 +140,10 @@ int do_spawn_apples(char apple_array[][6], char main_array[][6]) {
         apple_array[pos_1][pos_2]='m';
     }
 
-    return 0;
 }
 
 // Una funcion para tomar un char no repetido de una array 2d, y reemplazarlo por la letra que el usuario elija
-int do_replace_number(char main_array[0][6], char replacer_1, char replacer_2) {
-    
+void do_replace_number(char main_array[0][6], char replacer_1, char replacer_2) {
 
     for (int i=0; i<6; i++) {
         for(int u=0; u<6; u++) {
@@ -149,11 +153,11 @@ int do_replace_number(char main_array[0][6], char replacer_1, char replacer_2) {
         }
     }
 
-    return 0;
+
 }
 
 // Esta funcion mueve la serpiente un bloque. Se puede invocar varias veces para que la serpiente se mueva una variable indenfinida de bloques
-int do_snake_movement(char main_array[][6]) {
+void do_snake_movement(char main_array[][6]) {
     int temp_num, pos_1, pos_2, ant_pos_1, ant_pos_2;
 
     // Esta parte del codigo busca la cabeza de la serpiente, la pone en una variable, y me hace un backup
@@ -201,21 +205,20 @@ int do_snake_movement(char main_array[][6]) {
             pos_2 = ant_pos_2;
         }
     }
-    main_array[pos_1][pos_2]='A'; // 
+    main_array[pos_1][pos_2]='A'; // Esto define la cabeza de mi serpiente
 
-    // El numero de celdas de la serpiente, hace el codigo exponencialmente mas dificil, asi que hice un sistema de letras para hacerlo sencillo y escalable
-    // Reeplaza los valores en la siguiente posicion de la serpiente
-    // Los reeplaza por letras, asi el numero no se multiplica
-    // Luego los vuelve a convertir en numeros
+    // El numero de celdas de la serpiente hace el codigo exponencialmente mas dificil, asi que hice un sistema de letras
+    //La primera parte mueve la cola. Donde estaba el 0 pone una B, y donde estaba el 1 pone una C. El dos lo borra
+    //al poner un numero en otra posicion no tengo que acordarme de la posicion previa
     do_replace_number(main_array, '0', 'B');
     do_replace_number(main_array, '1', 'C');
     do_replace_number(main_array, '2', ' ');
 
+    // Finalmente reemplazo todo por numeros
     do_replace_number(main_array, 'A', '0');
     do_replace_number(main_array, 'B', '1');
     do_replace_number(main_array, 'C', '2');
-    
-    return 0;
+
 }
 
 // Esta funcion hace la logica de los puntos para la serpiente y el usuario.
@@ -224,7 +227,6 @@ int do_score(char main_array[][6], int pos_1, int pos_2, int score, int &show_sn
         printf("Serpiente encontrada\n");
         show_snake=3;
         score++;
-
     }
     else if(show_snake==3) {
         printf("La serpiente se ha comido una manzana\n");
@@ -237,12 +239,15 @@ int do_score(char main_array[][6], int pos_1, int pos_2, int score, int &show_sn
 }
 
 
-int limpiar_buffer(char loadedChar) {
-    while(loadedChar!='\n') {
+void limpiar_buffer() {
+    char loadedChar;
+
+    do {
         loadedChar=getchar();
-    }
+    }while(loadedChar!='\n');
+    
     printf("%c", '\n');
-    return 0;
+
 }   
 
 // me dice si la serpiente comio una manzana y si la comio elimina las manzanas y pone el contador de show_snake en 3
@@ -289,7 +294,6 @@ int main() {
 
     // Esta es la pieza de codigo que repite todo el juego hasta que el usuario logra ganar o perder
     do {
-
         // Este fragmento pide el input del usuario, y solo continua si es correcto. Sino continua preguntando
         do {
             user_input=true;
@@ -299,32 +303,40 @@ int main() {
                 pos_1 = getchar();
             }while(pos_1=='\n');
             
-            // Si getchar() recoge un input incorrecto, user_input cambia a false y el resto del programa no funciona
-             
+            //Recoge primer char 
             if(pos_1<'0'||pos_1>'5') {
                 user_input=false;
-                printf("Entrada inválida, vuelva a intentarlo");
+                printf("Entrada inválida, vuelva a intentarlo\n");
             }
-            else
+            //Si char correcto, recoge segundo
+            else {
                 pos_2=getchar();
 
-
-            if(pos_2!=',') {
-                user_input=false;
-                printf("Entrada inválida, vuelva a intentarlo");
-            }
-            else if(pos_2==','&&user_input==true)
-                pos_2=getchar();
-
-            
-            if(pos_2<'0'||pos_2>'5') {
-                user_input=false;
-                printf("Entrada inválida, vuelva a intentarlo");
+                if(pos_2!=',') {
+                    user_input=false;
+                    printf("Entrada inválida, vuelva a intentarlo\n");
+                }
+                //Si char correcto, recoge tercero
+                else if(pos_2==','&&user_input==true) {
+                    pos_2=getchar();
+                    
+                    if(pos_2<'0'||pos_2>'5') {
+                        user_input=false;
+                        printf("Entrada inválida, vuelva a intentarlo\n");
+                    }
+                    else { // Si char correcto, se fija si el ultimo es un enter
+                        loadedChar=getchar();
+                        if (loadedChar!='\n'){
+                            user_input=false;
+                            printf("Entrada inválida, vuelva a intentarlo\n");
+                        }
+                    }
+                }
             }
 
             // Este parte limpia el codigo de enters si mi char actual no es ya un enter
-            if(pos_1!='\n'||pos_2!='\n') {
-                limpiar_buffer(pos_2);
+            if(pos_1!='\n'&&pos_2!='\n'&&loadedChar!='\n') {
+                limpiar_buffer();
             }
 
             // Esto convierte el input del usuario en int, si no era ya un int
@@ -336,6 +348,7 @@ int main() {
         // Esta pieza de codigo mueve la serpiente 'u' veces
         for(int u=0; u<3; u++) {
             do_snake_movement(main_array);
+            
             // For cada loop me fijo si comio una manzana
             // Si come una, pongo show_snake en 3
             show_snake = test_snake_eat_apple(main_array, apple_array, show_snake);
@@ -351,7 +364,6 @@ int main() {
                     apple_array[i][u]=' ';
                 }
             }
-
             // Cuando ya no muestro a la serpiente, spawneo las manzanas otra vez
             if (show_snake==0) {
                 do_spawn_apples(apple_array, main_array);
