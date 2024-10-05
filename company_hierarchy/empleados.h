@@ -1,13 +1,11 @@
 #include "definiciones.h"
 
 
-TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
+TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci);
 // Asignar una persona a un cargo, si este existe.
 // Asigna una persona de nombre nom  y cédula de identidad ci al cargo cargo
 // siempre que el cargo exista en la empresa y esa persona no este asignada a
 // ese u otro cargo, en caso contrario la operación quedará sin efecto.
-	return NO_IMPLEMENTADA;
-}
 
 TipoRet EliminarPersona(Empresa &e, Cadena ci);
 // Eliminar una persona de un cargo.

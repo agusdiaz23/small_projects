@@ -10,15 +10,22 @@
 
 using namespace std;
 
-struct nodo_empresa{
-	// aquí deben figurar los campos que usted considere necesarios para manipular el organigrama.
-	// Se deberan crear nuevos modulos e incluirlos.
-};
 
 TipoRet CrearOrg(Empresa &e, Cadena cargo){
 // Inicializa la empresa y crea el primer cargo de la empresa.
-// Originalmente la misma debería  estar vacía, en otro caso la operación quedará sin efecto. 
-	return NO_IMPLEMENTADA;
+// Originalmente la misma debería  estar vacía, en otro caso la operación quedará sin efecto.
+
+	//Creo un cargo
+	Cadena nombre_cargo = "Decano";
+	Cargo nuevo_cargo = new(nodo_cargo);
+	nuevo_cargo->nombre=nombre_cargo;
+	nuevo_cargo->sig=NULL;
+
+	//Creo la empresa y le asigno el cargo
+	Empresa main_empresa = new(nodo_empresa);
+	main_empresa->Cargos=nuevo_cargo;
+
+	return OK;
 }
 
 TipoRet EliminarOrg(Empresa &e){
@@ -59,4 +66,5 @@ TipoRet ListarSuperCargos (Empresa e, Cadena cargo){
 // Lista todas los cargos que anteceden, en la jerarquía, al cargo de nombre cargo.
 	return NO_IMPLEMENTADA;
 }
+
 

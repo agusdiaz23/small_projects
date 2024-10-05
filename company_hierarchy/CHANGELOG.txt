@@ -6,3 +6,6 @@
             Agregado empleados.h y empleados.cpp con las funciones que manipulan personas
             De empresa.cpp y empresa.h se eliminaron esas mismas funciones
             Se definieron tres estructuras sencillas: Empresa, Cargo, Persona
+          - Corregido: empleados.cpp no estaba en el Makefile
+            Agregado: CrearOrg esta implementado
+            Agregado: Cargo ahora tiene nombre dentro

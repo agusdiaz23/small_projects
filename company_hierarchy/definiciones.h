@@ -29,13 +29,14 @@ struct nodo_empleado {
 // hasta que el profesor explique como van a ser los trees
 typedef struct nodo_cargo * Cargo;
 struct nodo_cargo {
+    Cadena nombre;
     Persona sig;
 };
 
 // Empresa es simplemente un pointer al primer y unico cargo
 typedef struct nodo_empresa * Empresa;
 struct  nodo_empresa {
-    nodo_cargo Cargos;
+    Cargo Cargos;
 };
 
 #endif
