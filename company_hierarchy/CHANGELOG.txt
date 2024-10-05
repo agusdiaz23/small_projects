@@ -1,3 +1,5 @@
 5/10/2024 - Added CHANGELOG and description in just created company_hierarchy directory.
-
           - Added files provided by Martin
+          - Edited Makefile in clean. Clean commands were written for a Linux enviroment. Adjusted for windows.
+          - Changed extensions in main.c and empresa.c to .cpp. In Windows, .c files cannot be compiled as C++ code. Only .cpp can.
+            Also changed extensions on Makefile to match these changes

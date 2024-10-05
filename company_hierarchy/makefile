@@ -1,10 +1,10 @@
 all: main.o empresa.o 
 	g++ -o main main.o empresa.o 
-main.o: main.c
-	g++ -c main.c
-empresa.o: empresa.h empresa.c
-	g++ -c empresa.c
+main.o: main.cpp
+	g++ -c main.cpp
+empresa.o: empresa.h empresa.cpp
+	g++ -c empresa.cpp
 clean:
-	rm *.o
-	rm main
+	del /Q *.o
+	del /Q main.exe
 
