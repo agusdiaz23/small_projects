@@ -1,0 +1,4 @@
+This program written in C++ simulates a company hierarchy.
+That is, the different positions that exist in said company.
+For each position, the program will handle a
+linked list of the people atached to it.
