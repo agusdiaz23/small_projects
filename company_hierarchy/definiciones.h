@@ -15,4 +15,27 @@ typedef enum tipo_retorno TipoRet;
 
 typedef char * Cadena;
 
+// Las tres estructuras basicas del obligatorio.
+
+// Empleado tiene sus datos y un pointer al siguiente empleado
+typedef struct nodo_empleado * Persona;
+struct nodo_empleado {
+    Cadena ci;
+    Cadena nom;
+    Persona sig;
+};
+
+// Cargo tiene un pointer a la linked list de personas
+// hasta que el profesor explique como van a ser los trees
+typedef struct nodo_cargo * Cargo;
+struct nodo_cargo {
+    Persona sig;
+};
+
+// Empresa es simplemente un pointer al primer y unico cargo
+typedef struct nodo_empresa * Empresa;
+struct  nodo_empresa {
+    nodo_cargo Cargos;
+};
+
 #endif

@@ -5,8 +5,10 @@
 // main.c
 // Consola para ingreso de datos.
 
-#include "definiciones.h"
-#include "empresa.h"
+#include "definiciones.h" // Se definen las estructuras que se usan en todo el programa
+#include "empresa.h" // Funciones relativas a los cargos
+#include "empleados.h" // Funciones para manipular empleados
+
 #include <string.h>
 #include <stdio.h>
 #include <iostream>

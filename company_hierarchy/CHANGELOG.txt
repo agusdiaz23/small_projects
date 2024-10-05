@@ -1,5 +1,8 @@
-5/10/2024 - Added CHANGELOG and description in just created company_hierarchy directory.
-          - Added files provided by Martin
-          - Edited Makefile in clean. Clean commands were written for a Linux enviroment. Adjusted for windows.
-          - Changed extensions in main.c and empresa.c to .cpp. In Windows, .c files cannot be compiled as C++ code. Only .cpp can.
-            Also changed extensions on Makefile to match these changes
+5/10/2024 - Añadido CHANGELOG y descripcion en la carpeta recien creada company_hierarchy
+          - Editado el comando clean en Makefile para que funcione en Windows y Linux
+          - Cambiada la extension de los archivos main.c y empresa.c a .cpp. En Windows, los archivos .c no pueden compilarse a C++.
+            Tambien se cambiaron las extensiones en Makefile a .cpp
+          - Se tradujo todo a español
+            Agregado empleados.h y empleados.cpp con las funciones que manipulan personas
+            De empresa.cpp y empresa.h se eliminaron esas mismas funciones
+            Se definieron tres estructuras sencillas: Empresa, Cargo, Persona
