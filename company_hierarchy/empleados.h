@@ -1,3 +1,5 @@
+
+
 #include "definiciones.h"
 
 
@@ -21,5 +23,13 @@ TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci);
 
 TipoRet ListarPersonas(Empresa e, Cadena cargo);
 // Dado un cargo listar las personas asignadas al mismo ordenadas por fecha de alta a la empresa. 
-// Lista todas las personas asignadas al cargo de nombre cargo. 
+// Lista todas las personas asignadas al cargo de nombre cargo.
+
+bool if_PersonaExisteCargo(Cadena ci, Cargo carg);
+// devuelve true si persona esta en el cargo
+
+// Lista sin orden los empleados en el cargo
+void ListarPersonasSimple(Empresa e, Cadena cargo);
+
+int CopiarString(Cadena &new_string, Cadena old_string);
 

@@ -21,8 +21,8 @@ TipoRet CrearOrg(Empresa &e, Cadena cargo){
 	nuevo_cargo->sig=NULL;
 
 	//Creo la empresa y le asigno el cargo
-	Empresa main_empresa = new(nodo_empresa);
-	main_empresa->Cargos=nuevo_cargo;
+	e = new(nodo_empresa);
+	e->cargos=nuevo_cargo;
 
 	return OK;
 }
