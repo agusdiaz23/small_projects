@@ -36,9 +36,6 @@ TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
             personas->sig = nueva_persona; // Al llegar al final de personas, pongo a la nueva
         }
         
-        cout << "El estado actual del cargo ---> ";
-        ListarPersonasSimple(e, cargo);
-        cout << endl;
     }
     else {
 
