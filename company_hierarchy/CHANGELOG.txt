@@ -6,5 +6,8 @@
             Agregado empleados.h y empleados.cpp con las funciones que manipulan personas
             De empresa.cpp y empresa.h se eliminaron esas mismas funciones
             Se definieron tres estructuras sencillas: Empresa, Cargo, Persona
-            
             Agregado: CrearOrg esta implementado
+
+6/10/204 - Agregado: AsignarPersona()
+            Funciones de ayuda: CopiarString(), ifPersonaExisteCargo(), ListarPersonaSimple()
+            Nombre a cargo
