@@ -24,12 +24,12 @@ TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
         nueva_persona->ci=new_ci;
         nueva_persona->sig=NULL;
 
-        if(cargos->sig == NULL){ // Si no hay nadie en cargo, pongo a la persona
-            cargos->sig = nueva_persona;
+        if(cargos->personas == NULL){ // Si no hay nadie en cargo, pongo a la persona
+            cargos->personas = nueva_persona;
         }
         
         else {
-            Persona personas = cargos->sig; // Si hay alguien, pongo un pointer al inicio de la lista y itero
+            Persona personas = cargos->personas; // Si hay alguien, pongo un pointer al inicio de la lista y itero
             while(personas->sig != NULL) {
                 personas = personas->sig;
             }
@@ -70,7 +70,7 @@ TipoRet ListarPersonas(Empresa e, Cadena cargo){
 // Imprime los empleados en el cargo segun el orden de listado.
 void ListarPersonasSimple(Empresa e, Cadena cargo) {
     Cargo cargos=e->cargos;
-    Persona personas = cargos->sig;
+    Persona personas = cargos->personas;
     while (personas != NULL) {
         cout << "Persona: " << personas->nom << ", CI: " << personas->ci << endl;
         personas = personas->sig;
@@ -82,8 +82,8 @@ bool if_PersonaExisteCargo(Cadena ci, Cargo carg) {
     bool PersonaExiste=false;
 
     
-    if(carg->sig != NULL) { // Si cargo tiene algo
-        Persona pers_iter = carg->sig;
+    if(carg->personas != NULL) { // Si cargo tiene algo
+        Persona pers_iter = carg->personas;
     
         while(pers_iter != NULL) {
 
