@@ -18,7 +18,7 @@ TipoRet CrearOrg(Empresa &e, Cadena cargo){
 	//Creo un cargo
 	Cargo nuevo_cargo = new(nodo_cargo);
 	nuevo_cargo->nombre=cargo;
-	nuevo_cargo->personas=NULL;
+	nuevo_cargo->empleados=NULL;
 
 	//Creo la empresa y le asigno el cargo
 	e = new(nodo_empresa);

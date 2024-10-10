@@ -1,6 +1,7 @@
 #ifndef DEFINICIONES_H
 #define DEFINICIONES_H
 
+
 // Estructuras de Datos y Algoritmos - Curso 2024
 // Tecnologo en Informatica FIng - DGETP - UTEC
 //
@@ -37,7 +38,7 @@ struct nodo_empleado {
 typedef struct nodo_cargo * Cargo;
 struct nodo_cargo {
     Cadena nombre;
-    Persona personas;
+    Empleado empleados;
 };
 
 // Empresa es simplemente un pointer al primer y unico cargo
@@ -45,5 +46,6 @@ typedef struct nodo_empresa * Empresa;
 struct  nodo_empresa {
     Cargo cargos;
 };
+
 
 #endif

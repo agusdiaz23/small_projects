@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
+using namespace std;
 
 Persona creaPers (Cadena ci, Cadena nombre){
     Persona p = new(nodo_persona);

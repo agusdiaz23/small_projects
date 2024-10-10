@@ -1,3 +1,6 @@
+#ifndef CARGO_H
+#define CARGO_H
+
 #include "definiciones.h"
 
 TipoRet NuevoCargo(Empresa &e, Cadena cargoPadre, Cadena nuevoCargo);
@@ -24,3 +27,5 @@ TipoRet ListarJerarquia(Empresa e);
 TipoRet ListarSuperCargos (Empresa e, Cadena cargo);
 // Dado un cargo listar los cargos que lo anteceden.
 // Lista todas los cargos que anteceden, en la jerarquía, al cargo de nombre cargo. 
+
+#endif
