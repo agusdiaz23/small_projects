@@ -5,45 +5,14 @@
 
 using namespace std;
 
+
 TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
 // Asigna una persona de nombre nom  y cédula de identidad ci al cargo cargo siempre que el cargo 
 // exista en la empresa y esa persona no este asignada a ese u otro cargo, en caso contrario la operación 
 // quedara sin efecto.
-    Cadena new_ci, new_nom;
-    Cargo cargos;
+   
 
-    // Asigno las variables a otra direccion.
-    // IMPORTANTE: si no se asignan a otra memoria, el usuario las soobrescribe en la siguiente iteracion
-    CopiarString(new_ci, ci);
-    CopiarString(new_nom, nom);
-
-    cargos = e->cargos;
-    if(!if_PersonaExisteCargo(new_ci, cargos)){ // Si esta persona no esta en el cargo
-        Persona nueva_persona = new(nodo_persona);
-        nueva_persona->nom=new_nom;
-        nueva_persona->ci=new_ci;
-        nueva_persona->sig=NULL;
-
-        if(cargos->personas == NULL){ // Si no hay nadie en cargo, pongo a la persona
-            cargos->personas = nueva_persona;
-        }
-        
-        else {
-            Persona personas = cargos->personas; // Si hay alguien, pongo un pointer al inicio de la lista y itero
-            while(personas->sig != NULL) {
-                personas = personas->sig;
-            }
-            personas->sig = nueva_persona; // Al llegar al final de personas, pongo a la nueva
-        }
-        
-    }
-    else {
-
-        return ERROR;
-    }
-    
-
-	return OK;
+	return NO_IMPLEMENTADA;
 }
 
 TipoRet EliminarPersona(Empresa &e, Cadena ci){
@@ -67,41 +36,14 @@ TipoRet ListarPersonas(Empresa e, Cadena cargo){
 	return NO_IMPLEMENTADA;
 }
 
-// Imprime los empleados en el cargo segun el orden de listado.
-void ListarPersonasSimple(Empresa e, Cadena cargo) {
-    Cargo cargos=e->cargos;
-    Persona personas = cargos->personas;
-    while (personas != NULL) {
-        cout << "Persona: " << personas->nom << ", CI: " << personas->ci << endl;
-        personas = personas->sig;
-    }
-}
 
-// devuelve true si persona esta en el cargo
-bool if_PersonaExisteCargo(Cadena ci, Cargo carg) {
-    bool PersonaExiste=false;
 
-    
-    if(carg->personas != NULL) { // Si cargo tiene algo
-        Persona pers_iter = carg->personas;
-    
-        while(pers_iter != NULL) {
 
-            if(strcmp(pers_iter->ci, ci) == 0){ // Si encontre a la persona
-                PersonaExiste = true;
-            }
-            pers_iter = pers_iter->sig;
-        }
-    }
-    return PersonaExiste;
-}
 
-// Copia el contenido de la segunda string en la primera
-int CopiarString(Cadena &new_string, Cadena old_string) {
-    int size = strlen(old_string);
-    new_string = new char[size+1];
-    strcpy(new_string, old_string);
 
-    return 0;
 
-}
+
+
+
+
+

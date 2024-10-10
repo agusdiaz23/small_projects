@@ -22,7 +22,13 @@ typedef struct nodo_persona * Persona;
 struct nodo_persona {
     Cadena ci;
     Cadena nom;
-    Persona sig;
+};
+
+
+typedef struct nodo_empleado * Empleado;
+struct nodo_empleado {
+    Persona personas;
+    Empleado sig;
 };
 
 

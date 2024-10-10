@@ -11,3 +11,9 @@
 6/10/204 - Agregado: AsignarPersona()
             Funciones de ayuda: CopiarString(), ifPersonaExisteCargo(), ListarPersonaSimple()
             Nombre a cargo
+
+10/10/2024  -Agregado: empleados.cpp, empleados.h, cargo.cpp, cargo.h
+              Se desplazaron funciones para coincidir con estos nuevos modulos
+            -Agregado: Ahora nodo_cargo tiene los parametros para construir un arbol
+            -Agregado: el nodo_persona, con cedula y nombre, reemplazo al nodo empleado. El nodo_empleado contiene el nodo_persona
+            -Eliminado: se eliminaro funciones que no se iban a poder usar sin mayores cambios con las nuevas struct

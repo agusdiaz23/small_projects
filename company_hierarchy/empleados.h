@@ -1,7 +1,7 @@
-
+#ifndef EMPLEADOS_H
+#define EMPLEADOS_H
 
 #include "definiciones.h"
-
 
 TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci);
 // Asignar una persona a un cargo, si este existe.
@@ -20,16 +20,12 @@ TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci);
 // siempre que el cargo exista en la empresa y esa persona no este ya asignada a
 // dicho cargo. En caso contrario la operación quedará sin efecto.
 
-
 TipoRet ListarPersonas(Empresa e, Cadena cargo);
 // Dado un cargo listar las personas asignadas al mismo ordenadas por fecha de alta a la empresa. 
 // Lista todas las personas asignadas al cargo de nombre cargo.
 
-bool if_PersonaExisteCargo(Cadena ci, Cargo carg);
-// devuelve true si persona esta en el cargo
+#endif
 
-// Lista sin orden los empleados en el cargo
-void ListarPersonasSimple(Empresa e, Cadena cargo);
 
-int CopiarString(Cadena &new_string, Cadena old_string);
+
 
