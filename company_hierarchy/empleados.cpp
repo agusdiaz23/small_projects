@@ -11,7 +11,6 @@ Empleado CreaListaEmpleado (){
 }
 
 Empleado cons(Empleado e, Cadena ci, Cadena nom){
-<<<<<<< Updated upstream
 // Inserta persona al inicio de lista empleado.
 	Empleado aux = new(nodo_empleado);
 	aux->personas = creaPers(ci,nom);
@@ -32,15 +31,6 @@ void ListaEmpleados(Empleado e){
         // Avanza al siguiente nodo
         iter = iter->sig;
 }
-=======
-// Inserta n al inicio de l.
-	Empleado aux = new(nodo_empleado);
-	aux->personas = crea;
-	aux->sig = l;
-	return aux;
-}
-
->>>>>>> Stashed changes
 
 
 TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
