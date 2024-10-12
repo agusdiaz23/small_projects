@@ -1,9 +1,36 @@
 #include "empleados.h"
+#include "persona.h"
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
 
 using namespace std;
+
+Empleado CreaListaEmpleado (){
+	return NULL;
+}
+
+Empleado cons(Empleado e, Cadena ci, Cadena nom){
+// Inserta persona al inicio de lista empleado.
+	Empleado aux = new(nodo_empleado);
+	aux->personas = creaPers(ci,nom);
+	aux->sig = e;
+	return aux;
+}
+
+void ListaEmpleados(Empleado e){
+	 Empleado iter = e;  // Iterador desde el inicio
+
+    while (iter != NULL) {  // Recorre la lista mientras no llegue al final
+        // Accede a los datos de la persona en el nodo actual
+        Persona p = iter->personas;
+        
+        // Imprime los datos de la persona (ci y nombre)
+        cout << "CI: " << getCI(p) << ", Nombre: " << getNombre(p) << endl;
+
+        // Avanza al siguiente nodo
+        iter = iter->sig;
+}
 
 
 TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
