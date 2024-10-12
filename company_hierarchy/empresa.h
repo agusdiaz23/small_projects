@@ -8,7 +8,6 @@
 // empresa.h
 // Modulo de Definición de la Empresa
 
-
 #include "definiciones.h"
 
 TipoRet CrearOrg(Empresa &e, Cadena cargo);
@@ -18,7 +17,7 @@ TipoRet CrearOrg(Empresa &e, Cadena cargo);
 TipoRet EliminarOrg(Empresa &e);
 // Eliminar el organigrama, elimina toda la estructura del organigrama, liberando la memoria asignada.
 
-
+Cargo getEmpresaRaiz(Empresa e);
 
 #endif
 

@@ -1,12 +1,12 @@
 #include "empleados.h"
-#include "persona.h"
+
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
 
 using namespace std;
 
-Empleado CreaListaEmpleado (){
+Empleado CreaListaEmpleado(){
 	return NULL;
 }
 
@@ -19,7 +19,7 @@ Empleado cons(Empleado e, Cadena ci, Cadena nom){
 }
 
 void ListaEmpleados(Empleado e){
-	 Empleado iter = e;  // Iterador desde el inicio
+	Empleado iter = e;  // Iterador desde el inicio
 
     while (iter != NULL) {  // Recorre la lista mientras no llegue al final
         // Accede a los datos de la persona en el nodo actual
@@ -30,17 +30,11 @@ void ListaEmpleados(Empleado e){
 
         // Avanza al siguiente nodo
         iter = iter->sig;
+	}
 }
 
 
-TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
-// Asigna una persona de nombre nom  y cédula de identidad ci al cargo cargo siempre que el cargo 
-// exista en la empresa y esa persona no este asignada a ese u otro cargo, en caso contrario la operación 
-// quedara sin efecto.
-   
 
-	return NO_IMPLEMENTADA;
-}
 
 TipoRet EliminarPersona(Empresa &e, Cadena ci){
 // Eliminar una persona de un cargo.

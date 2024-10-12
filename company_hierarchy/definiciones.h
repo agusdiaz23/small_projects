@@ -39,6 +39,9 @@ typedef struct nodo_cargo * Cargo;
 struct nodo_cargo {
     Cadena nombre;
     Empleado empleados;
+    Cargo hijo;
+    Cargo hermano;
+    Cargo padre;
 };
 
 // Empresa es simplemente un pointer al primer y unico cargo

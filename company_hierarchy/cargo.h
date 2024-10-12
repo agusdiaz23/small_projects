@@ -2,6 +2,14 @@
 #define CARGO_H
 
 #include "definiciones.h"
+#include "empresa.h"
+#include "empleados.h"
+
+TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci);
+// Asignar una persona a un cargo, si este existe.
+// Asigna una persona de nombre nom  y cédula de identidad ci al cargo cargo
+// siempre que el cargo exista en la empresa y esa persona no este asignada a
+// ese u otro cargo, en caso contrario la operación quedará sin efecto.
 
 TipoRet NuevoCargo(Empresa &e, Cadena cargoPadre, Cadena nuevoCargo);
 // Insertar un nuevo cargo como dependiente de otro ya existente.
@@ -26,6 +34,22 @@ TipoRet ListarJerarquia(Empresa e);
 
 TipoRet ListarSuperCargos (Empresa e, Cadena cargo);
 // Dado un cargo listar los cargos que lo anteceden.
-// Lista todas los cargos que anteceden, en la jerarquía, al cargo de nombre cargo. 
+// Lista todas los cargos que anteceden, en la jerarquía, al cargo de nombre cargo.
+
+// Asigno el nuevo cargo como hijo del cargo pedido
+void AsignarCargoHijo(Cargo cargo, Cargo cargo_padre);
+
+Cargo definirCargo(Cadena cargo_nom);
+
+//Crea el primer cargo al hacer una nuevo organizacion
+Cargo makePrimerCargo(Cadena cargo_nom);
+
+// Devuelve el nombre de un cargo
+Cadena getCarNom(Cargo cargo);
+
+// Itera todo el arbol usando el nodo pasado como raiz y devuelve el puntero al cargo con el nombre pasado
+Cargo iteradorEmpresa(Cadena cargo, Cargo cargos);
+
+Cargo ImprimirArbolCargos(Cargo cargos);
 
 #endif
