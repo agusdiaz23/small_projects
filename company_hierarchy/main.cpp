@@ -10,8 +10,6 @@
 #include "cargo.h"
 #include "empleados.h" // Funciones para manipular empleados
 #include "persona.h"
-
-
 #include <string.h>
 #include <stdio.h>
 #include <iostream>

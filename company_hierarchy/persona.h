@@ -3,10 +3,6 @@
 
 #include "definiciones.h"
 
-
-
-
-
 Persona crearPers_vacia();
 // Crea la persona vacia.
 
