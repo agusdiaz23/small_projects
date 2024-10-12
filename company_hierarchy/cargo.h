@@ -4,6 +4,8 @@
 #include "definiciones.h"
 #include "empresa.h"
 #include "empleados.h"
+#include "cargo.h"
+
 
 TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci);
 // Asignar una persona a un cargo, si este existe.
@@ -39,9 +41,10 @@ TipoRet ListarSuperCargos (Empresa e, Cadena cargo);
 // Asigno el nuevo cargo como hijo del cargo pedido
 void AsignarCargoHijo(Cargo cargo_hijo, Cargo cargo_padre);
 
+// Define un cargo con punteros vacíos y el nombre pasado. Devuelve el puntero al cargo
 Cargo definirCargo(Cadena cargo_nom);
 
-// Devuelve el nombre de un cargo
+// Imprime los datos del cargo pasado
 Cadena getCarNom(Cargo cargo);
 Cadena getCarNomH(Cargo cargo);
 Cadena getCarNomH(Cargo cargo);
@@ -51,11 +54,13 @@ void imprimeInfoCargo(Cargo cargo);
 // Itera todo el arbol usando el nodo pasado como raiz y devuelve el puntero al cargo con el nombre pasado
 Cargo iteradorEmpresa(Cadena cargo, Cargo cargos);
 
+//Itera todo el arbol imprimiendo la informacion de cada cargo por un semi orden jerarquico
 Cargo imprimirArbolCargos(Cargo cargos);
 
 // Itera hasta el final de la lista de cargos hijos y devuelve el ultimo miembro
 Cargo iteradorCargoHermanos(Cargo cargos);
 
+//Devuelve true si el cargo con el nombre pasado existe en el arbol pasado
 bool ifCargoExiste(Cadena cargo, Cargo cargos_lista);
 
 

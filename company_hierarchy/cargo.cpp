@@ -4,7 +4,6 @@
 
 
 #include "definiciones.h"
-#include "empresa.h"
 #include "cargo.h"
 
 using namespace std;
@@ -61,10 +60,19 @@ TipoRet ListarSuperCargos (Empresa e, Cadena cargo){
 	return NO_IMPLEMENTADA;
 }
 
-TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
 // Asigna una persona de nombre nom  y cédula de identidad ci al cargo cargo siempre que el cargo 
 // exista en la empresa y esa persona no este asignada a ese u otro cargo, en caso contrario la operación 
 // quedara sin efecto.
+TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
+	
+	// Pido el primer cargo
+	Cargo cargo_nodo = getEmpresaRaiz(e);
+	cargo_nodo = iteradorEmpresa(cargo, cargo_nodo);
+
+	cargo_nodo->empleados = cons(cargo_nodo->empleados, ci, nom);
+	ListaEmpleados(cargo_nodo->empleados);
+	
+
 	return NO_IMPLEMENTADA;
 }
 
@@ -90,6 +98,7 @@ Cadena getCarNomP(Cargo cargo){
 	} else
 		return "NO EXISTE";
 }
+
 
 Cargo definirCargo(Cadena cargo_nom) {
 	
@@ -168,6 +177,10 @@ Cargo imprimirArbolCargos(Cargo cargos) {
 		return (imprimirArbolCargos(cargos->hijo), imprimirArbolCargos(cargos->hermano));
 	}
 
+}
+
+Cargo imprimirTodo(Empresa e) {
+	Cargo cargos = getEmpresaRaiz(e);
 }
 
 bool ifCargoExiste(Cadena cargo, Cargo cargos_lista) {

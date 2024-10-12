@@ -22,7 +22,14 @@ TipoRet ListarPersonas(Empresa e, Cadena cargo);
 // Dado un cargo listar las personas asignadas al mismo ordenadas por fecha de alta a la empresa. 
 // Lista todas las personas asignadas al cargo de nombre cargo.
 
+//Define una lista vacia de empleados
 Empleado CreaListaEmpleado();
+
+//Define un nuevo nodo para empleado y lo pone al principio
+Empleado cons(Empleado e, Cadena ci, Cadena nom);
+
+void ListaEmpleados(Empleado e);
+
 
 #endif
 
