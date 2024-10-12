@@ -33,14 +33,43 @@ void ListaEmpleados(Empleado e){
 	}
 }
 
-
-
-
 TipoRet EliminarPersona(Empresa &e, Cadena ci){
-// Eliminar una persona de un cargo.
-// Elimina una persona de cédula ci de la empresa siempre y cuando la misma exista,
-// en caso contrario la operación quedará sin efecto.
-    return NO_IMPLEMENTADA;
+    if (e == NULL || e->cargos == NULL) { // La empresa o los cargos están vacíos
+        return ERROR;  
+    }
+
+    Cargo cargoActual = e->cargos;
+    bool personaEliminada = false;  // Bandera para saber si se eliminó la persona
+
+    while (cargoActual != NULL) {
+        Empleado actual = cargoActual->empleados;
+        Empleado anterior = NULL;
+
+        // Recorremos la lista de empleados en el cargo actual
+        while (actual != NULL) {
+            if (strcmp(getCI(actual->personas), ci) == 0) {
+				// Si es el primer empleado de la lista
+                if (anterior == NULL) { 
+                    cargoActual->empleados = actual->sig;
+                } else {
+                    anterior->sig = actual->sig;
+                }
+                // Liberar la memoria del nodo y de la persona
+                delete actual->personas;
+                delete actual;
+
+                personaEliminada = true;
+                return OK;  // Retorna OK después de eliminar la persona
+            }
+            // Avanzamos al siguiente nodo
+            anterior = actual;
+            actual = actual->sig;
+        }
+        // Si no encontramos la persona en el cargo actual, continuamos con el siguiente cargo (hermano o hijo)
+        cargoActual = cargoActual->hermano;  // Cambiar si deseas buscar en los hijos también
+    }
+
+    return ERROR;  // Si no se encontró la persona en ningún cargo
 }
 
 TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci){
