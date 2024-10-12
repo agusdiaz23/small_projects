@@ -16,7 +16,7 @@ using namespace std;
 // Originalmente la misma debería  estar vacía, en otro caso la operación quedará sin efecto.
 TipoRet CrearOrg(Empresa &e, Cadena cargo){
 
-	Cargo nuevo_cargo_nodo = makePrimerCargo(cargo);
+	Cargo nuevo_cargo_nodo = definirCargo(cargo);
 		
 	e = new(nodo_empresa);
 	e->cargos = nuevo_cargo_nodo;

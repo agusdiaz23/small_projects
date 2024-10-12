@@ -41,18 +41,17 @@ void AsignarCargoHijo(Cargo cargo_hijo, Cargo cargo_padre);
 
 Cargo definirCargo(Cadena cargo_nom);
 
-//Crea el primer cargo al hacer una nuevo organizacion
-Cargo makePrimerCargo(Cadena cargo_nom);
-
 // Devuelve el nombre de un cargo
 Cadena getCarNom(Cargo cargo);
 Cadena getCarNomH(Cargo cargo);
 Cadena getCarNomH(Cargo cargo);
 
+void imprimeInfoCargo(Cargo cargo);
+
 // Itera todo el arbol usando el nodo pasado como raiz y devuelve el puntero al cargo con el nombre pasado
 Cargo iteradorEmpresa(Cadena cargo, Cargo cargos);
 
-Cargo ImprimirArbolCargos(Cargo cargos);
+Cargo imprimirArbolCargos(Cargo cargos);
 
 // Itera hasta el final de la lista de cargos hijos y devuelve el ultimo miembro
 Cargo iteradorCargoHermanos(Cargo cargos);

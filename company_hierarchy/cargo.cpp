@@ -29,17 +29,9 @@ TipoRet NuevoCargo(Empresa &e, Cadena cargoPadre, Cadena nuevoCargo){
 
 	// Imprimo todo el arbol de cualquier manera para desbuguear
 	cout << "Se imprime arbol: " << endl;
-	ImprimirArbolCargos(getEmpresaRaiz(e));
+	imprimirArbolCargos(getEmpresaRaiz(e));
 
 	return OK;
-}
-
-// Hace un cargo y devuelve el puntero
-Cargo makePrimerCargo(Cadena cargo_nom) {
-	//Creo un cargo
-	Cargo nuevo_cargo = definirCargo(cargo_nom);
-
-	return nuevo_cargo;
 }
 
 TipoRet EliminarCargo(Empresa &e, Cadena cargo){
@@ -73,16 +65,13 @@ TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
 // Asigna una persona de nombre nom  y cédula de identidad ci al cargo cargo siempre que el cargo 
 // exista en la empresa y esa persona no este asignada a ese u otro cargo, en caso contrario la operación 
 // quedara sin efecto.
-   
-
 	return NO_IMPLEMENTADA;
 }
 
 Cadena getCarNom(Cargo cargo){
 	if(cargo != NULL) {
 		return cargo->nombre;
-	}
-	else
+	} else
 		return "NO EXISTE";
 }
 
@@ -90,8 +79,7 @@ Cadena getCarNomH(Cargo cargo){
 	if(cargo->hijo != NULL) {
 		cargo = cargo->hijo;
 		return cargo->nombre;
-	}
-	else
+	} else
 		return "NO EXISTE";
 }
 
@@ -99,8 +87,7 @@ Cadena getCarNomP(Cargo cargo){
 	if(cargo->padre != NULL) {
 		cargo = cargo->padre;
 		return cargo->nombre;
-	}
-	else
+	} else
 		return "NO EXISTE";
 }
 
@@ -127,15 +114,12 @@ void AsignarCargoHijo(Cargo cargo_hijo, Cargo cargo_padre) {
 		cargo_padre->hijo=cargo_hijo;
 		
 		cargo_hijo->padre = cargo_padre;
-	}
-	else {
+	} else {
 		Cargo cargo_hermano = iteradorCargoHermanos(cargo_padre->hijo);
 		cargo_hermano->hermano = cargo_hijo;
 		
 		cargo_hijo->padre = cargo_padre;
 	}
-	
-
 }
 
 // Itera todo el arbol usando el nodo pasado como raiz y devuelve el puntero al cargo con el nombre pasado
@@ -143,21 +127,13 @@ Cargo iteradorEmpresa(Cadena cargo, Cargo cargos) {
 
 	if(strcmp(cargos->nombre, cargo) == 0) { // Encontre un cargo con el mismo nombre
 		return cargos;
-	} 
-	
-	else if(cargos->hermano == NULL && cargos->hijo == NULL) {  // Si llegue al final de ambos
+	} else if(cargos->hermano == NULL && cargos->hijo == NULL) {  // Si llegue al final de ambos
 		return NULL;
-	} 
-	
-	else if(cargos->hermano == NULL && cargos->hijo != NULL) { // Si llegue al final de hermano
+	} else if(cargos->hermano == NULL && cargos->hijo != NULL) { // Si llegue al final de hermano
 		return iteradorEmpresa(cargo, cargos->hijo);
-	} 
-	
-	else if(cargos->hermano != NULL && cargos->hijo == NULL) { // Si llegue al final de hijo
+	} else if(cargos->hermano != NULL && cargos->hijo == NULL) { // Si llegue al final de hijo
 		return iteradorEmpresa(cargo, cargos->hermano);
-	} 
-	
-	else {
+	} else {
 		return (iteradorEmpresa(cargo, cargos->hijo), iteradorEmpresa(cargo, cargos->hermano));
 	}
 }
@@ -175,28 +151,21 @@ Cargo iteradorCargoHermanos(Cargo cargos) {
 }
 
 // Imprime el arbol a partir del cargo dado
-Cargo ImprimirArbolCargos(Cargo cargos) {
+Cargo imprimirArbolCargos(Cargo cargos) {
 	if(cargos == NULL) {
 		return NULL;
-	}
-	else if(cargos->hijo == NULL && cargos->hermano == NULL) {
-		cout << "Nombre: " << getCarNom(cargos) << "|" << "Nombre del hijo: " << getCarNomH(cargos) << "|" << "Nombre del padre: " << getCarNomP(cargos) << endl;
+	} else if(cargos->hijo == NULL && cargos->hermano == NULL) {
+		imprimeInfoCargo(cargos);
 		return NULL;
-	}
-	else if(cargos->hijo != NULL && cargos->hermano == NULL) {
-		cout << "Nombre: " << getCarNom(cargos) << "|" << "Nombre del hijo: " << getCarNomH(cargos) << "|" << "Nombre del padre: " << getCarNomP(cargos) << endl;
-		
-		return (ImprimirArbolCargos(cargos->hijo));
-	}
-	else if(cargos->hijo == NULL && cargos->hermano != NULL) {
-		cout << "Nombre: " << getCarNom(cargos) << "|" << "Nombre del hijo: " << getCarNomH(cargos) << "|" << "Nombre del padre: " << getCarNomP(cargos) << endl;
-		return (ImprimirArbolCargos(cargos->hermano));
-		
-	}
-	else if(cargos->hijo != NULL && cargos->hermano != NULL) {
-		cout << "Nombre: " << getCarNom(cargos) << "|" << "Nombre del hijo: " << getCarNomH(cargos) << "|" << "Nombre del padre: " << getCarNomP(cargos) << endl;
-		
-		return (ImprimirArbolCargos(cargos->hijo), ImprimirArbolCargos(cargos->hermano));
+	} else if(cargos->hijo != NULL && cargos->hermano == NULL) {
+		imprimeInfoCargo(cargos);
+		return (imprimirArbolCargos(cargos->hijo));
+	} else if(cargos->hijo == NULL && cargos->hermano != NULL) {
+		imprimeInfoCargo(cargos);
+		return (imprimirArbolCargos(cargos->hermano));
+	} else if(cargos->hijo != NULL && cargos->hermano != NULL) {
+		imprimeInfoCargo(cargos);
+		return (imprimirArbolCargos(cargos->hijo), imprimirArbolCargos(cargos->hermano));
 	}
 
 }
@@ -205,20 +174,20 @@ bool ifCargoExiste(Cadena cargo, Cargo cargos_lista) {
 
 	if(cargo == NULL) {
 		return false;
-	}
-	else if(strcmp(cargos_lista->nombre, cargo) == 0) {
+	} else if(strcmp(cargos_lista->nombre, cargo) == 0) {
 		return true;
-	}
-	else if(cargos_lista->hijo != NULL && cargos_lista->hermano != NULL) {
+	} else if(cargos_lista->hijo != NULL && cargos_lista->hermano != NULL) {
 		return (ifCargoExiste(cargo, cargos_lista->hijo) || ifCargoExiste(cargo, cargos_lista->hermano));
-	}
-	else if(cargos_lista->hijo != NULL && cargos_lista->hermano == NULL) {
+	} else if(cargos_lista->hijo != NULL && cargos_lista->hermano == NULL) {
 		return ifCargoExiste(cargo, cargos_lista->hijo);
-	}
-	else if(cargos_lista->hijo == NULL && cargos_lista->hermano != NULL) {
+	} else if(cargos_lista->hijo == NULL && cargos_lista->hermano != NULL) {
 		return ifCargoExiste(cargo, cargos_lista->hermano);
-	}
-	else if(cargos_lista->hijo == NULL && cargos_lista->hermano == NULL) {
+	} else if(cargos_lista->hijo == NULL && cargos_lista->hermano == NULL) {
 		return false;
 	}
+}
+
+// Esta función imprime los parientes de un cargo
+void imprimeInfoCargo(Cargo cargo) {
+	cout << "Nombre: " << getCarNom(cargo) << " | " << "Nombre del hijo: " << getCarNomH(cargo) << " | " << "Nombre del padre: " << getCarNomP(cargo) << endl;
 }
