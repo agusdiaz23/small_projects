@@ -37,7 +37,7 @@ TipoRet ListarSuperCargos (Empresa e, Cadena cargo);
 // Lista todas los cargos que anteceden, en la jerarquía, al cargo de nombre cargo.
 
 // Asigno el nuevo cargo como hijo del cargo pedido
-void AsignarCargoHijo(Cargo cargo, Cargo cargo_padre);
+void AsignarCargoHijo(Cargo cargo_hijo, Cargo cargo_padre);
 
 Cargo definirCargo(Cadena cargo_nom);
 
@@ -46,10 +46,18 @@ Cargo makePrimerCargo(Cadena cargo_nom);
 
 // Devuelve el nombre de un cargo
 Cadena getCarNom(Cargo cargo);
+Cadena getCarNomH(Cargo cargo);
+Cadena getCarNomH(Cargo cargo);
 
 // Itera todo el arbol usando el nodo pasado como raiz y devuelve el puntero al cargo con el nombre pasado
 Cargo iteradorEmpresa(Cadena cargo, Cargo cargos);
 
 Cargo ImprimirArbolCargos(Cargo cargos);
+
+// Itera hasta el final de la lista de cargos hijos y devuelve el ultimo miembro
+Cargo iteradorCargoHermanos(Cargo cargos);
+
+bool ifCargoExiste(Cadena cargo, Cargo cargos_lista);
+
 
 #endif
