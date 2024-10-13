@@ -55,9 +55,30 @@ TipoRet ListarJerarquia(Empresa e){
 	return OK;
 }
 
-TipoRet ListarSuperCargos (Empresa e, Cadena cargo){
 // Dado un cargo listar los cargos que lo anteceden.
+TipoRet ListarSuperCargos (Empresa e, Cadena cargo){
+	
+	// Empiezo por buscar el cargo pedido en el arbol. Me quedo con el puntero
+	Cargo cargos = getEmpresaRaiz(e);
+	cargos = iteradorEmpresa(cargo, cargos);
+
+	// Le paso el puntero a la funcion de imprimir
+	imprimirArbolCargosUntil(cargos, cargo, 0); // El 0 se puede cambiar para mover todo el arbol a la derecha
+
+
 	return NO_IMPLEMENTADA;
+}
+
+// Imprime  el arbol hasta que encuentra el cargo que se le paso
+bool imprimirArbolCargosUntil(Cargo cargos, Cadena car_nom, int ident) {
+	if(strcmp(getCarNom(cargos), car_nom)==0) {
+		return true;
+	}
+
+	if(!imprimirArbolCargos){
+		
+	}
+
 }
 
 // Asigna una persona de nombre nom  y cédula de identidad ci al cargo cargo siempre que el cargo 

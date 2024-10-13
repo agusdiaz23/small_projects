@@ -25,16 +25,11 @@ TipoRet ListarPersonas(Empresa e, Cadena cargo);
 //Define una lista vacia de empleados
 Empleado CreaListaEmpleado();
 
-<<<<<<< HEAD
 //Define un nuevo nodo para empleado y lo pone al principio
 Empleado cons(Empleado e, Cadena ci, Cadena nom);
 
 void ListaEmpleados(Empleado e);
 
-=======
-bool BuscarPersona(Empleado e, Cadena ci);
-//Buscar una persona en la empresa, dado un empleado y su CI, si existe devuevlve true sino flase
->>>>>>> Lore_2
 
 #endif
 
