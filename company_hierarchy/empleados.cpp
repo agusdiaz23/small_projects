@@ -34,42 +34,57 @@ void ListaEmpleados(Empleado e){
 }
 
 TipoRet EliminarPersona(Empresa &e, Cadena ci){
-    if (e == NULL || e->cargos == NULL) { // La empresa o los cargos están vacíos
-        return ERROR;  
-    }
+    // Verifica si la empresa o los cargos están vacíos
+    if (e == NULL || e->cargos == NULL) {
+        return ERROR;
 
-    Cargo cargoActual = e->cargos;
-    bool personaEliminada = false;  // Bandera para saber si se eliminó la persona
+    Cargo cargoActual = e->cargos;  // cargos es la raíz de los cargos
 
+    // Recorre todos los cargos
     while (cargoActual != NULL) {
+        // Recorre la lista de empleados del cargo actual
         Empleado actual = cargoActual->empleados;
         Empleado anterior = NULL;
 
-        // Recorremos la lista de empleados en el cargo actual
         while (actual != NULL) {
+            // Verifica si el empleado actual es el que queremos eliminar
             if (strcmp(getCI(actual->personas), ci) == 0) {
-				// Si es el primer empleado de la lista
-                if (anterior == NULL) { 
-                    cargoActual->empleados = actual->sig;
+                // Si es el primer empleado de la lista
+                if (anterior == NULL) {
+                    cargoActual->empleados = actual->hermano;  // Asigna el siguiente hermano
                 } else {
-                    anterior->sig = actual->sig;
+                    anterior->hermano = actual->hermano;  // Conecta el anterior con el siguiente
                 }
-                // Liberar la memoria del nodo y de la persona
-                delete actual->personas;
+
+                // Liberar la memoria del nodo actual
                 delete actual;
 
-                personaEliminada = true;
-                return OK;  // Retorna OK después de eliminar la persona
+                return OK;  // El empleado fue eliminado
             }
-            // Avanzamos al siguiente nodo
+
+            // Avanza al siguiente empleado
             anterior = actual;
-            actual = actual->sig;
+            actual = actual->hermano;
         }
-        // Si no encontramos la persona en el cargo actual, continuamos con el siguiente cargo (hermano o hijo)
-        cargoActual = cargoActual->hermano;  // Cambiar si deseas buscar en los hijos también
+
+        // Recorre en el cargo hijo 
+        if (cargoActual->hijo != NULL) {
+            // Aquí llamamos a EliminarPersona recursivamente sobre los cargos hijos
+            Empresa subEmpresa; 
+            subEmpresa->cargos = cargoActual->hijo;
+            TipoRet resultadoHijo = EliminarPersona(subEmpresa, ci);  // Llama a la misma función con los subcargos
+            if (resultadoHijo == OK) {
+                return OK;  // Eliminó el hijo
+            }
+        }
+
+        // Avanza al siguiente cargo
+        cargoActual = cargoActual->hermano;
     }
 
-    return ERROR;  // Si no se encontró la persona en ningún cargo
+        return ERROR;  // Persona no encontrada
+    }
+
 }
 
 TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci){
@@ -87,8 +102,24 @@ TipoRet ListarPersonas(Empresa e, Cadena cargo){
 }
 
 
+bool BuscarPersona(Empleado e, Cadena ci) {
+    if (e == NULL) {
+        return false;  // No se encuentra la persona
+    }
 
+    // Comparamos la cédula del nodo actual con la que estamos buscando
+    if (strcmp(getCI(e->personas), ci) == 0) {
+        return true;  // Persona encontrada
+    }
 
+    // Si no la encontramos en el nodo actual, buscamos en los hijos
+    if (BuscarPersona(e->hijo, ci)) {
+        return true; 
+    }
+
+    // Si no la encontramos en los hijos, buscamos en los hermanos
+    return BuscarPersona(e->hermano, ci);
+}
 
 
 

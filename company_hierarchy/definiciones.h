@@ -29,7 +29,10 @@ struct nodo_persona {
 typedef struct nodo_empleado * Empleado;
 struct nodo_empleado {
     Persona personas;
-    Empleado sig;
+    Empleado sig;           
+    Empleado hijo;       
+    Empleado hermano;   
+    Empleado padre;
 };
 
 

@@ -24,6 +24,9 @@ TipoRet ListarPersonas(Empresa e, Cadena cargo);
 
 Empleado CreaListaEmpleado();
 
+bool BuscarPersona(Empleado e, Cadena ci);
+//Buscar una persona en la empresa, dado un empleado y su CI, si existe devuevlve true sino flase
+
 #endif
 
 
