@@ -26,9 +26,6 @@ TipoRet NuevoCargo(Empresa &e, Cadena cargoPadre, Cadena nuevoCargo){
 		AsignarCargoHijo(nuevoHijo_nodo, cargoPadre_nodo);
 	}
 
-	// Imprimo todo el arbol de cualquier manera para desbuguear
-	cout << "Se imprime arbol: " << endl;
-	imprimirArbolCargos(getEmpresaRaiz(e));
 
 	return OK;
 }
@@ -52,7 +49,10 @@ TipoRet ListarCargosAlf(Empresa e){
 // Lista todos los cargos de la empresa ordenados por nivel jerárquico e indentados
 // según se muestra el ejemplo de la letra. 
 TipoRet ListarJerarquia(Empresa e){
-	return NO_IMPLEMENTADA;
+	Cargo cargos = getEmpresaRaiz(e);
+	imprimirArbolCargos(cargos, 0);
+	
+	return OK;
 }
 
 TipoRet ListarSuperCargos (Empresa e, Cadena cargo){
@@ -70,10 +70,9 @@ TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
 	cargo_nodo = iteradorEmpresa(cargo, cargo_nodo);
 
 	cargo_nodo->empleados = cons(cargo_nodo->empleados, ci, nom);
-	ListaEmpleados(cargo_nodo->empleados);
 	
 
-	return NO_IMPLEMENTADA;
+	return OK;
 }
 
 Cadena getCarNom(Cargo cargo){
@@ -138,11 +137,11 @@ Cargo iteradorEmpresa(Cadena cargo, Cargo cargos) {
 		return cargos;
 	} else if(cargos->hermano == NULL && cargos->hijo == NULL) {  // Si llegue al final de ambos
 		return NULL;
-	} else if(cargos->hermano == NULL && cargos->hijo != NULL) { // Si llegue al final de hermano
+	} else if(cargos->hermano == NULL && cargos->hijo != NULL) { // Si llegue al final de hermano voy al hijo
 		return iteradorEmpresa(cargo, cargos->hijo);
-	} else if(cargos->hermano != NULL && cargos->hijo == NULL) { // Si llegue al final de hijo
+	} else if(cargos->hermano != NULL && cargos->hijo == NULL) { // Si llegue al final de hijo voy al hermano
 		return iteradorEmpresa(cargo, cargos->hermano);
-	} else {
+	} else if(cargos->hermano != NULL && cargos->hijo != NULL) { // Si hay ramas para los dos lados voy a hijo primero (exploro toda esa rama)
 		Cargo result = iteradorEmpresa(cargo, cargos->hijo);
         if (result != NULL) {
             return result;
@@ -164,19 +163,29 @@ Cargo iteradorCargoHermanos(Cargo cargos) {
 	
 }
 
-// Imprime el arbol a partir del cargo dado
-void imprimirArbolCargos(Cargo cargos) {
-    if (cargos == NULL) {
-        return;
-    } else {
-        imprimeInfoCargo(cargos);
-        if (cargos->hijo != NULL) {
-            imprimirArbolCargos(cargos->hijo);
-        }
-        if (cargos->hermano != NULL) {
-            imprimirArbolCargos(cargos->hermano);
-        }
-    }
+
+
+// Se llama desde ListarJerarquia(). Usa un int para aumentar la identacion segun avanza por los hijos
+void imprimirArbolCargos(Cargo cargos, int ident) {
+	if(cargos == NULL) {
+	} else {
+		imprimirIdent(ident);
+		cout << "->" << getCarNom(cargos) << endl;
+
+		if(cargos->hijo != NULL) {
+			imprimirArbolCargos(cargos->hijo, ident + 5);
+		}
+		if(cargos->hermano != NULL) {
+			imprimirArbolCargos(cargos->hermano, ident);
+		}
+	}
+}
+
+// Recibe un int y imprime ese numero de espacios
+void imprimirIdent(int ident) {
+	for(int i = 0; i<=ident; i++) {
+		cout << " ";
+	}
 }
 
 

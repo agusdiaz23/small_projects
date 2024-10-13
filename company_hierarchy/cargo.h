@@ -54,14 +54,18 @@ void imprimeInfoCargo(Cargo cargo);
 // Itera todo el arbol usando el nodo pasado como raiz y devuelve el puntero al cargo con el nombre pasado
 Cargo iteradorEmpresa(Cadena cargo, Cargo cargos);
 
-//Itera todo el arbol imprimiendo la informacion de cada cargo por un semi orden jerarquico
-void imprimirArbolCargos(Cargo cargos);
+// Se llama desde ListarJerarquia(). Usa un int para aumentar la identacion segun avanza por los hijos
+void imprimirArbolCargos(Cargo cargos, int ident);
 
 // Itera hasta el final de la lista de cargos hijos y devuelve el ultimo miembro
 Cargo iteradorCargoHermanos(Cargo cargos);
 
 //Devuelve true si el cargo con el nombre pasado existe en el arbol pasado
 bool ifCargoExiste(Cadena cargo, Cargo cargos_lista);
+
+
+// Recibe un int y imprime ese numero de espacios
+void imprimirIdent(int ident);
 
 
 #endif
