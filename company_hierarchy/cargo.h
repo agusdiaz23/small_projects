@@ -55,7 +55,7 @@ void imprimeInfoCargo(Cargo cargo);
 Cargo iteradorEmpresa(Cadena cargo, Cargo cargos);
 
 //Itera todo el arbol imprimiendo la informacion de cada cargo por un semi orden jerarquico
-Cargo imprimirArbolCargos(Cargo cargos);
+void imprimirArbolCargos(Cargo cargos);
 
 // Itera hasta el final de la lista de cargos hijos y devuelve el ultimo miembro
 Cargo iteradorCargoHermanos(Cargo cargos);

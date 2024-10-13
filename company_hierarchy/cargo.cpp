@@ -143,7 +143,12 @@ Cargo iteradorEmpresa(Cadena cargo, Cargo cargos) {
 	} else if(cargos->hermano != NULL && cargos->hijo == NULL) { // Si llegue al final de hijo
 		return iteradorEmpresa(cargo, cargos->hermano);
 	} else {
-		return (iteradorEmpresa(cargo, cargos->hijo), iteradorEmpresa(cargo, cargos->hermano));
+		Cargo result = iteradorEmpresa(cargo, cargos->hijo);
+        if (result != NULL) {
+            return result;
+        } else {
+            return iteradorEmpresa(cargo, cargos->hermano);
+        }
 	}
 }
 
@@ -160,28 +165,20 @@ Cargo iteradorCargoHermanos(Cargo cargos) {
 }
 
 // Imprime el arbol a partir del cargo dado
-Cargo imprimirArbolCargos(Cargo cargos) {
-	if(cargos == NULL) {
-		return NULL;
-	} else if(cargos->hijo == NULL && cargos->hermano == NULL) {
-		imprimeInfoCargo(cargos);
-		return NULL;
-	} else if(cargos->hijo != NULL && cargos->hermano == NULL) {
-		imprimeInfoCargo(cargos);
-		return (imprimirArbolCargos(cargos->hijo));
-	} else if(cargos->hijo == NULL && cargos->hermano != NULL) {
-		imprimeInfoCargo(cargos);
-		return (imprimirArbolCargos(cargos->hermano));
-	} else if(cargos->hijo != NULL && cargos->hermano != NULL) {
-		imprimeInfoCargo(cargos);
-		return (imprimirArbolCargos(cargos->hijo), imprimirArbolCargos(cargos->hermano));
-	}
-
+void imprimirArbolCargos(Cargo cargos) {
+    if (cargos == NULL) {
+        return;
+    } else {
+        imprimeInfoCargo(cargos);
+        if (cargos->hijo != NULL) {
+            imprimirArbolCargos(cargos->hijo);
+        }
+        if (cargos->hermano != NULL) {
+            imprimirArbolCargos(cargos->hermano);
+        }
+    }
 }
 
-Cargo imprimirTodo(Empresa e) {
-	Cargo cargos = getEmpresaRaiz(e);
-}
 
 bool ifCargoExiste(Cadena cargo, Cargo cargos_lista) {
 
