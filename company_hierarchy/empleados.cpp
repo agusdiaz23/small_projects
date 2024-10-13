@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
+
 using namespace std;
 
 Empleado CreaListaEmpleado(){
@@ -33,56 +34,43 @@ void ListaEmpleados(Empleado e){
 	}
 }
 
-TipoRet EliminarPersona(Empresa &e, Cadena ci){
-    // Verifica si la empresa o los cargos están vacíos
-    if (e == NULL || e->cargos == NULL) {
-        return ERROR;
+TipoRet EliminarPersona(Empresa &e, Cadena ci) {
+    if (e->cargos == NULL) {
+        return ERROR;  // Si no hay cargos en la empresa, no hay empleados que eliminar
+    }
 
-    Cargo cargoActual = e->cargos;  // cargos es la raíz de los cargos
-
-    // Recorre todos los cargos
+    Cargo cargoActual = e->cargos;
+    
     while (cargoActual != NULL) {
-        // Recorre la lista de empleados del cargo actual
         Empleado actual = cargoActual->empleados;
         Empleado anterior = NULL;
 
+            // Iterar sobre los empleados del cargo actual
         while (actual != NULL) {
-            // Verifica si el empleado actual es el que queremos eliminar
-            if (strcmp(getCI(actual->personas), ci) == 0) {
-                // Si es el primer empleado de la lista
+            // Usar getCI para obtener la cédula y compararla
+            if (strcmp(getCI(actual->personas), ci) == 0) { 
+                // Si el empleado a eliminar es el primero en la lista
                 if (anterior == NULL) {
-                    cargoActual->empleados = actual->hermano;  // Asigna el siguiente hermano
-                } else {
-                    anterior->hermano = actual->hermano;  // Conecta el anterior con el siguiente
+                    cargoActual->empleados = actual->sig;
+                    anterior->sig = actual->sig;
                 }
 
-                // Liberar la memoria del nodo actual
-                delete actual;
+                // Liberar la memoria del empleado
+                delete actual->personas;  // Primero liberamos la persona
+                delete actual;            // Luego liberamos el nodo empleado
 
-                return OK;  // El empleado fue eliminado
+                return OK;
             }
 
-            // Avanza al siguiente empleado
+            // Avanzar en la lista
             anterior = actual;
-            actual = actual->hermano;
+            actual = actual->sig;  // Avanzar al siguiente empleado
         }
 
-        // Recorre en el cargo hijo 
-        if (cargoActual->hijo != NULL) {
-            // Aquí llamamos a EliminarPersona recursivamente sobre los cargos hijos
-            Empresa subEmpresa; 
-            subEmpresa->cargos = cargoActual->hijo;
-            TipoRet resultadoHijo = EliminarPersona(subEmpresa, ci);  // Llama a la misma función con los subcargos
-            if (resultadoHijo == OK) {
-                return OK;  // Eliminó el hijo
-            }
-        }
-
-        // Avanza al siguiente cargo
+        // Avanzar al siguiente cargo
         cargoActual = cargoActual->hermano;
-    }
 
-        return ERROR;  // Persona no encontrada
+        return ERROR;  // La persona no fue encontrada en ningún cargo
     }
 
 }
@@ -103,22 +91,15 @@ TipoRet ListarPersonas(Empresa e, Cadena cargo){
 
 
 bool BuscarPersona(Empleado e, Cadena ci) {
-    if (e == NULL) {
-        return false;  // No se encuentra la persona
+    // Iterar sobre la lista de empleados
+    while (e != NULL) {
+        // Comparar usando strcmp
+        if (e->personas != NULL && strcmp(e->personas->ci, ci) == 0) {
+            return true;
+        }
+        e = e->sig;
     }
-
-    // Comparamos la cédula del nodo actual con la que estamos buscando
-    if (strcmp(getCI(e->personas), ci) == 0) {
-        return true;  // Persona encontrada
-    }
-
-    // Si no la encontramos en el nodo actual, buscamos en los hijos
-    if (BuscarPersona(e->hijo, ci)) {
-        return true; 
-    }
-
-    // Si no la encontramos en los hijos, buscamos en los hermanos
-    return BuscarPersona(e->hermano, ci);
+    return false; 
 }
 
 
