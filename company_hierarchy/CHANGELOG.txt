@@ -8,7 +8,7 @@
             Se definieron tres estructuras sencillas: Empresa, Cargo, Persona
             Agregado: CrearOrg esta implementado
 
-6/10/204 - Agregado: AsignarPersona()
+6/10/204  - Agregado: AsignarPersona()
             Funciones de ayuda: CopiarString(), ifPersonaExisteCargo(), ListarPersonaSimple()
             Nombre a cargo
 
@@ -17,3 +17,10 @@
             -Agregado: Ahora nodo_cargo tiene los parametros para construir un arbol
             -Agregado: el nodo_persona, con cedula y nombre, reemplazo al nodo empleado. El nodo_empleado contiene el nodo_persona
             -Eliminado: se eliminaro funciones que no se iban a poder usar sin mayores cambios con las nuevas struct
+
+10/13/2024  -El arbol de cargos ahora es funcional.
+            Se pueden añadir cargos en cualquier orden con cualquier nombre.
+            -Agregado: se crearon diversas funciones para buscar informacion en el arbol de cargos
+            -Agregado: es posible asignar empleados a un determinado cargo.
+              Se pueden añadir empleados con los mismos datos. Hay que añadir funciones para evitarlo desde empleados.cpp
+            -Agregado: se pueden usar ListarJerarquia() para obtener una imagen visual del arbol

@@ -79,7 +79,7 @@ Cadena getCarNom(Cargo cargo){
 	if(cargo != NULL) {
 		return cargo->nombre;
 	} else
-		return "NO EXISTE";
+		return NULL;
 }
 
 Cadena getCarNomH(Cargo cargo){
@@ -87,7 +87,7 @@ Cadena getCarNomH(Cargo cargo){
 		cargo = cargo->hijo;
 		return cargo->nombre;
 	} else
-		return "NO EXISTE";
+		return NULL;
 }
 
 Cadena getCarNomP(Cargo cargo){
@@ -95,7 +95,7 @@ Cadena getCarNomP(Cargo cargo){
 		cargo = cargo->padre;
 		return cargo->nombre;
 	} else
-		return "NO EXISTE";
+		return NULL;
 }
 
 
@@ -164,7 +164,6 @@ Cargo iteradorCargoHermanos(Cargo cargos) {
 }
 
 
-
 // Se llama desde ListarJerarquia(). Usa un int para aumentar la identacion segun avanza por los hijos
 void imprimirArbolCargos(Cargo cargos, int ident) {
 	if(cargos == NULL) {
@@ -173,7 +172,7 @@ void imprimirArbolCargos(Cargo cargos, int ident) {
 		cout << "->" << getCarNom(cargos) << endl;
 
 		if(cargos->hijo != NULL) {
-			imprimirArbolCargos(cargos->hijo, ident + 5);
+			imprimirArbolCargos(cargos->hijo, ident + 2);
 		}
 		if(cargos->hermano != NULL) {
 			imprimirArbolCargos(cargos->hermano, ident);

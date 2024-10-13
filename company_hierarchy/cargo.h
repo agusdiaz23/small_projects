@@ -67,5 +67,8 @@ bool ifCargoExiste(Cadena cargo, Cargo cargos_lista);
 // Recibe un int y imprime ese numero de espacios
 void imprimirIdent(int ident);
 
+// Esta función imprime los parientes de un cargo y el cargo
+void imprimeInfoCargo(Cargo cargo);
+
 
 #endif
