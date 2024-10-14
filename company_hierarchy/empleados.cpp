@@ -33,7 +33,19 @@ void ListaEmpleados(Empleado e){
 	}
 }
 
-
+ //Verifica si persona pertenece a la lista de empleados retorna true
+bool EsEmpleado(Empleado e, Cadena ci) {
+   
+	//Itera sobre la lista de empleados
+    while (e != NULL) {
+        // Comparar usando strcmp
+        if (e->personas != NULL && strcmp(e->personas->ci, ci) == 0) {
+            return true;
+        }
+        e = e->sig;
+    }
+    return false; 
+}
 
 
 TipoRet EliminarPersona(Empresa &e, Cadena ci){

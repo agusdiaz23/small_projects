@@ -70,5 +70,8 @@ void imprimirIdent(int ident);
 // Esta función imprime los parientes de un cargo y el cargo
 void imprimeInfoCargo(Cargo cargo);
 
+// Esta funcion verifica si existe la CI como persona empleada en toda la empresa
+bool existePersonaEmpresa(Empresa e, Cadena ci);
+
 
 #endif

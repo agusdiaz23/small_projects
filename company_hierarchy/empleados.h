@@ -28,8 +28,11 @@ Empleado CreaListaEmpleado();
 //Define un nuevo nodo para empleado y lo pone al principio
 Empleado cons(Empleado e, Cadena ci, Cadena nom);
 
+//Lista las personas de una lista empleados
 void ListaEmpleados(Empleado e);
 
+//Verifica si persona de cedula CI existe en lista empleado
+bool EsEmpleado(Empleado e, Cadena ci);
 
 #endif
 
