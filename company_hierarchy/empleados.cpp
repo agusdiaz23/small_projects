@@ -63,11 +63,7 @@ TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci){
 	return NO_IMPLEMENTADA;
 }
 
-TipoRet ListarPersonas(Empresa e, Cadena cargo){
-// Dado un cargo listar las personas asignadas al mismo ordenadas por fecha de alta a la empresa. 
-// Lista todas las personas asignadas al cargo de nombre cargo. 
-	return NO_IMPLEMENTADA;
-}
+
 
 
 

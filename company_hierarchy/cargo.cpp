@@ -63,6 +63,18 @@ TipoRet ListarSuperCargos (Empresa e, Cadena cargo){
 	return NO_IMPLEMENTADA;
 }
 
+TipoRet ListarPersonas(Empresa e, Cadena cargo){
+// Dado un cargo listar las personas asignadas al mismo ordenadas por fecha de alta a la empresa. 
+// Lista todas las personas asignadas al cargo de nombre cargo. 
+	if(!ifCargoExiste(cargo, getEmpresaRaiz(e))){
+		return ERROR;
+	}	
+	else{
+		Cargo c = iteradorEmpresa(cargo, getEmpresaRaiz(e)); //Encuentro cargo con el nombre pasado por parametro
+		ListaEmpleados(c->empleados);//Manda imprimir a la funcion de empleados .h pasando la lista de empleados
+	}
+	return OK;
+}
 
 // Asigna una persona de nombre nom  y cédula de identidad ci al cargo cargo siempre que el cargo 
 // exista en la empresa y esa persona no este asignada a ese u otro cargo, en caso contrario la operación 
@@ -71,9 +83,8 @@ TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
 	
 	// Pido el primer cargo
 	Cargo cargo_nodo = getEmpresaRaiz(e);
-	
 
-	if((!ifCargoExiste(cargo, getEmpresaRaiz(e)) || (existePersonaEmpresa(e,ci))) {
+	if((!ifCargoExiste(cargo, getEmpresaRaiz(e))) || (existePersonaEmpresa(e,ci))) {
 		return ERROR;
 	}
 	

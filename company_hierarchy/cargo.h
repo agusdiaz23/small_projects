@@ -33,6 +33,10 @@ TipoRet ListarJerarquia(Empresa e);
 // Lista todos los cargos de la empresa ordenados por nivel jerárquico e indentados
 // según se muestra el ejemplo de la letra. 
 
+TipoRet ListarPersonas(Empresa e, Cadena cargo);
+// Dado un cargo listar las personas asignadas al mismo ordenadas por fecha de alta a la empresa. 
+// Lista todas las personas asignadas al cargo de nombre cargo.
+
 
 TipoRet ListarSuperCargos (Empresa e, Cadena cargo);
 // Dado un cargo listar los cargos que lo anteceden.
