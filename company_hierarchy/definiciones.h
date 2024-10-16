@@ -18,14 +18,14 @@ typedef char * Cadena;
 
 // Las tres estructuras basicas del obligatorio.
 
-// Empleado tiene sus datos y un pointer al siguiente empleado
+//Estructura de datos de una persona
 typedef struct nodo_persona * Persona;
 struct nodo_persona {
     Cadena ci;
     Cadena nom;
 };
 
-
+// Empleado tiene sus datos y un pointer al siguiente empleado
 typedef struct nodo_empleado * Empleado;
 struct nodo_empleado {
     Persona personas;

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string.h>
 
-
+#include "empleados.h"
 #include "definiciones.h"
 #include "cargo.h"
 
@@ -63,6 +63,18 @@ TipoRet ListarSuperCargos (Empresa e, Cadena cargo){
 	return NO_IMPLEMENTADA;
 }
 
+TipoRet ListarPersonas(Empresa e, Cadena cargo){
+// Dado un cargo listar las personas asignadas al mismo ordenadas por fecha de alta a la empresa. 
+// Lista todas las personas asignadas al cargo de nombre cargo. 
+	if(!ifCargoExiste(cargo, getEmpresaRaiz(e))){
+		return ERROR;
+	}	
+	else{
+		Cargo c = iteradorEmpresa(cargo, getEmpresaRaiz(e)); //Encuentro cargo con el nombre pasado por parametro
+		ListaEmpleados(c->empleados);//Manda imprimir a la funcion de empleados .h pasando la lista de empleados
+	}
+	return OK;
+}
 
 // Asigna una persona de nombre nom  y cédula de identidad ci al cargo cargo siempre que el cargo 
 // exista en la empresa y esa persona no este asignada a ese u otro cargo, en caso contrario la operación 
@@ -71,11 +83,16 @@ TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
 	
 	// Pido el primer cargo
 	Cargo cargo_nodo = getEmpresaRaiz(e);
-	cargo_nodo = iteradorEmpresa(cargo, cargo_nodo);
 
+	if((!ifCargoExiste(cargo, getEmpresaRaiz(e))) || (existePersonaEmpresa(e,ci))) {
+		return ERROR;
+	}
+	
+	// se posiciona en cargo que debe asignar persona
+	cargo_nodo = iteradorEmpresa(cargo, cargo_nodo);
+	// asigna persona usando el cons empleado de empleados.h
 	cargo_nodo->empleados = cons(cargo_nodo->empleados, ci, nom);
 	
-
 	return OK;
 }
 
@@ -194,7 +211,7 @@ void imprimirIdent(int ident) {
 
 bool ifCargoExiste(Cadena cargo, Cargo cargos_lista) {
 
-	if(cargo == NULL) {
+	if(cargos_lista == NULL) {
 		return false;
 	} else if(strcmp(cargos_lista->nombre, cargo) == 0) {
 		return true;
@@ -207,6 +224,31 @@ bool ifCargoExiste(Cadena cargo, Cargo cargos_lista) {
 	} else if(cargos_lista->hijo == NULL && cargos_lista->hermano == NULL) {
 		return false;
 	}
+}
+// Esta funcion verifica si existe la CI como persona empleada en toda la empresa
+bool existePersonaEmpresa(Empresa e, Cadena ci){
+	
+	Cargo cargo_iter = getEmpresaRaiz(e);//Cargo para iterar que inicia desde raiz
+	bool retorno = false;	
+	while (cargo_iter != NULL and !retorno){//Mientras cargo donde estoy no es NULL y aún no encontre a la persona sigo iterando		
+		retorno = EsEmpleado (cargo_iter->empleados, ci);//En cada nodo verifico si Ci existe usando funcion pertenece de empleado.h		
+		if (cargo_iter->hijo != NULL) { //Si tengo hijo avanzo a ese hijo
+			cargo_iter = cargo_iter->hijo;
+		}
+		else if (cargo_iter->hermano != NULL){//No tiene hijo pero tiene hermano, voy a ese hermano
+			cargo_iter = cargo_iter->hermano;
+		}
+		else {//Si estoy en una hoja sin hijo/hermano, retroceso a padre  			
+			while (cargo_iter != NULL && cargo_iter ->hermano == NULL){
+				cargo_iter = cargo_iter ->padre;
+			}
+			if (cargo_iter != NULL){//itero en siguiente hermano
+				cargo_iter = cargo_iter -> hermano;
+			}
+		}
+	}
+	// Si en algún ciclo encontre a la persona, se acaba while y retorno será true
+	return retorno;
 }
 
 // Esta función imprime los parientes de un cargo

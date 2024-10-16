@@ -33,6 +33,10 @@ TipoRet ListarJerarquia(Empresa e);
 // Lista todos los cargos de la empresa ordenados por nivel jerárquico e indentados
 // según se muestra el ejemplo de la letra. 
 
+TipoRet ListarPersonas(Empresa e, Cadena cargo);
+// Dado un cargo listar las personas asignadas al mismo ordenadas por fecha de alta a la empresa. 
+// Lista todas las personas asignadas al cargo de nombre cargo.
+
 
 TipoRet ListarSuperCargos (Empresa e, Cadena cargo);
 // Dado un cargo listar los cargos que lo anteceden.
@@ -69,6 +73,9 @@ void imprimirIdent(int ident);
 
 // Esta función imprime los parientes de un cargo y el cargo
 void imprimeInfoCargo(Cargo cargo);
+
+// Esta funcion verifica si existe la CI como persona empleada en toda la empresa
+bool existePersonaEmpresa(Empresa e, Cadena ci);
 
 
 #endif

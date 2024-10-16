@@ -18,18 +18,17 @@ TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci);
 // siempre que el cargo exista en la empresa y esa persona no este ya asignada a
 // dicho cargo. En caso contrario la operación quedará sin efecto.
 
-TipoRet ListarPersonas(Empresa e, Cadena cargo);
-// Dado un cargo listar las personas asignadas al mismo ordenadas por fecha de alta a la empresa. 
-// Lista todas las personas asignadas al cargo de nombre cargo.
-
 //Define una lista vacia de empleados
 Empleado CreaListaEmpleado();
 
 //Define un nuevo nodo para empleado y lo pone al principio
 Empleado cons(Empleado e, Cadena ci, Cadena nom);
 
+//Lista las personas de una lista empleados
 void ListaEmpleados(Empleado e);
 
+//Verifica si persona de cedula CI existe en lista empleado
+bool EsEmpleado(Empleado e, Cadena ci);
 
 #endif
 
