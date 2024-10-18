@@ -54,7 +54,7 @@ void EliminarEmpleadoPorCI(Empleado &e, Cadena ci) {
     // Recorre la lista buscando el empleado con la CI proporcionada
     while (actual != NULL && !eliminado) {
 
-        // Compara el CI del empleado actual
+        // Compara el CI del empleado actual con el proporcionado
         if (strcmp(getCI(actual->personas), ci) == 0) {
             // Si es el primer nodo de la lista
             if (anterior == NULL) {
