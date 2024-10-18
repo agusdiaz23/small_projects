@@ -33,7 +33,7 @@ Empleado cons(Empleado e, Cadena ci, Cadena nom){
             // Apunto el nodo al inicio de la lista destino
             actual->sig = destino;
             destino = actual;    
-            reasignado = true;
+            reasignado = true;// Corto ciclo para que no vuelva a entrar a while ya que actual ahora apunta a lista destino
         }
         anterior = actual;
         actual = actual->sig;        
