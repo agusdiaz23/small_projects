@@ -33,20 +33,46 @@ void ListaEmpleados(Empleado e){
 	}
 }
 
- //Verifica si persona pertenece a la lista de empleados retorna true
 bool EsEmpleado(Empleado e, Cadena ci) {
-   
-	//Itera sobre la lista de empleados
+
+    // Itera sobre la lista de empleados
     while (e != NULL) {
-        // Comparar usando strcmp
-        if (e->personas != NULL && strcmp(e->personas->ci, ci) == 0) {
+        // Comparar usando strcmp con la función getCI
+        if (e->personas != NULL && strcmp(getCI(e->personas), ci) == 0){
             return true;
         }
-        e = e->sig;
+        e = e->sig; 
     }
     return false; 
 }
 
+void EliminarEmpleadoPorCI(Empleado &e, Cadena ci) {
+    Empleado actual = e;
+    Empleado anterior = NULL;
+    bool eliminado = false;
+
+    // Recorre la lista buscando el empleado con la CI proporcionada
+    while (actual != NULL && !eliminado) {
+
+        // Compara el CI del empleado actual
+        if (strcmp(getCI(actual->personas), ci) == 0) {
+            // Si es el primer nodo de la lista
+            if (anterior == NULL) {
+                e = actual->sig;
+            } else {
+                // Engancha el nodo anterior al siguiente
+                anterior->sig = actual->sig;
+            }
+            // Libera la memoria del nodo actual
+            delete actual;
+            eliminado = true;  
+        } else {
+            // Mueve los punteros al siguiente nodo
+            anterior = actual;
+            actual = actual->sig;
+        }
+    }
+}
 
 TipoRet EliminarPersona(Empresa &e, Cadena ci){
 // Eliminar una persona de un cargo.

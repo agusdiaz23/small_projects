@@ -30,6 +30,10 @@ void ListaEmpleados(Empleado e);
 //Verifica si persona de cedula CI existe en lista empleado
 bool EsEmpleado(Empleado e, Cadena ci);
 
+//Eliminar de la lista de empleados si encontro la CI
+void EliminarEmpleadoPorCI(Empleado &e, Cadena ci);
+
+
 #endif
 
 
