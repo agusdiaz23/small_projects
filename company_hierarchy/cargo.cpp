@@ -112,9 +112,7 @@ TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci){
 	Cargo raiz = getEmpresaRaiz(e);
 	//Busco cargo que debo desasignar
 	Cargo cargo_desasignar = BuscaCargoPersona(raiz,ci);
-	Empleado emp_sacar = cargo_desasignar ->empleados;
-	Empleado emp_poner = cargo_asignar ->empleados; 
-	cargo_asignar ->empleados = ReasignaEmpleado(emp_sacar,emp_poner,ci);
+	ReasignaEmpleado(cargo_desasignar ->empleados,cargo_asignar ->empleados,ci);
 	return OK;
 }
 
@@ -253,7 +251,6 @@ void imprimirIdent(int ident) {
 
 
 bool ifCargoExiste(Cadena cargo, Cargo cargos_lista) {
-	cout << "Entre en funcion existe cargo" << endl;
 	if(cargos_lista == NULL) {
 		return false;
 	} else if(strcmp(cargos_lista->nombre, cargo) == 0) {
