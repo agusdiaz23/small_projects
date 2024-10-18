@@ -12,12 +12,6 @@ TipoRet EliminarPersona(Empresa &e, Cadena ci);
 // Elimina una persona de cédula ci de la empresa siempre y cuando la misma exista,
 // en caso contrario la operación quedará sin efecto.
 
-TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci);
-// Reasignar una persona a un nuevo cargo.
-// Reasigna una persona de la empresa de cédula ci al nuevo cargo de nombre cargo
-// siempre que el cargo exista en la empresa y esa persona no este ya asignada a
-// dicho cargo. En caso contrario la operación quedará sin efecto.
-
 //Define una lista vacia de empleados
 Empleado CreaListaEmpleado();
 
@@ -30,6 +24,12 @@ void ListaEmpleados(Empleado e);
 //Verifica si persona de cedula CI existe en lista empleado
 bool EsEmpleado(Empleado e, Cadena ci);
 
+//Busca un empleado por CI y devuelve puntero a su nodo empleado
+Empleado BuscaEmpleado(Empleado e, Cadena ci);
+
+//Reasigna una persona entre una lista de empleados y otra, re direccionando nodo y devolviendo lista empleado destino
+Empleado ReasignaEmpleado(Empleado &origen, Empleado &destino, Cadena ci);
+ 
 #endif
 
 

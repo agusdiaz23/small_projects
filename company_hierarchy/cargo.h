@@ -12,7 +12,14 @@ TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci);
 // Asigna una persona de nombre nom  y cédula de identidad ci al cargo cargo
 // siempre que el cargo exista en la empresa y esa persona no este asignada a
 // ese u otro cargo, en caso contrario la operación quedará sin efecto.
+ 
+TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci);
+// Reasignar una persona a un nuevo cargo.
+// Reasigna una persona de la empresa de cédula ci al nuevo cargo de nombre cargo
+// siempre que el cargo exista en la empresa y esa persona no este ya asignada a
+// dicho cargo. En caso contrario la operación quedará sin efecto.
 
+ 
 TipoRet NuevoCargo(Empresa &e, Cadena cargoPadre, Cadena nuevoCargo);
 // Insertar un nuevo cargo como dependiente de otro ya existente.
 // El nuevo cargo no debe existir en el sistema.
@@ -57,6 +64,9 @@ void imprimeInfoCargo(Cargo cargo);
 
 // Itera todo el arbol usando el nodo pasado como raiz y devuelve el puntero al cargo con el nombre pasado
 Cargo iteradorEmpresa(Cadena cargo, Cargo cargos);
+
+// Itera todo el arbol buscando el cargo de la persona Ci pasa por parametro, devuelve el cargo donde este la persona o null
+Cargo BuscaCargoPersona(Cargo cargos, Cadena ci);
 
 // Se llama desde ListarJerarquia(). Usa un int para aumentar la identacion segun avanza por los hijos
 void imprimirArbolCargos(Cargo cargos, int ident);

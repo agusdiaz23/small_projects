@@ -17,7 +17,32 @@ Empleado cons(Empleado e, Cadena ci, Cadena nom){
 	aux->sig = e;
 	return aux;
 }
+//re direcciona nodo a la nueva lista de empleados, la idea es usar el mismo espacio de memoria
+ Empleado ReasignaEmpleado(Empleado &origen, Empleado &destino, Cadena ci){
+    Empleado actual = origen;
+    Empleado anterior = NULL;
+    bool reasignado = false;
+    while (actual != NULL && !reasignado){
+        Persona p = actual ->personas;
+        if (strcmp(getCI(p),ci) == 0){ // Tengo que re direccionar
+            if (anterior == NULL){ // Soy el primero
+                origen = actual->sig;                             
+            }else{ // no soy el primero
+                anterior->sig = actual->sig; 
+            }
+            // Apunto el nodo al inicio de la lista destino
+            actual->sig = destino;
+            destino = actual;    
+            reasignado = true;
+        }
+        anterior = actual;
+        actual = actual->sig;        
+    }
+    return destino;
+}
 
+
+ 
 void ListaEmpleados(Empleado e){
 	Empleado iter = e;  // Iterador desde el inicio
 
@@ -39,28 +64,32 @@ bool EsEmpleado(Empleado e, Cadena ci) {
 	//Itera sobre la lista de empleados
     while (e != NULL) {
         // Comparar usando strcmp
-        if (e->personas != NULL && strcmp(e->personas->ci, ci) == 0) {
+        if (e->personas != NULL && strcmp(getCI(e->personas), ci) == 0) {
             return true;
         }
         e = e->sig;
     }
     return false; 
 }
-
+//Busca un empleado por CI y devuelve puntero a su nodo empleado
+Empleado BuscaEmpleado(Empleado e, Cadena ci) {
+   
+	//Itera sobre la lista de empleados
+    while (e != NULL) {
+        // Comparar usando strcmp
+        if (e->personas != NULL && strcmp(getCI(e->personas), ci) == 0) {
+            return e;
+        }
+        e = e->sig;
+    }
+    return NULL; 
+}
 
 TipoRet EliminarPersona(Empresa &e, Cadena ci){
 // Eliminar una persona de un cargo.
 // Elimina una persona de cédula ci de la empresa siempre y cuando la misma exista,
 // en caso contrario la operación quedará sin efecto.
     return NO_IMPLEMENTADA;
-}
-
-TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci){
-// Reasignar una persona a un nuevo cargo.
-// Reasigna una persona de la empresa de cédula ci al nuevo cargo de nombre cargo
-// siempre que el cargo exista en la empresa y esa persona no este ya asignada a
-// dicho cargo. En caso contrario la operación quedará sin efecto.
-	return NO_IMPLEMENTADA;
 }
 
 

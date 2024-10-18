@@ -96,6 +96,28 @@ TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
 	return OK;
 }
 
+TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci){
+	if(!ifCargoExiste(cargo,getEmpresaRaiz(e)))	{
+		return ERROR;
+	}
+	if (!existePersonaEmpresa(e,ci)){
+		return ERROR;
+	}
+	//Se posiciona en cargo que debe asignar persona
+	Cargo cargo_nodo = getEmpresaRaiz(e);
+	Cargo cargo_asignar = iteradorEmpresa(cargo, cargo_nodo);
+	if (EsEmpleado(cargo_asignar->empleados,ci)){
+		return ERROR;
+	}
+	Cargo raiz = getEmpresaRaiz(e);
+	//Busco cargo que debo desasignar
+	Cargo cargo_desasignar = BuscaCargoPersona(raiz,ci);
+	Empleado emp_sacar = cargo_desasignar ->empleados;
+	Empleado emp_poner = cargo_asignar ->empleados; 
+	cargo_asignar ->empleados = ReasignaEmpleado(emp_sacar,emp_poner,ci);
+	return OK;
+}
+
 Cadena getCarNom(Cargo cargo){
 	if(cargo != NULL) {
 		return cargo->nombre;
@@ -172,6 +194,27 @@ Cargo iteradorEmpresa(Cadena cargo, Cargo cargos) {
 	}
 }
 
+// Itera todo el arbol buscando el cargo de la persona Ci pasa por parametro, devuelve el cargo donde este la persona o null
+Cargo BuscaCargoPersona(Cargo cargos, Cadena ci) {
+
+	if(EsEmpleado(cargos->empleados,ci)) { // Encontre un cargo con la persona como empleado
+		return cargos;
+	} else if(cargos->hermano == NULL && cargos->hijo == NULL) {  // Si llegue al final de ambos
+		return NULL;
+	} else if(cargos->hermano == NULL && cargos->hijo != NULL) { // Si llegue al final de hermano voy al hijo
+		return BuscaCargoPersona(cargos->hijo, ci);
+	} else if(cargos->hermano != NULL && cargos->hijo == NULL) { // Si llegue al final de hijo voy al hermano
+		return BuscaCargoPersona(cargos->hermano, ci);
+	} else if(cargos->hermano != NULL && cargos->hijo != NULL) { // Si hay ramas para los dos lados voy a hijo primero (exploro toda esa rama)
+		Cargo result = BuscaCargoPersona(cargos->hijo, ci);
+        if (result != NULL) {
+            return result;
+        } else {
+            return BuscaCargoPersona(cargos->hermano, ci);
+        }
+	}
+}
+
 // Itera hasta el final de la lista de cargos hijos y devuelve el ultimo miembro
 Cargo iteradorCargoHermanos(Cargo cargos) {
 	
@@ -210,7 +253,7 @@ void imprimirIdent(int ident) {
 
 
 bool ifCargoExiste(Cadena cargo, Cargo cargos_lista) {
-
+	cout << "Entre en funcion existe cargo" << endl;
 	if(cargos_lista == NULL) {
 		return false;
 	} else if(strcmp(cargos_lista->nombre, cargo) == 0) {
@@ -238,7 +281,7 @@ bool existePersonaEmpresa(Empresa e, Cadena ci){
 		else if (cargo_iter->hermano != NULL){//No tiene hijo pero tiene hermano, voy a ese hermano
 			cargo_iter = cargo_iter->hermano;
 		}
-		else {//Si estoy en una hoja sin hijo/hermano, retroceso a padre  			
+		else {//Si estoy en una hoja sin hijo/hermano, retrocedo a padre  			
 			while (cargo_iter != NULL && cargo_iter ->hermano == NULL){
 				cargo_iter = cargo_iter ->padre;
 			}
