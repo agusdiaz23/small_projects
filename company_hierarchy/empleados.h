@@ -28,7 +28,7 @@ bool EsEmpleado(Empleado e, Cadena ci);
 Empleado BuscaEmpleado(Empleado e, Cadena ci);
 
 //Reasigna una persona entre una lista de empleados y otra, re direccionando nodo y devolviendo lista empleado destino
-Empleado ReasignaEmpleado(Empleado &origen, Empleado &destino, Cadena ci);
+Empleado ReasignaEmpleado(Empleado origen, Empleado &destino, Cadena ci);
  
 #endif
 

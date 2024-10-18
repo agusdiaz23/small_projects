@@ -18,7 +18,7 @@ Empleado cons(Empleado e, Cadena ci, Cadena nom){
 	return aux;
 }
 //re direcciona nodo a la nueva lista de empleados, la idea es usar el mismo espacio de memoria
- Empleado ReasignaEmpleado(Empleado &origen, Empleado &destino, Cadena ci){
+ Empleado ReasignaEmpleado(Empleado origen, Empleado &destino, Cadena ci){    
     Empleado actual = origen;
     Empleado anterior = NULL;
     bool reasignado = false;
