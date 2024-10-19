@@ -5,30 +5,38 @@
 #include "persona.h"
 #include "cargo.h"
 
+// ________Funciones tipo definir
 
-
-TipoRet EliminarPersona(Empresa &e, Cadena ci);
-// Eliminar una persona de un cargo.
-// Elimina una persona de cédula ci de la empresa siempre y cuando la misma exista,
-// en caso contrario la operación quedará sin efecto.
-
-TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci);
-// Reasignar una persona a un nuevo cargo.
-// Reasigna una persona de la empresa de cédula ci al nuevo cargo de nombre cargo
-// siempre que el cargo exista en la empresa y esa persona no este ya asignada a
-// dicho cargo. En caso contrario la operación quedará sin efecto.
-
-TipoRet ListarPersonas(Empresa e, Cadena cargo);
-// Dado un cargo listar las personas asignadas al mismo ordenadas por fecha de alta a la empresa. 
-// Lista todas las personas asignadas al cargo de nombre cargo.
-
-//Define una lista vacia de empleados
 Empleado CreaListaEmpleado();
 
-//Define un nuevo nodo para empleado y lo pone al principio
+
+
+// ________Funciones tipo manipular nodos (iterar, devolver y eliminar)
+
+// Inserta persona al inicio de lista empleado.
 Empleado cons(Empleado e, Cadena ci, Cadena nom);
 
+//re direcciona nodo a la nueva lista de empleados, la idea es usar el mismo espacio de memoria
+void ReasignaEmpleado(Empleado &origen, Empleado &destino, Cadena ci);
+
+//Busca un empleado por CI y devuelve puntero a su nodo empleado
+Empleado BuscaEmpleado(Empleado e, Cadena ci);
+
+void EliminarEmpleadoPorCI(Empleado &e, Cadena ci);
+
+
+
+// __________Funciones tipo imprimir
+
 void ListaEmpleados(Empleado e);
+
+
+
+// _________Funciones tipo ifExiste
+
+//Verifica si persona pertenece a la lista de empleados retorna true
+bool EsEmpleado(Empleado e, Cadena ci);
+
 
 
 #endif

@@ -6,9 +6,17 @@
 
 using namespace std;
 
+
+
+// ________Funciones tipo definir
+
 Empleado CreaListaEmpleado(){
 	return NULL;
 }
+
+
+
+// ________Funciones tipo manipular nodos (iterar, devolver y eliminar)
 
 Empleado cons(Empleado e, Cadena ci, Cadena nom){
 // Inserta persona al inicio de lista empleado.
@@ -17,6 +25,75 @@ Empleado cons(Empleado e, Cadena ci, Cadena nom){
 	aux->sig = e;
 	return aux;
 }
+
+void ReasignaEmpleado(Empleado &origen, Empleado &destino, Cadena ci){
+//re direcciona nodo a la nueva lista de empleados, la idea es usar el mismo espacio de memoria
+
+    Empleado actual = origen;
+    Empleado anterior = NULL;
+    bool reasignado = false;
+    while (actual != NULL && !reasignado){
+        Persona p = actual ->personas;
+        if (strcmp(getCI(p),ci) == 0){ // Tengo que re direccionar
+            if (anterior == NULL){ // Soy el primero
+                origen = actual->sig;                             
+            }else{ // no soy el primero
+                anterior->sig = actual->sig; 
+            }
+            // Apunto el nodo al inicio de la lista destino
+            actual->sig = destino;
+            destino = actual;    
+            reasignado = true;// Corto ciclo para que no vuelva a entrar a while ya que actual ahora apunta a lista destino
+        }
+        anterior = actual;
+        actual = actual->sig;        
+    }
+}
+
+Empleado BuscaEmpleado(Empleado e, Cadena ci) {
+//Busca un empleado por CI y devuelve puntero a su nodo empleado
+
+	//Itera sobre la lista de empleados
+    while (e != NULL) {
+        // Comparar usando strcmp
+        if (e->personas != NULL && strcmp(getCI(e->personas), ci) == 0) {
+            return e;
+        }
+        e = e->sig;
+    }
+    return NULL; 
+}
+
+void EliminarEmpleadoPorCI(Empleado &e, Cadena ci) {
+    Empleado actual = e;
+    Empleado anterior = NULL;
+    bool eliminado = false;
+
+    // Recorre la lista buscando el empleado con la CI proporcionada
+    while (actual != NULL && !eliminado) {
+
+        // Compara el CI del empleado actual con el proporcionado
+        if (strcmp(getCI(actual->personas), ci) == 0) {
+            // Si es el primer nodo de la lista
+            if (anterior == NULL) {
+                e = actual->sig;
+            } else {
+                // Engancha el nodo anterior al siguiente
+                anterior->sig = actual->sig;
+            }
+            // Libera la memoria del nodo actual
+            delete actual;
+            eliminado = true;  
+        } else {
+            // Mueve los punteros al siguiente nodo
+            anterior = actual;
+            actual = actual->sig;
+        }
+    }
+}
+
+
+// __________Funciones tipo imprimir
 
 void ListaEmpleados(Empleado e){
 	Empleado iter = e;  // Iterador desde el inicio
@@ -35,30 +112,21 @@ void ListaEmpleados(Empleado e){
 
 
 
+// _________Funciones tipo ifExiste
 
-TipoRet EliminarPersona(Empresa &e, Cadena ci){
-// Eliminar una persona de un cargo.
-// Elimina una persona de cédula ci de la empresa siempre y cuando la misma exista,
-// en caso contrario la operación quedará sin efecto.
-    return NO_IMPLEMENTADA;
+bool EsEmpleado(Empleado e, Cadena ci) {
+//Verifica si persona pertenece a la lista de empleados retorna true
+
+	//Itera sobre la lista de empleados
+    while (e != NULL) {
+        // Comparar usando strcmp
+        if (e->personas != NULL && strcmp(getCI(e->personas), ci) == 0) {
+            return true;
+        }
+        e = e->sig;
+    }
+    return false; 
 }
-
-TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci){
-// Reasignar una persona a un nuevo cargo.
-// Reasigna una persona de la empresa de cédula ci al nuevo cargo de nombre cargo
-// siempre que el cargo exista en la empresa y esa persona no este ya asignada a
-// dicho cargo. En caso contrario la operación quedará sin efecto.
-	return NO_IMPLEMENTADA;
-}
-
-TipoRet ListarPersonas(Empresa e, Cadena cargo){
-// Dado un cargo listar las personas asignadas al mismo ordenadas por fecha de alta a la empresa. 
-// Lista todas las personas asignadas al cargo de nombre cargo. 
-	return NO_IMPLEMENTADA;
-}
-
-
-
 
 
 

@@ -24,3 +24,8 @@
             -Agregado: es posible asignar empleados a un determinado cargo.
               Se pueden añadir empleados con los mismos datos. Hay que añadir funciones para evitarlo desde empleados.cpp
             -Agregado: se pueden usar ListarJerarquia() para obtener una imagen visual del arbol
+
+10/19/2020  -Merge de del codigo de todos los miembros del grupo
+            -Reordenamiento general de todas las funciones. Se agruparon aquellas que tienen parecido funcional
+            -Aregado: funciones relativas a la manipulacion de la lista de empleado y personas
+            -Agregado: todas las funciones de listar de alguna manera estan funcionando
