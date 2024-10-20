@@ -9,6 +9,8 @@
 // Modulo de Definición de la Empresa
 
 #include "definiciones.h"
+#include "empresa.h"
+#include "cargo.h"
 
 TipoRet CrearOrg(Empresa &e, Cadena cargo);
 // Inicializa la empresa y crea el primer cargo de la empresa.

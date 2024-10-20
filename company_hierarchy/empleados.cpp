@@ -82,6 +82,7 @@ void EliminarEmpleadoPorCI(Empleado &e, Cadena ci) {
                 anterior->sig = actual->sig;
             }
             // Libera la memoria del nodo actual
+            destruir (actual->personas);
             delete actual;
             eliminado = true;  
         } else {
@@ -92,6 +93,28 @@ void EliminarEmpleadoPorCI(Empleado &e, Cadena ci) {
     }
 }
 
+
+Empleado EliminarEmpleadosLista(Empleado e) {
+// Elimina toda la lista de empleados
+    
+    if(e == NULL) {
+        return NULL;
+    }
+
+    if(e->sig == NULL) { // Si mi siguiente nodo es nulo elimino el nodo en el que estoy parado
+        e->personas = destruir(e->personas); // Destruye la persona (sus datos) y devuelve un null
+        delete e; // Destruye el nodo en el que estoy parado
+        return NULL; // Salgo de esta iteracion
+    }
+    else if (e->sig != NULL) { // Si todavia no estoy al final de la lista
+        EliminarEmpleadosLista(e->sig);
+
+        e->personas = destruir(e->personas); // Destruye la persona (sus datos) y devuelve un null
+        delete e; // Destruye el nodo en el que estoy parado
+
+    }
+    return NULL;
+}
 
 // __________Funciones tipo imprimir
 

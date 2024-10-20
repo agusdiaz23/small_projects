@@ -30,7 +30,7 @@ int main (){
 	cout << "\tEliminarOrg()\n";
 	cout << "\tNuevoCargo(cargoPadre, nuevoCargo)\n";
 	cout << "\tEliminarCargo(cargo)\n";
-	cout << "\tListarCargosAlf()\n";
+	cout << "\tAlf()\n";
 	cout << "\tListarJerarquia()\n";
 	cout << "\tAsignarPersona(cargo, ci, nombre)\n";
 	cout << "\tEliminarPersona(ci)\n";
@@ -93,7 +93,7 @@ int main (){
 						cout << " - ERROR: para ejecutar el comando el organigrama debe estar creado.\n";
 				}else
 					cout << " - ERROR: Faltan Parametros.\n";
-			}else if (strcasecmp (pch, "ListarCargosAlf") == 0){
+			}else if (strcasecmp (pch, "Alf") == 0){
 				if (creado){
 					ret = ListarCargosAlf(e);
 					ejecutado = true;

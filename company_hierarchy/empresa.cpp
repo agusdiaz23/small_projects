@@ -6,7 +6,7 @@
 // Modulo de Implementacion de la Empresa
 
 #include "empresa.h"
-#include "cargo.h"
+#include "definiciones.h"
 #include <iostream>
 #include <string.h>
 
@@ -26,7 +26,13 @@ TipoRet CrearOrg(Empresa &e, Cadena cargo){
 
 TipoRet EliminarOrg(Empresa &e){
 // Eliminar el organigrama, elimina toda la estructura del organigrama, liberando la memoria asignada.
-	return NO_IMPLEMENTADA;
+
+	Cargo cargos = getEmpresaRaiz(e);
+	Cargo eliminarCargos_Y_Parientes(cargos); // Borro todo el arbol
+
+	delete e; // Borro la empresa
+
+	return OK;
 }
 
 // Devuelve nodo_cargo al que apunta el nodo_empresa

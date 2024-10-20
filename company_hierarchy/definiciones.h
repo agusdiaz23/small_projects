@@ -40,7 +40,8 @@ struct nodo_cargo {
     Cadena nombre;
     Empleado empleados;
     Cargo hijo;
-    Cargo hermano;
+    Cargo hermano_sig;
+    Cargo hermano_ant;
     Cargo padre;
 };
 
@@ -48,6 +49,14 @@ struct nodo_cargo {
 typedef struct nodo_empresa * Empresa;
 struct  nodo_empresa {
     Cargo cargos;
+};
+
+
+// Esta lista contiene solo el nombre de los cargos. Se ordenara alfabeticamente
+typedef struct nodo_listaSimple * listaSimple;
+struct nodo_listaSimple {
+    listaSimple sig;
+    Cadena nombre;
 };
 
 

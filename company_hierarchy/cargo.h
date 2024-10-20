@@ -5,6 +5,7 @@
 #include "empresa.h"
 #include "empleados.h"
 #include "cargo.h"
+#include "manejaListaAlf.h"
 
 // Insertar un nuevo cargo como dependiente de otro ya existente.
 // El nuevo cargo no debe existir en el sistema.
@@ -82,12 +83,23 @@ Cargo iteradorCargoHermanos(Cargo cargos);
 Cargo BuscaCargoPersona(Cargo cargos, Cadena ci);
 	
 
-//_______Funcciones tipo asignar y definir
+//_______Funcciones tipo asignar, definir y eliminar
 
 Cargo definirCargo(Cadena cargo_nom);
 
 // Asigno el nuevo cargo como hijo del cargo pedido
 void AsignarCargoHijo(Cargo cargo_hijo, Cargo cargo_padre);
+
+void ArbolCargo_A_ListaCargo(Cargo cargos, listaSimple &lista);
+
+// Dado un cargo raiz pasado, eliminar ese cargo y todo lo que esta unido
+Cargo eliminarCargosDesde(Cargo cargos);
+
+// Dado un cargo raiz pasado, eliminar ese cargo y todo lo que este unido
+Cargo eliminarCargos_Y_Parientes(Cargo cargos);
+
+
+
 
 
 //_______Funciones tipo ifExiste

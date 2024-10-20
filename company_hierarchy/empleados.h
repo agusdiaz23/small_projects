@@ -24,6 +24,10 @@ Empleado BuscaEmpleado(Empleado e, Cadena ci);
 
 void EliminarEmpleadoPorCI(Empleado &e, Cadena ci);
 
+// Elimina toda la lista de empleados
+Empleado EliminarEmpleadosLista(Empleado e);
+
+
 
 
 // __________Funciones tipo imprimir
