@@ -164,7 +164,18 @@ TipoRet EliminarPersona(Empresa &e, Cadena ci){
 // Eliminar una persona de un cargo.
 // Elimina una persona de cédula ci de la empresa siempre y cuando la misma exista,
 // en caso contrario la operación quedará sin efecto.
-    return NO_IMPLEMENTADA;
+	// Llama a una funcion que itera por toda la empresa para eliminar la cedula
+	
+	Cargo cargos = getEmpresaRaiz(e);  // Obtengo el cargo raiz
+
+	// Compruebo que la persona existe
+	if(!EsEmpleado(cargos->empleados, ci))
+		return ERROR;
+	
+	Cargo cargo_con_persona = BuscaCargoPersona(cargos, ci); // Busco el cargo con esa persona (Gracias por esta funcion Mauro)
+	EliminarEmpleadoPorCI(cargo_con_persona->empleados, ci); // Mando el cargo y la ci para eliminar el empleado
+
+    return OK;
 }
 
 TipoRet ListarPersonas(Empresa e, Cadena cargo){

@@ -32,7 +32,7 @@
 
 10/20/2020  -Agregado: Ahora es posible eliminar cualquier parte de la organizacion, 
               incluyendo pero no limitandose a los cargos y a la organizacion mismas
-            -Agregado: para facilitar la eliminacion de partese añadio un nodo anterior a la estructura de cargos
+            -Agregado: para facilitar la eliminacion de partes se añadio un nodo anterior a la estructura de cargos
             -Agregado: se añadio el archivo manejaListaAlf
               Contiene las funciones que hacen el sortin de una lista con los nombres de los argos
               Contiene funciones que pasan el arbol binario a una linked lista sencilla
