@@ -7,6 +7,8 @@
 #include "cargo.h"
 #include "manejaListaAlf.h"
 
+
+
 // Insertar un nuevo cargo como dependiente de otro ya existente.
 // El nuevo cargo no debe existir en el sistema.
 TipoRet NuevoCargo(Empresa &e, Cadena cargoPadre, Cadena nuevoCargo);

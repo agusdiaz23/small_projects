@@ -10,7 +10,6 @@
 #include <iostream>
 #include <string.h>
 
-using namespace std;
 
 // Inicializa la empresa y crea el primer cargo de la empresa.
 // Originalmente la misma debería  estar vacía, en otro caso la operación quedará sin efecto.

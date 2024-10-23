@@ -37,30 +37,43 @@ TipoRet EliminarCargo(Empresa &e, Cadena cargo){
 // Si el cargo a eliminar posee subcargos, éstos deberán ser eliminados también, así como
 // las personas asociadas a cada uno de los cargos suprimidos.
 	
-	Cargo cargo_a_eliminar, cargo_padre, cargo_hermano_ant, cargo_hermano_sig; // Declaro variables
+	Cargo cargo_a_eliminar, cargo_raiz, cargo_padre, cargo_hermano_ant, cargo_hermano_sig; // Declaro variables
 
-	cargo_a_eliminar = getEmpresaRaiz(e); // Tomo el cargo raiz de la empresa
 
-	if(!ifCargoExiste) // Compruebo que el cargo existe
+	cargo_raiz = getEmpresaRaiz(e); // Tomo el cargo raiz de la empresa
+	if(!ifCargoExiste(cargo, cargo_raiz)) // Compruebo que el cargo existe
 		return ERROR;
+
+
+	cargo_a_eliminar = iteradorEmpresa(cargo, cargo_raiz); // Busco el cargo que quiero eliminar. Esta enlazado a todo su subarbol
 	if(cargo_a_eliminar->padre == NULL) // Compruebo que no sea el primer cargo
 		return ERROR;
 
-	cargo_a_eliminar = iteradorEmpresa(cargo, cargo_a_eliminar); // Busco el cargo que quiero eliminar. Esta enlazado a todo su subarbol
+	if(cargo_a_eliminar->hermano_sig == NULL && cargo_a_eliminar->hermano_ant == NULL) { // Si el cargo a eliminar no tiene hermanos
+		cargo_padre = cargo_a_eliminar->padre;
+		cargo_padre->hijo = NULL;
+	}
+	else { // Compruebo las diferentes situaciones que se pueden dar el nodo
+		if(cargo_a_eliminar->hermano_ant == NULL && cargo_a_eliminar->hermano_sig != NULL){
+			cargo_hermano_sig = cargo_a_eliminar->hermano_sig;
+			cargo_padre = cargo_a_eliminar->padre;
+			
+			cargo_padre->hijo = cargo_hermano_sig;
+			cargo_hermano_sig->hermano_ant=NULL;
+		}
+		else if(cargo_a_eliminar->hermano_ant != NULL && cargo_a_eliminar->hermano_sig == NULL){
+			cargo_hermano_ant = cargo_a_eliminar->hermano_ant;
+			cargo_hermano_ant->hermano_sig = NULL;
+		}
+		else {
+			cargo_hermano_ant = cargo_a_eliminar->hermano_ant;
+			cargo_hermano_sig = cargo_a_eliminar->hermano_sig;
 
-	// Empiezo a modificar los nodos para no quedarme con punteros a direcciones liberadas
-	if (cargo_a_eliminar->hermano_ant == NULL) { // Si el nodo no tiene un hermano anterior
-		cargo_padre = cargo_a_eliminar->padre; // Me guardo el padre
-		cargo_padre->hijo = NULL; // El padre pasa a no tener hijos.
-	}
-	else { // Si el cargo tiene un hermano anterior
-		if(cargo_a_eliminar->hermano_sig == NULL) { // Si el cargo a eliminar no tiene un hermano sig
-			cargo_hermano_ant = NULL; // Apunto a NULL el hermano ANTERIOR del cargo a eliminar
+			cargo_hermano_ant->hermano_sig = cargo_hermano_sig;
 		}
-		else { // Si el cargo tiene un hermano anterior y un hermano siguiente
-			cargo_hermano_ant->hermano_sig = cargo_hermano_sig; // Me salto el del medio, que es el que quiero eliminar
-		}
+
 	}
+
 	
 	//Entro en una funcion recursiva que elimina todo los cargos que le pase
 	eliminarCargosDesde(cargo_a_eliminar);
@@ -359,6 +372,8 @@ void AsignarCargoHijo(Cargo cargo_hijo, Cargo cargo_padre) {
 	if(cargo_padre->hijo == NULL) {
 		cargo_padre->hijo=cargo_hijo;
 		cargo_hijo->padre = cargo_padre;
+		cargo_padre->hijo->nombre;
+
 	// Si el cargo padre ya tiene hijos itero hasta el final de esa lista
 	} else {
 		Cargo cargo_hermano_sig = iteradorCargohermano_sigs(cargo_padre->hijo); // Busco el ultimo cargo de la lista de hijos
