@@ -8,202 +8,22 @@
 
 using namespace std;
 
-TipoRet NuevoCargo(Empresa &e, Cadena cargoPadre, Cadena nuevoCargo){
-	
-	if(ifCargoExiste(nuevoCargo, getEmpresaRaiz(e))) {
-		return ERROR;
-	}
-	
-	// Busco el cargo con el mismo nombre
-	Cargo cargoPadre_nodo = getEmpresaRaiz(e);
-	cargoPadre_nodo = iteradorEmpresa(cargoPadre, cargoPadre_nodo);
-
-	// Asigno el nuevo nodo como hijo
-	if (cargoPadre_nodo == NULL) {
-		cout << ERROR << endl;
-	} else {
-		Cargo nuevoHijo_nodo = definirCargo(nuevoCargo);
-		AsignarCargoHijo(nuevoHijo_nodo, cargoPadre_nodo);
-	}
 
 
-	return OK;
-}
-
-TipoRet EliminarCargo(Empresa &e, Cadena cargo){
-// Eliminar un cargo, junto con sus subcargos y personas asociadas.
-// Elimina un cargo en la empresa si cargo ya existe en la misma.
-// En otro caso la operación quedará sin efecto.
-// Si el cargo a eliminar posee subcargos, éstos deberán ser eliminados también, así como
-// las personas asociadas a cada uno de los cargos suprimidos.
-	
-	Cargo cargo_a_eliminar, cargo_raiz, cargo_padre, cargo_hermano_ant, cargo_hermano_sig; // Declaro variables
 
 
-	cargo_raiz = getEmpresaRaiz(e); // Tomo el cargo raiz de la empresa
-	if(!ifCargoExiste(cargo, cargo_raiz)) // Compruebo que el cargo existe
-		return ERROR;
 
 
-	cargo_a_eliminar = iteradorEmpresa(cargo, cargo_raiz); // Busco el cargo que quiero eliminar. Esta enlazado a todo su subarbol
-	if(cargo_a_eliminar->padre == NULL) // Compruebo que no sea el primer cargo
-		return ERROR;
-
-	if(cargo_a_eliminar->hermano_sig == NULL && cargo_a_eliminar->hermano_ant == NULL) { // Si el cargo a eliminar no tiene hermanos
-		cargo_padre = cargo_a_eliminar->padre;
-		cargo_padre->hijo = NULL;
-	}
-	else { // Compruebo las diferentes situaciones que se pueden dar el nodo
-		if(cargo_a_eliminar->hermano_ant == NULL && cargo_a_eliminar->hermano_sig != NULL){
-			cargo_hermano_sig = cargo_a_eliminar->hermano_sig;
-			cargo_padre = cargo_a_eliminar->padre;
-			
-			cargo_padre->hijo = cargo_hermano_sig;
-			cargo_hermano_sig->hermano_ant=NULL;
-		}
-		else if(cargo_a_eliminar->hermano_ant != NULL && cargo_a_eliminar->hermano_sig == NULL){
-			cargo_hermano_ant = cargo_a_eliminar->hermano_ant;
-			cargo_hermano_ant->hermano_sig = NULL;
-		}
-		else {
-			cargo_hermano_ant = cargo_a_eliminar->hermano_ant;
-			cargo_hermano_sig = cargo_a_eliminar->hermano_sig;
-
-			cargo_hermano_ant->hermano_sig = cargo_hermano_sig;
-		}
-
-	}
-
-	
-	//Entro en una funcion recursiva que elimina todo los cargos que le pase
-	eliminarCargosDesde(cargo_a_eliminar);
 
 
-	
-	return OK;
-}
-
-TipoRet ListarJerarquia(Empresa e){
-// Listar todos los cargos de la empresa en orden jerárquico. 
-// Lista todos los cargos de la empresa ordenados por nivel jerárquico e indentados
-// según se muestra el ejemplo de la letra. 
-
-	Cargo cargos = getEmpresaRaiz(e);
-	
-
-	imprimirArbolCargos(cargos, 0);
-	
-	return OK;
-}
-
-TipoRet ListarCargosAlf(Empresa e){
-// Listar todos los cargos ordenados alfabéticamente.
-// Lista todos los cargos de la empresa ordenados alfabéticamente por nombre del cargo.
-
-	// Creo una lista que es la que voy a ordenar
-	listaSimple lista = definirListaSimple();
-	
-	// A partir de ahora itero en todos los cargos y voy añadiendo nodos
-	Cargo cargos = getEmpresaRaiz(e);
-	ArbolCargo_A_ListaCargo(cargos, lista);
 
 
-	// Empiezo la funcion de ordenar;
-	lista = ordenarListaAlf(lista);
 
-	// Imprimo la litra en orden alfabetico
-	imprimeListaSimple(lista);
 
-	return OK;
-}
 
-TipoRet ListarSuperCargos (Empresa e, Cadena cargo){
-// Listar todos los cargos ordenados alfabéticamente.
-// Lista todos los cargos de la empresa ordenados alfabéticamente por nombre del cargo. 
-	
-	// Compruebo que el cargo al que quiero llegar existe
-	if(!ifCargoExiste(cargo, getEmpresaRaiz(e))) {
-		return ERROR;
-	}
-	
-	// Entro en una funcion para imprimirlo
-	Cargo cargos = getEmpresaRaiz(e);
-	imprimirArbolCargosHasta(cargos, cargo, 0);
-	
-	return OK;
-}
 
-TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
-// Asigna una persona de nombre nom  y cédula de identidad ci al cargo cargo siempre que el cargo 
-// exista en la empresa y esa persona no este asignada a ese u otro cargo, en caso contrario la operación 
-// quedara sin efecto.
 
-	// Pido el primer cargo
-	Cargo cargo_nodo = getEmpresaRaiz(e);
 
-	if((!ifCargoExiste(cargo, getEmpresaRaiz(e))) || (existePersonaEmpresa(e,ci))) {
-		return ERROR;
-	}
-	
-	// se posiciona en cargo que debe asignar persona
-	cargo_nodo = iteradorEmpresa(cargo, cargo_nodo);
-	// asigna persona usando el cons empleado de empleados.h
-	cargo_nodo->empleados = cons(cargo_nodo->empleados, ci, nom);
-	
-	return OK;
-}
-
-TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci){
-	if(!ifCargoExiste(cargo,getEmpresaRaiz(e)))	{
-		return ERROR;
-	}
-	if (!existePersonaEmpresa(e,ci)){
-		return ERROR;
-	}
-	//Se posiciona en cargo que debe asignar persona
-	Cargo cargo_nodo = getEmpresaRaiz(e);
-	Cargo cargo_asignar = iteradorEmpresa(cargo, cargo_nodo);
-	if (EsEmpleado(cargo_asignar->empleados,ci)){
-		return ERROR;
-	}
-	Cargo raiz = getEmpresaRaiz(e);
-	//Busco cargo que debo desasignar
-	Cargo cargo_desasignar = BuscaCargoPersona(raiz,ci);
-	ReasignaEmpleado(cargo_desasignar ->empleados,cargo_asignar ->empleados,ci);
-	return OK;
-}
-
-TipoRet EliminarPersona(Empresa &e, Cadena ci){
-// Eliminar una persona de un cargo.
-// Elimina una persona de cédula ci de la empresa siempre y cuando la misma exista,
-// en caso contrario la operación quedará sin efecto.
-	// Llama a una funcion que itera por toda la empresa para eliminar la cedula
-	
-	Cargo cargos = getEmpresaRaiz(e);  // Obtengo el cargo raiz
-
-	// Compruebo que la persona existe
-	if(!EsEmpleado(cargos->empleados, ci))
-		return ERROR;
-	
-	Cargo cargo_con_persona = BuscaCargoPersona(cargos, ci); // Busco el cargo con esa persona (Gracias por esta funcion Mauro)
-	EliminarEmpleadoPorCI(cargo_con_persona->empleados, ci); // Mando el cargo y la ci para eliminar el empleado
-
-    return OK;
-}
-
-TipoRet ListarPersonas(Empresa e, Cadena cargo){
-// Dado un cargo listar las personas asignadas al mismo ordenadas por fecha de alta a la empresa. 
-// Lista todas las personas asignadas al cargo de nombre cargo. 
-
-	if(!ifCargoExiste(cargo, getEmpresaRaiz(e))){
-		return ERROR;
-	}	
-	else{
-		Cargo c = iteradorEmpresa(cargo, getEmpresaRaiz(e)); //Encuentro cargo con el nombre pasado por parametro
-		ListaEmpleados(c->empleados);//Manda imprimir a la funcion de empleados .h pasando la lista de empleados
-	}
-	return OK;
-}
 
 
 
