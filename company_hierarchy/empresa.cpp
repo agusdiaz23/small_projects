@@ -30,8 +30,9 @@ TipoRet CrearOrg(Empresa &e, Cadena cargo){
 TipoRet EliminarOrg(Empresa &e){
 // Eliminar el organigrama, elimina toda la estructura del organigrama, liberando la memoria asignada.
 
-	Cargo cargos = getEmpresaRaiz(e);
-	Cargo eliminarCargos_Y_Parientes(cargos); // Borro todo el arbol
+	Cargo cargos = e->cargos;
+
+	eliminarCargos_Y_Parientes(cargos); // Borro todo el arbol
 
 	delete e; // Borro la empresa
 
@@ -40,12 +41,14 @@ TipoRet EliminarOrg(Empresa &e){
 
 TipoRet NuevoCargo(Empresa &e, Cadena cargoPadre, Cadena nuevoCargo){
 	
-	if(ifCargoExiste(nuevoCargo, getEmpresaRaiz(e))) {
+	Cargo cargos = e->cargos;
+
+	if(ifCargoExiste(nuevoCargo, cargos)) {
 		return ERROR;
 	}
 	
 	// Busco el cargo con el mismo nombre
-	Cargo cargoPadre_nodo = getEmpresaRaiz(e);
+	Cargo cargoPadre_nodo = cargos;
 	cargoPadre_nodo = iteradorEmpresa(cargoPadre, cargoPadre_nodo);
 
 	// Asigno el nuevo nodo como hijo
@@ -121,7 +124,7 @@ TipoRet ListarCargosAlf(Empresa e){
 	listaSimple lista = definirListaSimple();
 	
 	// A partir de ahora itero en todos los cargos y voy añadiendo nodos
-	Cargo cargos = getEmpresaRaiz(e);
+	Cargo cargos = e->cargos;
 	ArbolCargo_A_ListaCargo(cargos, lista);
 
 
@@ -139,7 +142,7 @@ TipoRet ListarJerarquia(Empresa e){
 // Lista todos los cargos de la empresa ordenados por nivel jerárquico e indentados
 // según se muestra el ejemplo de la letra. 
 
-	Cargo cargos = getEmpresaRaiz(e);
+	Cargo cargos = e->cargos;
 	
 
 	imprimirArbolCargos(cargos, 0);
@@ -153,9 +156,9 @@ TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
 // quedara sin efecto.
 
 	// Pido el primer cargo
-	Cargo cargo_nodo = getEmpresaRaiz(e);
+	Cargo cargo_nodo = e->cargos;
 
-	if((!ifCargoExiste(cargo, getEmpresaRaiz(e))) || (existePersonaEmpresa(e,ci))) {
+	if((!ifCargoExiste(cargo, cargo_nodo)) || (existePersonaEmpresa(cargo_nodo, ci))) {
 		return ERROR;
 	}
 	
@@ -189,7 +192,7 @@ TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci){
 	if(!ifCargoExiste(cargo,getEmpresaRaiz(e)))	{
 		return ERROR;
 	}
-	if (!existePersonaEmpresa(e,ci)){
+	if (!existePersonaEmpresa(e->cargos,ci)){
 		return ERROR;
 	}
 	//Se posiciona en cargo que debe asignar persona
@@ -224,12 +227,12 @@ TipoRet ListarSuperCargos (Empresa e, Cadena cargo){
 // Lista todos los cargos de la empresa ordenados alfabéticamente por nombre del cargo. 
 	
 	// Compruebo que el cargo al que quiero llegar existe
-	if(!ifCargoExiste(cargo, getEmpresaRaiz(e))) {
+	if(!ifCargoExiste(cargo, e->cargos)) {
 		return ERROR;
 	}
 	
 	// Entro en una funcion para imprimirlo
-	Cargo cargos = getEmpresaRaiz(e);
+	Cargo cargos = e->cargos;
 	imprimirArbolCargosHasta(cargos, cargo, 0);
 	
 	return OK;

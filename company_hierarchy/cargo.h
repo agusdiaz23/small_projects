@@ -67,8 +67,9 @@ Cargo eliminarCargos_Y_Parientes(Cargo cargos);
 bool ifCargoExiste(Cadena cargo, Cargo cargos_lista);
 
 // Esta funcion verifica si existe la CI como persona empleada en toda la empresa
-bool existePersonaEmpresa(Empresa e, Cadena ci);
+bool existePersonaEmpresa(Cargo cargo_iter, Cadena ci);
 	
+
 
 
 #endif

@@ -11,22 +11,6 @@ using namespace std;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //________Funciones de imprimir 
 
 void imprimirArbolCargosHasta(Cargo cargos, Cadena car_nom, int ident) {
@@ -298,10 +282,9 @@ bool ifCargoExiste(Cadena cargo, Cargo cargos_lista) {
 	}
 }
 
-bool existePersonaEmpresa(Empresa e, Cadena ci){
+bool existePersonaEmpresa(Cargo cargo_iter, Cadena ci){
 	// Esta funcion verifica si existe la CI como persona empleada en toda la empresa
 
-	Cargo cargo_iter = getEmpresaRaiz(e);//Cargo para iterar que inicia desde raiz
 	bool retorno = false;	
 	while (cargo_iter != NULL and !retorno){//Mientras cargo donde estoy no es NULL y aún no encontre a la persona sigo iterando		
 		retorno = EsEmpleado (cargo_iter->empleados, ci);//En cada nodo verifico si Ci existe usando funcion pertenece de empleado.h		
