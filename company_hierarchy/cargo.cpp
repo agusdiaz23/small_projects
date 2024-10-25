@@ -261,6 +261,22 @@ Cargo eliminarCargos_Y_Parientes(Cargo cargos) {
 	return NULL; 
 }
 
+void EliminaPersonaDeCargo (Cargo cargo, Cadena ci){
+	EliminarEmpleadoPorCI(cargo->empleados, ci);
+}
+
+void AsignoPersonaCargo (Cargo cargos, Cadena ci, Cadena nombre){
+	consEmpleado(cargos->empleados, ci, nombre);
+}
+
+
+void ReasignaEmpleadoEnCargo (Cargo Cdesde, Cargo Cpara, Cadena ci){
+	ReasignaEmpleado(Cdesde->empleados, Cpara->empleados, ci);
+}
+
+void ListaEmpleadosCargo (Cargo cargo){
+	ListaEmpleados(cargo->empleados);
+	}
 
 
 //_______Funciones tipo ifExiste
@@ -305,4 +321,8 @@ bool existePersonaEmpresa(Cargo cargo_iter, Cadena ci){
 	}
 	// Si en algún ciclo encontre a la persona, se acaba while y retorno será true
 	return retorno;
+}
+
+bool EsEmpleadoEnCargo(Cargo cargo, Cadena ci){
+	return EsEmpleado (cargo->empleados, ci);
 }

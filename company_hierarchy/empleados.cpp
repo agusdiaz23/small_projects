@@ -18,7 +18,7 @@ Empleado CreaListaEmpleado(){
 
 // ________Funciones tipo manipular nodos (iterar, devolver y eliminar)
 
-Empleado cons(Empleado e, Cadena ci, Cadena nom){
+Empleado consEmpleado(Empleado e, Cadena ci, Cadena nom){
 // Inserta persona al inicio de lista empleado.
 	Empleado aux = new(nodo_empleado);
 	aux->personas = creaPers(ci,nom);

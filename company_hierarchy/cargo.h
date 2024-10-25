@@ -58,8 +58,14 @@ Cargo eliminarCargosDesde(Cargo cargos);
 // Dado un cargo raiz pasado, eliminar ese cargo y todo lo que este unido
 Cargo eliminarCargos_Y_Parientes(Cargo cargos);
 
+//Asigno persona a lista empleado de un cargo
+void AsignoPersonaCargo (Cargo cargos, Cadena ci, Cadena nombre);
 
+void ReasignaEmpleadoEnCargo (Cargo Cdesde, Cargo Cpara, Cadena ci);
 
+void EliminaPersonaDeCargo (Cargo cargo, Cadena ci);
+
+void ListaEmpleadosCargo (Cargo cargo);
 
 
 //_______Funciones tipo ifExiste
@@ -69,7 +75,7 @@ bool ifCargoExiste(Cadena cargo, Cargo cargos_lista);
 // Esta funcion verifica si existe la CI como persona empleada en toda la empresa
 bool existePersonaEmpresa(Cargo cargo_iter, Cadena ci);
 	
-
+bool EsEmpleadoEnCargo(Cargo cargo, Cadena ci);
 
 
 #endif

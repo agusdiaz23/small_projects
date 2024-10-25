@@ -70,15 +70,14 @@ TipoRet EliminarCargo(Empresa &e, Cadena cargo){
 // Si el cargo a eliminar posee subcargos, éstos deberán ser eliminados también, así como
 // las personas asociadas a cada uno de los cargos suprimidos.
 	
-	Cargo cargo_a_eliminar, cargo_raiz, cargo_padre, cargo_hermano_ant, cargo_hermano_sig; // Declaro variables
+	Cargo cargo_a_eliminar, cargo_padre, cargo_hermano_ant, cargo_hermano_sig; // Declaro variables
 
 
-	cargo_raiz = getEmpresaRaiz(e); // Tomo el cargo raiz de la empresa
-	if(!ifCargoExiste(cargo, cargo_raiz)) // Compruebo que el cargo existe
+	if(!ifCargoExiste(cargo, e->cargos)) // Compruebo que el cargo existe
 		return ERROR;
 
 
-	cargo_a_eliminar = iteradorEmpresa(cargo, cargo_raiz); // Busco el cargo que quiero eliminar. Esta enlazado a todo su subarbol
+	cargo_a_eliminar = iteradorEmpresa(cargo, e->cargos); // Busco el cargo que quiero eliminar. Esta enlazado a todo su subarbol
 	if(cargo_a_eliminar->padre == NULL) // Compruebo que no sea el primer cargo
 		return ERROR;
 
@@ -165,7 +164,7 @@ TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci){
 	// se posiciona en cargo que debe asignar persona
 	cargo_nodo = iteradorEmpresa(cargo, cargo_nodo);
 	// asigna persona usando el cons empleado de empleados.h
-	cargo_nodo->empleados = cons(cargo_nodo->empleados, ci, nom);
+	AsignoPersonaCargo(cargo_nodo, ci, nom);
 	
 	return OK;
 }
@@ -175,36 +174,32 @@ TipoRet EliminarPersona(Empresa &e, Cadena ci){
 // Elimina una persona de cédula ci de la empresa siempre y cuando la misma exista,
 // en caso contrario la operación quedará sin efecto.
 	// Llama a una funcion que itera por toda la empresa para eliminar la cedula
-	
-	Cargo cargos = getEmpresaRaiz(e);  // Obtengo el cargo raiz
 
 	// Compruebo que la persona existe
-	if(!EsEmpleado(cargos->empleados, ci))
+	if(!EsEmpleadoEnCargo(e->cargos, ci))
 		return ERROR;
 	
-	Cargo cargo_con_persona = BuscaCargoPersona(cargos, ci); // Busco el cargo con esa persona (Gracias por esta funcion Mauro)
-	EliminarEmpleadoPorCI(cargo_con_persona->empleados, ci); // Mando el cargo y la ci para eliminar el empleado
+	Cargo cargo_con_persona = BuscaCargoPersona(e->cargos, ci); // Busco el cargo con esa persona (Gracias por esta funcion Mauro)
+	EliminaPersonaDeCargo(cargo_con_persona, ci); // Mando el cargo y la ci para eliminar el empleado
 
     return OK;
 }
 
 TipoRet ReasignarPersona(Empresa &e, Cadena cargo, Cadena ci){
-	if(!ifCargoExiste(cargo,getEmpresaRaiz(e)))	{
+	if(!ifCargoExiste(cargo, e->cargos))	{
 		return ERROR;
 	}
 	if (!existePersonaEmpresa(e->cargos,ci)){
 		return ERROR;
 	}
 	//Se posiciona en cargo que debe asignar persona
-	Cargo cargo_nodo = getEmpresaRaiz(e);
-	Cargo cargo_asignar = iteradorEmpresa(cargo, cargo_nodo);
-	if (EsEmpleado(cargo_asignar->empleados,ci)){
+	Cargo cargo_asignar = iteradorEmpresa(cargo, e->cargos);
+	if (EsEmpleadoEnCargo(cargo_asignar,ci)){
 		return ERROR;
 	}
-	Cargo raiz = getEmpresaRaiz(e);
 	//Busco cargo que debo desasignar
-	Cargo cargo_desasignar = BuscaCargoPersona(raiz,ci);
-	ReasignaEmpleado(cargo_desasignar ->empleados,cargo_asignar ->empleados,ci);
+	Cargo cargo_desasignar = BuscaCargoPersona(e->cargos,ci);
+	ReasignaEmpleadoEnCargo(cargo_desasignar,cargo_asignar,ci);
 	return OK;
 }
 
@@ -212,12 +207,12 @@ TipoRet ListarPersonas(Empresa e, Cadena cargo){
 // Dado un cargo listar las personas asignadas al mismo ordenadas por fecha de alta a la empresa. 
 // Lista todas las personas asignadas al cargo de nombre cargo. 
 
-	if(!ifCargoExiste(cargo, getEmpresaRaiz(e))){
+	if(!ifCargoExiste(cargo, e->cargos)){
 		return ERROR;
 	}	
 	else{
-		Cargo c = iteradorEmpresa(cargo, getEmpresaRaiz(e)); //Encuentro cargo con el nombre pasado por parametro
-		ListaEmpleados(c->empleados);//Manda imprimir a la funcion de empleados .h pasando la lista de empleados
+		Cargo c = iteradorEmpresa(cargo, e->cargos); //Encuentro cargo con el nombre pasado por parametro
+		ListaEmpleadosCargo(c);//Manda imprimir a la funcion de cargo.h pasandole el cargo
 	}
 	return OK;
 }

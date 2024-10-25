@@ -14,7 +14,7 @@ Empleado CreaListaEmpleado();
 // ________Funciones tipo manipular nodos (iterar, devolver y eliminar)
 
 // Inserta persona al inicio de lista empleado.
-Empleado cons(Empleado e, Cadena ci, Cadena nom);
+Empleado consEmpleado(Empleado e, Cadena ci, Cadena nom);
 
 //re direcciona nodo a la nueva lista de empleados, la idea es usar el mismo espacio de memoria
 void ReasignaEmpleado(Empleado &origen, Empleado &destino, Cadena ci);
