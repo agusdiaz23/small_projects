@@ -5,18 +5,13 @@
 #include "empresa.h"
 #include "empleados.h"
 #include "cargo.h"
+#include "manejaListaAlf.h"
 
 
-TipoRet AsignarPersona(Empresa &e, Cadena cargo, Cadena nom, Cadena ci);
-// Asignar una persona a un cargo, si este existe.
-// Asigna una persona de nombre nom  y cédula de identidad ci al cargo cargo
-// siempre que el cargo exista en la empresa y esa persona no este asignada a
-// ese u otro cargo, en caso contrario la operación quedará sin efecto.
 
-TipoRet NuevoCargo(Empresa &e, Cadena cargoPadre, Cadena nuevoCargo);
-// Insertar un nuevo cargo como dependiente de otro ya existente.
-// El nuevo cargo no debe existir en el sistema.
+//________Funciones de imprimir 
 
+<<<<<<< HEAD
 TipoRet EliminarCargo(Empresa &e, Cadena cargo);
 // Eliminar un cargo, junto con sus subcargos y personas asociadas.
 // Elimina un cargo en la empresa si cargo ya existe en la misma.
@@ -57,22 +52,73 @@ void imprimeInfoCargo(Cargo cargo);
 
 // Itera todo el arbol usando el nodo pasado como raiz y devuelve el puntero al cargo con el nombre pasado
 Cargo iteradorEmpresa(Cadena cargo, Cargo cargos);
+=======
+// Imprime el arbol hasta el cargo pasado (no incluye el cargo pasado)
+void imprimirArbolCargosHasta(Cargo cargos, Cadena car_nom, int ident);
+>>>>>>> c4b554be68c87e4e2810f6fa0f866d433ca8434c
 
 // Se llama desde ListarJerarquia(). Usa un int para aumentar la identacion segun avanza por los hijos
 void imprimirArbolCargos(Cargo cargos, int ident);
 
-// Itera hasta el final de la lista de cargos hijos y devuelve el ultimo miembro
-Cargo iteradorCargoHermanos(Cargo cargos);
-
-//Devuelve true si el cargo con el nombre pasado existe en el arbol pasado
-bool ifCargoExiste(Cadena cargo, Cargo cargos_lista);
-
+// Esta función imprime los parientes de un cargo (llama a funciones de tipo get para obtener la info)
+void imprimeInfoCargo(Cargo cargo);
 
 // Recibe un int y imprime ese numero de espacios
 void imprimirIdent(int ident);
 
-// Esta función imprime los parientes de un cargo y el cargo
-void imprimeInfoCargo(Cargo cargo);
+
+//________Funciones tipo get
+
+Cadena getCarNom(Cargo cargo);
+Cadena getCarNomH(Cargo cargo);
+Cadena getCarNomP(Cargo cargo);
+
+
+//______Funiones tipo iterar y devolver
+
+// Itera todo el arbol usando el nodo pasado como raiz y devuelve el puntero al cargo con el nombre pasado
+Cargo iteradorEmpresa(Cadena cargo, Cargo cargos);
+
+// Itera hasta el final de la lista de cargos hijos y devuelve el ultimo miembro
+Cargo iteradorCargoHermanos(Cargo cargos);
+
+// Itera todo el arbol buscando el cargo de la persona Ci pasa por parametro, devuelve el cargo donde este la persona o null
+Cargo BuscaCargoPersona(Cargo cargos, Cadena ci);
+	
+
+//_______Funcciones tipo asignar, definir y eliminar
+
+Cargo definirCargo(Cadena cargo_nom);
+
+// Asigno el nuevo cargo como hijo del cargo pedido
+void AsignarCargoHijo(Cargo cargo_hijo, Cargo cargo_padre);
+
+void ArbolCargo_A_ListaCargo(Cargo cargos, listaSimple &lista);
+
+// Dado un cargo raiz pasado, eliminar ese cargo y todo lo que esta unido
+Cargo eliminarCargosDesde(Cargo cargos);
+
+// Dado un cargo raiz pasado, eliminar ese cargo y todo lo que este unido
+Cargo eliminarCargos_Y_Parientes(Cargo cargos);
+
+//Asigno persona a lista empleado de un cargo
+void AsignoPersonaCargo (Cargo cargos, Cadena ci, Cadena nombre);
+
+void ReasignaEmpleadoEnCargo (Cargo Cdesde, Cargo Cpara, Cadena ci);
+
+void EliminaPersonaDeCargo (Cargo cargo, Cadena ci);
+
+void ListaEmpleadosCargo (Cargo cargo);
+
+
+//_______Funciones tipo ifExiste
+
+bool ifCargoExiste(Cadena cargo, Cargo cargos_lista);
+
+// Esta funcion verifica si existe la CI como persona empleada en toda la empresa
+bool existePersonaEmpresa(Cargo cargo_iter, Cadena ci);
+	
+bool EsEmpleadoEnCargo(Cargo cargo, Cadena ci);
 
 // Esta funcion verifica si existe la CI como persona empleada en toda la empresa
 bool existePersonaEmpresa(Empresa e, Cadena ci);
