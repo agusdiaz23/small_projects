@@ -3,6 +3,8 @@
 #include <string.h>
 
 #include "cargo.h"
+#include "empleados.h"
+#include "manejaListaAlf.h"
 
 using namespace std;
 

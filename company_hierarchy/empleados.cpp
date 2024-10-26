@@ -1,4 +1,5 @@
 #include "empleados.h"
+#include "persona.h"
 
 #include <iostream>
 #include <stdio.h>

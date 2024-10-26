@@ -10,6 +10,8 @@
 #include <string.h>
 
 #include "empresa.h"
+#include "cargo.h"
+#include "manejaListaAlf.h"
 
 
 using namespace std;
@@ -240,12 +242,6 @@ TipoRet ListarSuperCargos (Empresa e, Cadena cargo){
 	return OK;
 }
 
-
-// Devuelve nodo_cargo al que apunta el nodo_empresa
-Cargo getEmpresaRaiz(Empresa e) {
-	Cargo nodo_raiz = e->cargos;
-	return nodo_raiz;
-}
 
 
 

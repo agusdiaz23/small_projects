@@ -61,7 +61,6 @@ TipoRet ListarPersonas(Empresa e, Cadena cargo);
 TipoRet ListarSuperCargos (Empresa e, Cadena cargo);
 
 
-Cargo getEmpresaRaiz(Empresa e);
 
 #endif
 

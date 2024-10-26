@@ -8,7 +8,6 @@
 #include "definiciones.h" // Se definen las estructuras que se usan en todo el programa
 #include "empresa.h" // Funciones relativas a los cargos
 
-#include "persona.h"
 
 #include <string.h>
 #include <stdio.h>
