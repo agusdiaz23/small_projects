@@ -206,6 +206,11 @@ void ArbolCargo_A_ListaCargo(Cargo cargos) {
 	// Itero a traves de mi arbol de cargos y voy poniendolos en una lista
 	iterarArbol_Anadir_a_Lista(cargos, lista);
 
+	// ordeno mi lista alfabeticamente
+	lista = ordenarListaAlf(lista);
+	
+	// Imprimo la lista
+	imprimeListaSimple(lista);
 }
 
 void iterarArbol_Anadir_a_Lista(Cargo cargos, listaSimple &lista) {
@@ -324,7 +329,7 @@ void ReasignaEmpleadoEnCargo (Cargo Cdesde, Cargo Cpara, Cadena ci){
 
 void ListaEmpleadosCargo (Cargo cargo){
 	ListaEmpleados(cargo->empleados);
-	}
+}
 
 
 //_______Funciones tipo ifExiste
