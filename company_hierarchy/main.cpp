@@ -5,10 +5,8 @@
 // main.c
 // Consola para ingreso de datos.
 
-#include "definiciones.h" // Se definen las estructuras que se usan en todo el programa
-#include "empresa.h" // Funciones relativas a los cargos
-
-
+#include "definiciones.h"
+#include "empresa.h"
 #include <string.h>
 #include <stdio.h>
 #include <iostream>
@@ -29,7 +27,7 @@ int main (){
 	cout << "\tEliminarOrg()\n";
 	cout << "\tNuevoCargo(cargoPadre, nuevoCargo)\n";
 	cout << "\tEliminarCargo(cargo)\n";
-	cout << "\tAlf()\n";
+	cout << "\tListarCargosAlf()\n";
 	cout << "\tListarJerarquia()\n";
 	cout << "\tAsignarPersona(cargo, ci, nombre)\n";
 	cout << "\tEliminarPersona(ci)\n";
@@ -92,7 +90,7 @@ int main (){
 						cout << " - ERROR: para ejecutar el comando el organigrama debe estar creado.\n";
 				}else
 					cout << " - ERROR: Faltan Parametros.\n";
-			}else if (strcasecmp (pch, "Alf") == 0){
+			}else if (strcasecmp (pch, "ListarCargosAlf") == 0){
 				if (creado){
 					ret = ListarCargosAlf(e);
 					ejecutado = true;
@@ -182,7 +180,7 @@ int main (){
 				if (ret == OK)
 					cout << " - OK\n";
 				else if (ret == ERROR)
-					cout << " - ERROR\n";
+					cout << " - ERRORRRRR\n";
 				else
 					cout << " - NO IMPLEMENTADA\n";
 			}
