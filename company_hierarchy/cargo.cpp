@@ -2,13 +2,21 @@
 #include <iostream>
 #include <string.h>
 
-
-#include "definiciones.h"
 #include "cargo.h"
 
 using namespace std;
 
 
+// Cargo tiene un pointer a la linked list de personas
+// hasta que el profesor explique como van a ser los trees
+struct nodo_cargo {
+    Cadena nombre;
+    Empleado empleados;
+    Cargo hijo;
+    Cargo hermano_sig;
+    Cargo hermano_ant;
+    Cargo padre;
+};
 
 
 //________Funciones de imprimir 

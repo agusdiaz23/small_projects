@@ -3,6 +3,12 @@
 
 #include "definiciones.h"
 
+// Empleado tiene sus datos y un pointer al siguiente empleado
+typedef struct nodo_persona * Persona;
+
+
+
+
 Persona crearPers_vacia();
 // Crea la persona vacia.
 

@@ -6,6 +6,11 @@
 
 using namespace std;
 
+struct nodo_empleado {
+    Persona personas;
+    Empleado sig;
+};
+
 
 
 // ________Funciones tipo definir

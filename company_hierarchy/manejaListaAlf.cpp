@@ -2,10 +2,17 @@
 #include <iostream>
 #include <string.h>
 
-#include "definiciones.h"
 #include "manejaListaAlf.h"
 
 using namespace std;
+
+
+// Esta lista contiene solo el nombre de los cargos. Se ordenara alfabeticamente
+struct nodo_listaSimple {
+    listaSimple sig;
+    Cadena nombre;
+};
+
 
 listaSimple ordenarListaAlf(listaSimple lista) {
     bool sorted = false;

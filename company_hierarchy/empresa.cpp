@@ -5,14 +5,20 @@
 // empresa.c
 // Modulo de Implementacion de la Empresa
 
-#include "empresa.h"
-#include "definiciones.h"
-
 #include <stdio.h>
 #include <iostream>
 #include <string.h>
 
+#include "empresa.h"
+
+
 using namespace std;
+
+// Empresa es simplemente un pointer al primer y unico cargo
+
+struct  nodo_empresa {
+    Cargo cargos;
+};
 
 
 // Inicializa la empresa y crea el primer cargo de la empresa.

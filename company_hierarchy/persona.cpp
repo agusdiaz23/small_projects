@@ -1,9 +1,15 @@
 #include "persona.h"
+
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
 
 using namespace std;
+
+struct nodo_persona {
+    Cadena ci;
+    Cadena nom;
+};
 
 Persona creaPers (Cadena ci, Cadena nombre){
     Persona p = new(nodo_persona);

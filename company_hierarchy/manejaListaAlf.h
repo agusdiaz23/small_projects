@@ -1,9 +1,9 @@
-#ifndef MANEJALISTALF_H
-#define MANEJALISTALF_H
+#ifndef MANEJALISTAALF_H
+#define MANEJALISTAALF_H
 
-
-#include "cargo.h"
 #include "definiciones.h"
+
+typedef struct nodo_listaSimple * listaSimple;
 
 
 void imprimeListaSimple(listaSimple lista);

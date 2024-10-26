@@ -2,8 +2,9 @@
 #define EMPLEADOS_H
 
 #include "definiciones.h"
-#include "persona.h"
-#include "cargo.h"
+
+typedef struct nodo_empleado * Empleado;
+
 
 // ________Funciones tipo definir
 

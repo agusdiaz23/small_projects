@@ -2,10 +2,8 @@
 #define CARGO_H
 
 #include "definiciones.h"
-#include "empresa.h"
-#include "empleados.h"
-#include "cargo.h"
-#include "manejaListaAlf.h"
+
+typedef struct nodo_cargo * Cargo;
 
 
 
