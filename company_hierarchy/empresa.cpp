@@ -86,38 +86,8 @@ TipoRet EliminarCargo(Empresa &e, Cadena cargo){
 
 
 	cargo_a_eliminar = iteradorEmpresa(cargo, e->cargos); // Busco el cargo que quiero eliminar. Esta enlazado a todo su subarbol
-	if(cargo_a_eliminar->padre == NULL) // Compruebo que no sea el primer cargo
-		return ERROR;
 
-	if(cargo_a_eliminar->hermano_sig == NULL && cargo_a_eliminar->hermano_ant == NULL) { // Si el cargo a eliminar no tiene hermanos
-		cargo_padre = cargo_a_eliminar->padre;
-		cargo_padre->hijo = NULL;
-	}
-	else { // Compruebo las diferentes situaciones que se pueden dar el nodo
-		if(cargo_a_eliminar->hermano_ant == NULL && cargo_a_eliminar->hermano_sig != NULL){
-			cargo_hermano_sig = cargo_a_eliminar->hermano_sig;
-			cargo_padre = cargo_a_eliminar->padre;
-			
-			cargo_padre->hijo = cargo_hermano_sig;
-			cargo_hermano_sig->hermano_ant=NULL;
-		}
-		else if(cargo_a_eliminar->hermano_ant != NULL && cargo_a_eliminar->hermano_sig == NULL){
-			cargo_hermano_ant = cargo_a_eliminar->hermano_ant;
-			cargo_hermano_ant->hermano_sig = NULL;
-		}
-		else {
-			cargo_hermano_ant = cargo_a_eliminar->hermano_ant;
-			cargo_hermano_sig = cargo_a_eliminar->hermano_sig;
-
-			cargo_hermano_ant->hermano_sig = cargo_hermano_sig;
-		}
-
-	}
-
-	
-	//Entro en una funcion recursiva que elimina todo los cargos que le pase
-	eliminarCargosDesde(cargo_a_eliminar);
-
+	eliminarCargoSeleccionado(cargo_a_eliminar);
 
 	
 	return OK;
@@ -127,19 +97,11 @@ TipoRet ListarCargosAlf(Empresa e){
 // Listar todos los cargos ordenados alfabéticamente.
 // Lista todos los cargos de la empresa ordenados alfabéticamente por nombre del cargo.
 
-	// Creo una lista que es la que voy a ordenar
-	listaSimple lista = definirListaSimple();
-	
-	// A partir de ahora itero en todos los cargos y voy añadiendo nodos
+
+	// Itero en todos los cargos y voy añadiendo nodos a una lista que luego imprimo
 	Cargo cargos = e->cargos;
-	ArbolCargo_A_ListaCargo(cargos, lista);
+	ArbolCargo_A_ListaCargo(cargos);
 
-
-	// Empiezo la funcion de ordenar;
-	lista = ordenarListaAlf(lista);
-
-	// Imprimo la litra en orden alfabetico
-	imprimeListaSimple(lista);
 
 	return OK;
 }

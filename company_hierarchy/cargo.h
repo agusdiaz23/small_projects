@@ -2,6 +2,7 @@
 #define CARGO_H
 
 #include "definiciones.h"
+#include "manejaListaAlf.h"
 
 typedef struct nodo_cargo * Cargo;
 
@@ -48,7 +49,7 @@ Cargo definirCargo(Cadena cargo_nom);
 // Asigno el nuevo cargo como hijo del cargo pedido
 void AsignarCargoHijo(Cargo cargo_hijo, Cargo cargo_padre);
 
-void ArbolCargo_A_ListaCargo(Cargo cargos, listaSimple &lista);
+void ArbolCargo_A_ListaCargo(Cargo cargos);
 
 // Dado un cargo raiz pasado, eliminar ese cargo y todo lo que esta unido
 Cargo eliminarCargosDesde(Cargo cargos);
@@ -64,6 +65,10 @@ void ReasignaEmpleadoEnCargo (Cargo Cdesde, Cargo Cpara, Cadena ci);
 void EliminaPersonaDeCargo (Cargo cargo, Cadena ci);
 
 void ListaEmpleadosCargo (Cargo cargo);
+
+TipoRet eliminarCargoSeleccionado(Cargo cargo_a_eliminar);
+
+void iterarArbol_Anadir_a_Lista(Cargo cargos, listaSimple &lista);
 
 
 //_______Funciones tipo ifExiste

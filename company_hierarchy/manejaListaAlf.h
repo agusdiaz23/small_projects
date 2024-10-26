@@ -12,7 +12,7 @@ void setNom(listaSimple lista, Cadena nombre);
 
 Cadena getListaSimpleNom(listaSimple lista);
 
-listaSimple definirListaSimple();
+listaSimple definirListaSimple(Cadena nombre);
 
 listaSimple ordenarListaAlf(listaSimple lista);
 
@@ -20,5 +20,9 @@ bool ifListSorted(listaSimple lista);
 
 // Esta funcion recibe dos string. Las compara char a char. Si string_a > string_b (alfabeticamente) devuelve true
 bool compareStringsAlf(int indice, Cadena string_a, Cadena string_b);
+
+void concatenarLista(listaSimple &lista, listaSimple nuevaLista);
+
+listaSimple definirListaSimpleVacia();
 
 #endif

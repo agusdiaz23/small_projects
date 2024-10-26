@@ -102,6 +102,25 @@ Cadena getListaSimpleNom(listaSimple lista){
     return lista->nombre;
 }
 
-listaSimple definirListaSimple() {
+listaSimple definirListaSimple(Cadena nombre) {
+    listaSimple nuevaLista = new(nodo_listaSimple);
+    setNom(nuevaLista, nombre);
+    nuevaLista->sig=NULL;
+
+    return nuevaLista;
+}
+
+void concatenarLista(listaSimple &lista, listaSimple nuevaLista) {
+    	// Si estoy en una lista que no se inicializo, mi nuevo nodo sera el primero
+		if(lista == NULL) {
+			lista = nuevaLista;
+		}
+		else {
+			nuevaLista->sig = lista;
+			lista = nuevaLista;
+		}
+}
+
+listaSimple definirListaSimpleVacia() {
     return NULL;
 }

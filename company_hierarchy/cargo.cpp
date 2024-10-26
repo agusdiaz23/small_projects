@@ -198,38 +198,38 @@ void AsignarCargoHijo(Cargo cargo_hijo, Cargo cargo_padre) {
 	}
 }
 
-void ArbolCargo_A_ListaCargo(Cargo cargos, listaSimple &lista) {
+void ArbolCargo_A_ListaCargo(Cargo cargos) {
+
+	// Creo una lista vacia que sera la que ordenare alfabeticamente
+	listaSimple lista = definirListaSimpleVacia();
+
+	// Itero a traves de mi arbol de cargos y voy poniendolos en una lista
+	iterarArbol_Anadir_a_Lista(cargos, lista);
+
+}
+
+void iterarArbol_Anadir_a_Lista(Cargo cargos, listaSimple &lista) {
 	if(cargos==NULL) {
 		return;	
 	}
 	else {
 		
 		// Creo un nodo de tipo lista con los datos del nodo de cargos
-		listaSimple nuevaLista = new(nodo_listaSimple);
 		Cadena nombre = getCarNom(cargos);
-		setNom(nuevaLista, nombre);
-		nuevaLista->sig=NULL;
-
-		// Si estoy en una lista que no se inicializo
-		if(lista == NULL) {
-			lista = nuevaLista;
-		}
-		else {
-			nuevaLista->sig = lista;
-			lista = nuevaLista;
-		}
-
+		
+		listaSimple nuevaLista = definirListaSimple(nombre);
+		
+		// Engancho mi nuevo nodo a la lista. La funcion se fija si acabo de crear la lista
+		concatenarLista(lista, nuevaLista);
 
 		// Entro al hijo primero sino es null
 		if (cargos->hijo != NULL)
-			ArbolCargo_A_ListaCargo(cargos->hijo, lista);
+			iterarArbol_Anadir_a_Lista(cargos->hijo, lista);
 		
-		if(cargos->hermano_sig != NULL) {
-			ArbolCargo_A_ListaCargo(cargos->hermano_sig, lista);
-		}
+		if(cargos->hermano_sig != NULL)
+			iterarArbol_Anadir_a_Lista(cargos->hermano_sig, lista);
 	}
 
-	
 }
 
 Cargo eliminarCargosDesde(Cargo cargos){
@@ -277,6 +277,44 @@ void EliminaPersonaDeCargo (Cargo cargo, Cadena ci){
 
 void AsignoPersonaCargo (Cargo &cargos, Cadena ci, Cadena nombre){
 	cargos -> empleados = consEmpleado(cargos->empleados, ci, nombre);
+}
+
+TipoRet eliminarCargoSeleccionado(Cargo cargo_a_eliminar){
+	Cargo cargo_padre, cargo_hermano_ant, cargo_hermano_sig; // Declaro variables
+	
+	if(cargo_a_eliminar->padre == NULL) // Compruebo que no sea el primer cargo
+		return ERROR;
+
+	if(cargo_a_eliminar->hermano_sig == NULL && cargo_a_eliminar->hermano_ant == NULL) { // Si el cargo a eliminar no tiene hermanos
+		cargo_padre = cargo_a_eliminar->padre;
+		cargo_padre->hijo = NULL;
+	}
+	else { // Compruebo las diferentes situaciones que se pueden dar el nodo
+		if(cargo_a_eliminar->hermano_ant == NULL && cargo_a_eliminar->hermano_sig != NULL){
+			cargo_hermano_sig = cargo_a_eliminar->hermano_sig;
+			cargo_padre = cargo_a_eliminar->padre;
+			
+			cargo_padre->hijo = cargo_hermano_sig;
+			cargo_hermano_sig->hermano_ant=NULL;
+		}
+		else if(cargo_a_eliminar->hermano_ant != NULL && cargo_a_eliminar->hermano_sig == NULL){
+			cargo_hermano_ant = cargo_a_eliminar->hermano_ant;
+			cargo_hermano_ant->hermano_sig = NULL;
+		}
+		else {
+			cargo_hermano_ant = cargo_a_eliminar->hermano_ant;
+			cargo_hermano_sig = cargo_a_eliminar->hermano_sig;
+
+			cargo_hermano_ant->hermano_sig = cargo_hermano_sig;
+		}
+
+	}
+
+	
+	//Entro en una funcion recursiva que elimina todo los cargos que le pase
+	eliminarCargosDesde(cargo_a_eliminar);
+
+	return OK;
 }
 
 
