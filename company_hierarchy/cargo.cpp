@@ -125,6 +125,7 @@ Cargo iteradorEmpresa(Cadena cargo, Cargo cargos) {
             return iteradorEmpresa(cargo, cargos->hermano_sig);
         }
 	}
+	return NULL;
 }
 
 Cargo iteradorCargohermano_sigs(Cargo cargos) {
@@ -136,6 +137,7 @@ Cargo iteradorCargohermano_sigs(Cargo cargos) {
 	else if(cargos->hermano_sig != NULL) {
 		return (iteradorCargohermano_sigs(cargos->hermano_sig));
 	}
+	return NULL;
 }
 
 Cargo BuscaCargoPersona(Cargo cargos, Cadena ci) {
@@ -157,6 +159,7 @@ Cargo BuscaCargoPersona(Cargo cargos, Cadena ci) {
             return BuscaCargoPersona(cargos->hermano_sig, ci);
         }
 	}
+	return NULL;
 }
 
 
@@ -347,6 +350,7 @@ bool ifCargoExiste(Cadena cargo, Cargo cargos_lista) {
 	} else if(cargos_lista->hijo == NULL && cargos_lista->hermano_sig == NULL) {
 		return false;
 	}
+	return false;
 }
 
 bool existePersonaEmpresa(Cargo cargo_iter, Cadena ci){

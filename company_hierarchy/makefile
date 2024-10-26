@@ -16,5 +16,10 @@ persona.o: persona.h persona.cpp
 clean:
 	del /Q *.o
 	del /Q main.exe
+cleanl:
+	rm *.o
+	rm main
+
+
 
 
