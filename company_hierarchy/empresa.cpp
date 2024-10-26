@@ -188,8 +188,7 @@ TipoRet ListarPersonas(Empresa e, Cadena cargo){
 }
 
 TipoRet ListarSuperCargos (Empresa e, Cadena cargo){
-// Listar todos los cargos ordenados alfabéticamente.
-// Lista todos los cargos de la empresa ordenados alfabéticamente por nombre del cargo. 
+
 	
 	// Compruebo que el cargo al que quiero llegar existe
 	if(!ifCargoExiste(cargo, e->cargos)) {

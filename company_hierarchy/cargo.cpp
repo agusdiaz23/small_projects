@@ -27,7 +27,7 @@ void imprimirArbolCargosHasta(Cargo cargos, Cadena car_nom, int ident) {
 // Imprime el arbol hasta el cargo pasado (no incluye el cargo pasado)
 
 	// Me muevo recursivamente e imprimo hasta que encuentra un cargo con el mismo nombre
-	if( strcmp ( getCarNom(cargos), car_nom ) == 0 ) {
+	if( strcasecmp ( getCarNom(cargos), car_nom ) == 0 ) {
 		return;
 	}
 	else {
@@ -109,7 +109,7 @@ Cadena getCarNomP(Cargo cargo){
 Cargo iteradorEmpresa(Cadena cargo, Cargo cargos) {
 // Itera todo el arbol usando el nodo pasado como raiz y devuelve el puntero al cargo con el nombre pasado
 
-	if(strcmp(cargos->nombre, cargo) == 0) { // Encontre un cargo con el mismo nombre
+	if(strcasecmp(cargos->nombre, cargo) == 0) { // Encontre un cargo con el mismo nombre
 		return cargos;
 	} else if(cargos->hermano_sig == NULL && cargos->hijo == NULL) {  // Si llegue al final de ambos
 		return NULL;
@@ -336,7 +336,7 @@ bool ifCargoExiste(Cadena cargo, Cargo cargos_lista) {
 
 	if(cargo == NULL) {
 		return false;
-	} else if(strcmp(cargos_lista->nombre, cargo) == 0) {
+	} else if(strcasecmp(cargos_lista->nombre, cargo) == 0) {
 		return true;
 	} else if(cargos_lista->hijo != NULL && cargos_lista->hermano_sig != NULL) {
 		return (ifCargoExiste(cargo, cargos_lista->hijo) || ifCargoExiste(cargo, cargos_lista->hermano_sig));

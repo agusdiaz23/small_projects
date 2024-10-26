@@ -40,7 +40,7 @@ void ReasignaEmpleado(Empleado &origen, Empleado &destino, Cadena ci){
     bool reasignado = false;
     while (actual != NULL && !reasignado){
         Persona p = actual ->personas;
-        if (strcmp(getCI(p),ci) == 0){ // Tengo que re direccionar
+        if (strcasecmp(getCI(p),ci) == 0){ // Tengo que re direccionar
             if (anterior == NULL){ // Soy el primero
                 origen = actual->sig;                             
             }else{ // no soy el primero
@@ -61,8 +61,8 @@ Empleado BuscaEmpleado(Empleado e, Cadena ci) {
 
 	//Itera sobre la lista de empleados
     while (e != NULL) {
-        // Comparar usando strcmp
-        if (e->personas != NULL && strcmp(getCI(e->personas), ci) == 0) {
+        // Comparar usando strcasecmp
+        if (e->personas != NULL && strcasecmp(getCI(e->personas), ci) == 0) {
             return e;
         }
         e = e->sig;
@@ -79,7 +79,7 @@ void EliminarEmpleadoPorCI(Empleado &e, Cadena ci) {
     while (actual != NULL && !eliminado) {
 
         // Compara el CI del empleado actual con el proporcionado
-        if (strcmp(getCI(actual->personas), ci) == 0) {
+        if (strcasecmp(getCI(actual->personas), ci) == 0) {
             // Si es el primer nodo de la lista
             if (anterior == NULL) {
                 e = actual->sig;
@@ -148,8 +148,8 @@ bool EsEmpleado(Empleado e, Cadena ci) {
 
 	//Itera sobre la lista de empleados
     while (e != NULL) {
-        // Comparar usando strcmp
-        if (e->personas != NULL && strcmp(getCI(e->personas), ci) == 0) {
+        // Comparar usando strcasecmp
+        if (e->personas != NULL && strcasecmp(getCI(e->personas), ci) == 0) {
             return true;
         }
         e = e->sig;
