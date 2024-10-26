@@ -59,7 +59,7 @@ Cargo eliminarCargosDesde(Cargo cargos);
 Cargo eliminarCargos_Y_Parientes(Cargo cargos);
 
 //Asigno persona a lista empleado de un cargo
-void AsignoPersonaCargo (Cargo cargos, Cadena ci, Cadena nombre);
+void AsignoPersonaCargo (Cargo &cargos, Cadena ci, Cadena nombre);
 
 void ReasignaEmpleadoEnCargo (Cargo Cdesde, Cargo Cpara, Cadena ci);
 

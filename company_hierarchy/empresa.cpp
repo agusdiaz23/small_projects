@@ -212,6 +212,7 @@ TipoRet ListarPersonas(Empresa e, Cadena cargo){
 	}	
 	else{
 		Cargo c = iteradorEmpresa(cargo, e->cargos); //Encuentro cargo con el nombre pasado por parametro
+		cout << getCarNom(c) << endl;
 		ListaEmpleadosCargo(c);//Manda imprimir a la funcion de cargo.h pasandole el cargo
 	}
 	return OK;

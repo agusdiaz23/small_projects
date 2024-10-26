@@ -265,8 +265,8 @@ void EliminaPersonaDeCargo (Cargo cargo, Cadena ci){
 	EliminarEmpleadoPorCI(cargo->empleados, ci);
 }
 
-void AsignoPersonaCargo (Cargo cargos, Cadena ci, Cadena nombre){
-	consEmpleado(cargos->empleados, ci, nombre);
+void AsignoPersonaCargo (Cargo &cargos, Cadena ci, Cadena nombre){
+	cargos -> empleados = consEmpleado(cargos->empleados, ci, nombre);
 }
 
 
