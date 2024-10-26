@@ -180,7 +180,7 @@ int main (){
 				if (ret == OK)
 					cout << " - OK\n";
 				else if (ret == ERROR)
-					cout << " - ERRORRRRR\n";
+					cout << " - ERROR\n";
 				else
 					cout << " - NO IMPLEMENTADA\n";
 			}

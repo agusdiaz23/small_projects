@@ -237,17 +237,6 @@ void iterarArbol_Anadir_a_Lista(Cargo cargos, listaSimple &lista) {
 
 }
 
-Cargo eliminarCargosDesde(Cargo cargos){
-// Dado un cargo, eliminarlo a este y todo lo que tiene por debajo (NO ELIMINO LOS HERMANOS EN ESTA FUNCION. USAR CON SEGURIDAD)
-	
-	eliminarCargos_Y_Parientes(cargos->hijo); // La funcion que paso elimina todo si o si
-
-	// Elimino el nodo con tranquilidad
-	EliminarEmpleadosLista(cargos->empleados); // Empiezo eliminando la lista de empleados
-	delete[] cargos->nombre; // Elimino la string
-	delete cargos; // Elimino el nodo 
-	return NULL; 
-}
 
 Cargo eliminarCargos_Y_Parientes(Cargo cargos) {
 // Dado un cargo raiz pasado, eliminar ese cargo y todo lo que este unido. (ELIMINA HERMANOS TAMBIEN)
@@ -259,13 +248,17 @@ Cargo eliminarCargos_Y_Parientes(Cargo cargos) {
 
 	// Entro en los cargos hijo si no estoy al final
 	if(cargos->hijo != NULL) {
-		eliminarCargosDesde(cargos->hijo);
+		eliminarCargos_Y_Parientes(cargos->hijo);
 		cargos->hijo = NULL;
 	}
 
-	// Entro en los cargos padre si no estoy al final
+	// Entro en los cargos hermano sig si no estoy al final
 	if(cargos->hermano_sig != NULL) {
-		eliminarCargosDesde(cargos->hermano_sig);
+		eliminarCargos_Y_Parientes(cargos->hermano_sig);
+	}
+
+	if(cargos->hermano_ant != NULL) {
+		eliminarCargos_Y_Parientes(cargos->hermano_ant);
 	}
 
 	// En este punto ya me meti en todo lo posible asi que puedo eliminar nodo
@@ -284,20 +277,21 @@ void AsignoPersonaCargo (Cargo &cargos, Cadena ci, Cadena nombre){
 	cargos -> empleados = consEmpleado(cargos->empleados, ci, nombre);
 }
 
-TipoRet eliminarCargoSeleccionado(Cargo cargo_a_eliminar){
+bool eliminarCargoSeleccionado(Cargo cargo_a_eliminar){
 	Cargo cargo_padre, cargo_hermano_ant, cargo_hermano_sig; // Declaro variables
 	
-	if(cargo_a_eliminar->padre == NULL) // Compruebo que no sea el primer cargo
-		return ERROR;
+	if(cargo_a_eliminar->padre == NULL) {// Compruebo que no sea el primer cargo
+		return false;
+	}
 
 	if(cargo_a_eliminar->hermano_sig == NULL && cargo_a_eliminar->hermano_ant == NULL) { // Si el cargo a eliminar no tiene hermanos
 		cargo_padre = cargo_a_eliminar->padre;
 		cargo_padre->hijo = NULL;
 	}
-	else { // Compruebo las diferentes situaciones que se pueden dar el nodo
-		if(cargo_a_eliminar->hermano_ant == NULL && cargo_a_eliminar->hermano_sig != NULL){
-			cargo_hermano_sig = cargo_a_eliminar->hermano_sig;
-			cargo_padre = cargo_a_eliminar->padre;
+	else { // Compruebo las diferentes situaciones que se pueden dar en el nodo
+		if(cargo_a_eliminar->hermano_ant == NULL && cargo_a_eliminar->hermano_sig != NULL){ // Sino tiene un hermano anterior pero si uno siguiente
+			cargo_hermano_sig = cargo_a_eliminar->hermano_sig;	// Apunto el padre al hermano siguiente y me quedo con el del medio
+			cargo_padre = cargo_a_eliminar->padre; 
 			
 			cargo_padre->hijo = cargo_hermano_sig;
 			cargo_hermano_sig->hermano_ant=NULL;
@@ -312,14 +306,18 @@ TipoRet eliminarCargoSeleccionado(Cargo cargo_a_eliminar){
 
 			cargo_hermano_ant->hermano_sig = cargo_hermano_sig;
 		}
+	
 
 	}
 
-	
-	//Entro en una funcion recursiva que elimina todo los cargos que le pase
-	eliminarCargosDesde(cargo_a_eliminar);
+	//Entro en una funcion recursiva que elimina todo los cargos que le pase (incluyendo hermanos)
+	eliminarCargos_Y_Parientes(cargo_a_eliminar->hijo);
 
-	return OK;
+	EliminarEmpleadosLista(cargo_a_eliminar->empleados); // Empiezo eliminando la lista de empleados
+	delete[] cargo_a_eliminar->nombre; // Elimino la string
+	delete cargo_a_eliminar; // Elimino el nodo 
+
+	return true;
 }
 
 

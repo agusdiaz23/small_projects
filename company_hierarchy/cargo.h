@@ -66,7 +66,7 @@ void EliminaPersonaDeCargo (Cargo cargo, Cadena ci);
 
 void ListaEmpleadosCargo (Cargo cargo);
 
-TipoRet eliminarCargoSeleccionado(Cargo cargo_a_eliminar);
+bool eliminarCargoSeleccionado(Cargo cargo_a_eliminar);
 
 void iterarArbol_Anadir_a_Lista(Cargo cargos, listaSimple &lista);
 

@@ -11,7 +11,7 @@
 
 #include "empresa.h"
 #include "cargo.h"
-#include "manejaListaAlf.h"
+
 
 
 using namespace std;
@@ -78,16 +78,16 @@ TipoRet EliminarCargo(Empresa &e, Cadena cargo){
 // Si el cargo a eliminar posee subcargos, éstos deberán ser eliminados también, así como
 // las personas asociadas a cada uno de los cargos suprimidos.
 	
-	Cargo cargo_a_eliminar, cargo_padre, cargo_hermano_ant, cargo_hermano_sig; // Declaro variables
-
-
 	if(!ifCargoExiste(cargo, e->cargos)) // Compruebo que el cargo existe
 		return ERROR;
 
-
+	Cargo cargo_a_eliminar; // Declaro variables
 	cargo_a_eliminar = iteradorEmpresa(cargo, e->cargos); // Busco el cargo que quiero eliminar. Esta enlazado a todo su subarbol
 
-	eliminarCargoSeleccionado(cargo_a_eliminar);
+	
+	if(!eliminarCargoSeleccionado(cargo_a_eliminar)) {
+		return ERROR;
+	}
 
 	
 	return OK;
