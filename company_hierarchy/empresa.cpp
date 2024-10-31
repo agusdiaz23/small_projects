@@ -143,9 +143,9 @@ TipoRet EliminarPersona(Empresa &e, Cadena ci){
 // en caso contrario la operación quedará sin efecto.
 	// Llama a una funcion que itera por toda la empresa para eliminar la cedula
 	// Compruebo que la persona existe
-	if(!EsEmpleadoEnCargo(e->cargos, ci))
+	if (!existePersonaEmpresa(e->cargos,ci))
 		return ERROR;
-
+	
 	Cargo cargo_con_persona = BuscaCargoPersona(e->cargos, ci); // Busco el cargo con esa persona (Gracias por esta funcion Mauro)
 	EliminaPersonaDeCargo(cargo_con_persona, ci); // Mando el cargo y la ci para eliminar el empleado
 
