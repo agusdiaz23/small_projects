@@ -122,6 +122,8 @@ Empleado EliminarEmpleadosLista(Empleado e) {
     return NULL;
 }
 
+
+
 // __________Funciones tipo imprimir
 
 void ListaEmpleados(Empleado e){

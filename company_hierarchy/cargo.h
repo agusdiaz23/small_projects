@@ -10,8 +10,9 @@ typedef struct nodo_cargo * Cargo;
 
 //________Funciones de imprimir 
 
-// Imprime el arbol hasta el cargo pasado (no incluye el cargo pasado)
-void imprimirArbolCargosHasta(Cargo cargos, Cadena car_nom, int ident);
+// Esta funcion va iterativamente desde el cargo pasado hasta el cargo raiz
+// Una vez en el cargo raiz imprime el dato de cada nodo
+void imprimeDesdeAbajo(Cargo cargos);
 
 // Se llama desde ListarJerarquia(). Usa un int para aumentar la identacion segun avanza por los hijos
 void imprimirArbolCargos(Cargo cargos, int ident);
@@ -55,7 +56,7 @@ void ArbolCargo_A_ListaCargo(Cargo cargos);
 Cargo eliminarCargosDesde(Cargo cargos);
 
 // Dado un cargo raiz pasado, eliminar ese cargo y todo lo que este unido
-Cargo eliminarCargos_Y_Parientes(Cargo cargos);
+Cargo eliminaHermanosSig_Y_Hijos(Cargo cargos);
 
 //Asigno persona a lista empleado de un cargo
 void AsignoPersonaCargo (Cargo &cargos, Cadena ci, Cadena nombre);

@@ -38,9 +38,7 @@ TipoRet CrearOrg(Empresa &e, Cadena cargo){
 TipoRet EliminarOrg(Empresa &e){
 // Eliminar el organigrama, elimina toda la estructura del organigrama, liberando la memoria asignada.
 
-	Cargo cargos = e->cargos;
-
-	eliminarCargos_Y_Parientes(cargos); // Borro todo el arbol
+	e->cargos = eliminaHermanosSig_Y_Hijos(e->cargos); // Borro todo el arbol
 
 	delete e; // Borro la empresa
 
@@ -195,10 +193,12 @@ TipoRet ListarSuperCargos (Empresa e, Cadena cargo){
 		return ERROR;
 	}
 	
-	// Entro en una funcion para imprimirlo
-	Cargo cargos = e->cargos;
-	imprimirArbolCargosHasta(cargos, cargo, 0);
-	
+	// Encuentro un puntero hacia el cargo cuyos super cargos quiero listar
+	Cargo cargo_aux = iteradorEmpresa(cargo, e->cargos);
+
+	// Esto itera desde abajo del todo del arbol
+	imprimeDesdeAbajo(cargo_aux);
+
 	return OK;
 }
 

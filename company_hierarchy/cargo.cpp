@@ -23,26 +23,19 @@ struct nodo_cargo {
 
 //________Funciones de imprimir 
 
-void imprimirArbolCargosHasta(Cargo cargos, Cadena car_nom, int ident) {
-// Imprime el arbol hasta el cargo pasado (no incluye el cargo pasado)
 
-	// Me muevo recursivamente e imprimo hasta que encuentra un cargo con el mismo nombre
-	if( strcasecmp ( getCarNom(cargos), car_nom ) == 0 ) {
-		return;
+void imprimeDesdeAbajo(Cargo cargos) 	{
+//Esta funcion va iterativamente desde el cargo pasado hasta el cargo raiz
+// Una vez en el cargo raiz imprime el dato de cada nodo
+	
+	if(cargos->padre==NULL) { // Si llegue el cargo raiz que no tiene cargo padre
+		cout << getCarNom(cargos) << endl; // Imprimo el nombre y dejo de iterar
 	}
-	else {
-		// Esta parte pone la identacion segun avanza el programa
-		imprimirIdent(ident);
-		cout << "->" << getCarNom(cargos) << endl;
-
-		if(cargos->hijo != NULL) {
-			imprimirArbolCargosHasta(cargos->hijo, car_nom, ident + 2);
-		}
-
-		if(cargos->hermano_sig != NULL) {
-			imprimirArbolCargosHasta(cargos->hermano_sig, car_nom, ident + 2);
-		}
+	else if(cargos->padre != NULL) 	{ // Si mi cargo actual tiene un padre sigo recorriendo
+		imprimeDesdeAbajo(cargos->padre);
+		cout << getCarNom(cargos) << endl;
 	}
+
 }
 
 void imprimirArbolCargos(Cargo cargos, int ident) {
@@ -129,13 +122,23 @@ Cargo iteradorEmpresa(Cadena cargo, Cargo cargos) {
 }
 
 Cargo iteradorCargohermano_sigs(Cargo cargos) {
-	// Itera hasta el final de la lista de cargos hijos y devuelve el ultimo miembro
+	// Itera hasta el final de la lista de cargos hermanos y devuelve el ultimo miembro
 
 	if(cargos->hermano_sig == NULL) {
 		return cargos;
 	}
 	else if(cargos->hermano_sig != NULL) {
 		return (iteradorCargohermano_sigs(cargos->hermano_sig));
+	}
+	return NULL;
+}
+
+Cargo iteradorCargohermano_ants(Cargo cargos) {
+	if(cargos->hermano_ant == NULL) {
+		return cargos;
+	}
+	else if(cargos->hermano_ant != NULL) {
+		return (iteradorCargohermano_ants(cargos->hermano_ant));
 	}
 	return NULL;
 }
@@ -240,28 +243,22 @@ void iterarArbol_Anadir_a_Lista(Cargo cargos, listaSimple &lista) {
 
 }
 
-
-Cargo eliminarCargos_Y_Parientes(Cargo cargos) {
-// Dado un cargo raiz pasado, eliminar ese cargo y todo lo que este unido. (ELIMINA HERMANOS TAMBIEN)
+Cargo eliminaHermanosSig_Y_Hijos(Cargo cargos) {
+// Dado un cargo raiz pasado, eliminar ese cargo y todo lo que este unido.
 
 	// Si estoy en un cargo null devuelvo null
 	if (cargos == NULL) {
 		return NULL;
 	}
 
-	// Entro en los cargos hijo si no estoy al final
+	// Entro en los cargos hijo si tengo
 	if(cargos->hijo != NULL) {
-		eliminarCargos_Y_Parientes(cargos->hijo);
+		eliminaHermanosSig_Y_Hijos(cargos->hijo);
 		cargos->hijo = NULL;
 	}
 
-	// Entro en los cargos hermano sig si no estoy al final
 	if(cargos->hermano_sig != NULL) {
-		eliminarCargos_Y_Parientes(cargos->hermano_sig);
-	}
-
-	if(cargos->hermano_ant != NULL) {
-		eliminarCargos_Y_Parientes(cargos->hermano_ant);
+		eliminaHermanosSig_Y_Hijos(cargos->hermano_sig);
 	}
 
 	// En este punto ya me meti en todo lo posible asi que puedo eliminar nodo
@@ -281,7 +278,7 @@ void AsignoPersonaCargo (Cargo &cargos, Cadena ci, Cadena nombre){
 }
 
 bool eliminarCargoSeleccionado(Cargo cargo_a_eliminar){
-	Cargo cargo_padre, cargo_hermano_ant, cargo_hermano_sig; // Declaro variables
+	Cargo cargo_padre, cargo_hermano_ant, cargo_hermano_sig, aux; // Declaro variables
 	
 	if(cargo_a_eliminar->padre == NULL) {// Compruebo que no sea el primer cargo
 		return false;
@@ -292,7 +289,7 @@ bool eliminarCargoSeleccionado(Cargo cargo_a_eliminar){
 		cargo_padre->hijo = NULL;
 	}
 	else { // Compruebo las diferentes situaciones que se pueden dar en el nodo
-		if(cargo_a_eliminar->hermano_ant == NULL && cargo_a_eliminar->hermano_sig != NULL){ // Sino tiene un hermano anterior pero si uno siguiente
+		if(cargo_a_eliminar->hermano_sig != NULL){ // Sino tiene un hermano anterior pero si uno siguiente
 			cargo_hermano_sig = cargo_a_eliminar->hermano_sig;	// Apunto el padre al hermano siguiente y me quedo con el del medio
 			cargo_padre = cargo_a_eliminar->padre; 
 			
@@ -313,8 +310,12 @@ bool eliminarCargoSeleccionado(Cargo cargo_a_eliminar){
 
 	}
 
-	//Entro en una funcion recursiva que elimina todo los cargos que le pase (incluyendo hermanos)
-	eliminarCargos_Y_Parientes(cargo_a_eliminar->hijo);
+	//Entro en una funcion recursiva que elimina todo los cargos que le pase incluyendo hermanos y demas
+	if(cargo_a_eliminar->hijo != NULL) 	{
+		cargo_a_eliminar->hijo = eliminaHermanosSig_Y_Hijos(cargo_a_eliminar->hijo); // Elimino todo desde ese cargo
+	}
+
+	
 
 	EliminarEmpleadosLista(cargo_a_eliminar->empleados); // Empiezo eliminando la lista de empleados
 	delete[] cargo_a_eliminar->nombre; // Elimino la string
