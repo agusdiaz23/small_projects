@@ -289,7 +289,7 @@ bool eliminarCargoSeleccionado(Cargo cargo_a_eliminar){
 		cargo_padre->hijo = NULL;
 	}
 	else { // Compruebo las diferentes situaciones que se pueden dar en el nodo
-		if(cargo_a_eliminar->hermano_sig != NULL){ // Sino tiene un hermano anterior pero si uno siguiente
+		if(cargo_a_eliminar->hermano_ant == NULL && cargo_a_eliminar->hermano_sig != NULL){ // Sino tiene un hermano anterior pero si uno siguiente
 			cargo_hermano_sig = cargo_a_eliminar->hermano_sig;	// Apunto el padre al hermano siguiente y me quedo con el del medio
 			cargo_padre = cargo_a_eliminar->padre; 
 			
