@@ -1,4 +1,7 @@
-main: main.o
+main: Socio.o main.o
+	g++ Socio.o main.o
+
+Socio.o: Socio.cpp
 
 main.o: main.cpp
 
