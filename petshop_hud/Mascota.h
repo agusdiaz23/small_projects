@@ -16,7 +16,7 @@ class Mascota{
         Mascota(string, string, float);
         
         string getNombre();
-        void setCI(string);
+        void setNombre(string);
 
         Genero getGenero();
         void setGenero(Genero);
