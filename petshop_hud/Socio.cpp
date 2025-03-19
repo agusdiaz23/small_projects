@@ -1,9 +1,11 @@
 #include "Socio.h"
 
 Socio::Socio(){}
-Socio::Socio(string CI, string nombre) {
+Socio::Socio(string CI, string nombre, DtFecha fecha) {
     this->CI=CI;
     this->nombre=nombre;
+    this->fechaIngreso = fecha;
+    this->topeMascotas = 0;
 }
 
 string Socio::getCI(){
@@ -18,6 +20,13 @@ string Socio::getNombre(){
 }
 void Socio::setNombre(string nombre){
     this->nombre=nombre;
+}
+
+DtFecha Socio::getFechaIngreso(){
+    return this->fechaIngreso;
+}
+void Socio::setFechaIngreso(DtFecha fechai){
+    this->fechaIngreso=fechai;
 }
 
 Socio::~Socio(){}

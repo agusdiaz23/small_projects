@@ -2,17 +2,30 @@
 #define MASCOTA
 
 #include <string>
+#include "Genero.h"
 
 using namespace std;
 
 class Mascota{
     private:
         string nombre;
+        Genero genero;
+        float peso;
     public:
         Mascota();
-        Mascota(string);
+        Mascota(string, string, float);
+        
+        string getNombre();
+        void setCI(string);
 
-        void setNombre(string);
+        Genero getGenero();
+        void setGenero(Genero);
+
+        float getPeso();
+        void setPeso(float);
+
+        ~Mascota();
+
 };
 
 #endif
