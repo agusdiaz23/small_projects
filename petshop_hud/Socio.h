@@ -1,5 +1,6 @@
 #ifndef SOCIO
 #define SOCIO
+
 #define CANT_MASCOTAS 10
 #define CANT_CONSULTAS 20
 

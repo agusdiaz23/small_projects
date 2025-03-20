@@ -26,7 +26,7 @@ class Mascota{
 
         ~Mascota();
 
-        virtual float Mascota::obtenerRacionDiaria()=0;
+        virtual float obtenerRacionDiaria()=0;
 
 };
 

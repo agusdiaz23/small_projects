@@ -2,8 +2,7 @@
 #define CONSULTA
 
 #include <string>
-#include <DtFecha.h>
-
+#include "DtFecha.h"
 
 using namespace std;
 
@@ -16,8 +15,11 @@ class Consulta{
         Consulta();
         Consulta(DtFecha, string);
         
-        DtFecha getFechaConsulta();
-        void setFechaConsulta(DtFecha);
+        DtFecha getfechaConsulta();
+        void setfechaConsulta(DtFecha);
+
+        string getMotivo();
+        void setMotivo(string);
 
         ~Consulta();
 

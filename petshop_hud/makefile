@@ -1,13 +1,21 @@
-main: Socio.o main.o Mascota.o Consulta.o
-	g++ Socio.o main.o Mascota.o Consulta.o
+main: DtFecha.o DtMascota.o Gato.o Perro.o Socio.o Mascota.o Consulta.o main.o 
+	g++ DtFecha.o DtMascota.o Gato.o Perro.o Socio.o Mascota.o Consulta.o main.o
 
-Socio.o: Socio.cpp
+DtFecha: DtFecha.cpp
 
-main.o: main.cpp
+DtMascota: DtMascota.cpp
+
+Gato.o: Gato.cpp
+
+Perro.o: Perro.cpp
 
 Mascota.o: Mascota.cpp
 
 Consulta.o: Consulta.cpp
+
+Socio.o: Socio.cpp
+
+main.o: main.cpp
 
 clean-w:
 	del /Q *.o 

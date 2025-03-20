@@ -1,7 +1,10 @@
 #ifndef DTFECHA
 #define DTFECHA
-#include<iostream>
+
+#include <iostream>
+
 using namespace std;
+
 class DtFecha{
     private:
         int dia;
@@ -20,4 +23,6 @@ class DtFecha{
         friend bool operator ==(const DtFecha&,const DtFecha&);
 
 };
+
+
 #endif
