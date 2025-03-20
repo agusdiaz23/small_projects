@@ -1,10 +1,12 @@
 #ifndef SOCIO
 #define SOCIO
 #define CANT_MASCOTAS 10
+#define CANT_CONSULTAS 20
 
 #include <string>
 #include "DtFecha.h"
 #include "Mascota.h"
+#include "Consulta.h"
 
 using namespace std;
 
@@ -14,7 +16,9 @@ class Socio{
         string nombre;
         DtFecha fechaIngreso;
         Mascota* mascotas[CANT_MASCOTAS];
+        Consulta* consultas[CANT_CONSULTAS];
         int topeMascotas;
+        int topeConsultas;
     public:
         Socio();
         Socio(string, string, DtFecha);
@@ -29,6 +33,9 @@ class Socio{
         void setFechaIngreso(DtFecha);
 
         ~Socio();
+
+        Mascota** obtenerMascotas(int&);
+        Consulta** obtenerConsulta(int&);
 
 };
 

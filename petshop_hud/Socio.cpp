@@ -29,4 +29,9 @@ void Socio::setFechaIngreso(DtFecha fechai){
     this->fechaIngreso=fechai;
 }
 
+Mascota** Socio:: obtenerMascotas(int& cantMascotas){
+    cantMascotas=this->topeMascotas;
+    return this->mascotas;
+}
+
 Socio::~Socio(){}

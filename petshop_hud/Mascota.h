@@ -13,7 +13,7 @@ class Mascota{
         float peso;
     public:
         Mascota();
-        Mascota(string, string, float);
+        Mascota(string, Genero, float);
         
         string getNombre();
         void setNombre(string);
@@ -25,6 +25,8 @@ class Mascota{
         void setPeso(float);
 
         ~Mascota();
+
+        virtual float Mascota::obtenerRacionDiaria()=0;
 
 };
 
