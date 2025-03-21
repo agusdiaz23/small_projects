@@ -6,9 +6,6 @@ Consulta::Consulta(DtFecha fechaConsulta, string motivo){
     this->motivo=motivo;
 }
 
-
-
-
 DtFecha Consulta::getfechaConsulta(){
     return this->fechaConsulta;
 }

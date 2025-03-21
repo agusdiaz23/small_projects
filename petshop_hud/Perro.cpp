@@ -1,9 +1,9 @@
 #include "Perro.h"
 
-Perro::Perro(){}
-Perro::Perro(RazaPerro raza, bool vacunaCachorro){
+Perro::Perro(string nombre, Genero genero, float peso, RazaPerro raza, bool vacunaCachorro) : 
+mascota(nombre, genero, peso){
     this->raza=raza;
-    this->raza=raza;
+    this->vacunaCachorro=vacunaCachorro;
 }
 
 RazaPerro Perro::getRazaPerro(){
@@ -23,5 +23,5 @@ void Perro::setvacunaCachorro(bool vacunaCachorro){
 Perro::~Perro(){}
 
 float Perro::obtenerRacionDiaria(float peso) {
-    return this->getPeso()*0,015;
+    return this->getPeso()*0.025;
 }

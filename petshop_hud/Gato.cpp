@@ -1,7 +1,7 @@
 #include "Gato.h"
 
-Gato::Gato(){}
-Gato::Gato(TipoPelo tipoPelo){
+Gato::Gato(string nombre, Genero genero, float peso, TipoPelo tipoPelo): 
+Mascota(nombre, Genero, peso){
     this->tipoPelo=tipoPelo;
 }
 
@@ -15,5 +15,5 @@ void Gato::settipoPelo(TipoPelo){
 Gato::~Gato(){}
 
 float Gato::obtenerRacionDiaria(float peso) {
-    return this->getPeso()*0,025;
+    return this->getPeso()*0.015;
 }

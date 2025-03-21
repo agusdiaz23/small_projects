@@ -11,8 +11,7 @@ class Gato: public Mascota{
     public:
         TipoPelo tipoPelo;
     private:
-        Gato();
-        Gato(TipoPelo);
+        Gato(string, Genero, float, TipoPelo);
 
         TipoPelo gettipoPelo();
         void settipoPelo(TipoPelo);
