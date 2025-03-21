@@ -1,5 +1,5 @@
-main: DtFecha.o DtMascota.o Gato.o Perro.o Socio.o Mascota.o Consulta.o main.o 
-	g++ DtFecha.o DtMascota.o Gato.o Perro.o Socio.o Mascota.o Consulta.o main.o
+main: DtFecha.o DtMascota.o Gato.o Perro.o Socio.o Mascota.o Consulta.o main.o DtConsulta.0 DtGato.o Dtperro.o
+	g++ DtFecha.o DtMascota.o Gato.o Perro.o Socio.o Mascota.o Consulta.o main.o DtConsulta.o DtGato.o Dtperro.o
 
 DtFecha: DtFecha.cpp
 
@@ -17,6 +17,13 @@ Socio.o: Socio.cpp
 
 main.o: main.cpp
 
+DtConsulta.0: DtConsulta.cpp
+
+DtGato.o: DtGato.cpp
+
+Dtperro.o: Dtperro.cpp
+
+
 clean-w:
 	del /Q *.o 
 	del /Q main.exe
@@ -24,4 +31,3 @@ clean-w:
 clean:
 	rm -rf *.o grin
 	clear
-
