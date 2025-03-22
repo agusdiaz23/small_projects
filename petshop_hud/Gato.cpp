@@ -1,7 +1,8 @@
 #include "Gato.h"
+#include "TipoPelo.h"
 
-Gato::Gato(string nombre, Genero genero, float peso, TipoPelo tipoPelo): 
-Mascota(nombre, Genero, peso){
+Gato::Gato(){}
+Gato::Gato(string nombre, Genero genero, float peso, TipoPelo tipoPelo):Mascota(nombre, genero, peso) {
     this->tipoPelo=tipoPelo;
 }
 

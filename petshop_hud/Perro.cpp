@@ -1,7 +1,8 @@
 #include "Perro.h"
 
-Perro::Perro(string nombre, Genero genero, float peso, RazaPerro raza, bool vacunaCachorro) : 
-mascota(nombre, genero, peso){
+Perro::Perro(){}
+Perro::Perro(string nombre, Genero genero, float peso, RazaPerro raza, bool vacunaCachorro): 
+Mascota(nombre, genero, peso){
     this->raza=raza;
     this->vacunaCachorro=vacunaCachorro;
 }

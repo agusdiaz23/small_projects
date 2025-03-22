@@ -1,4 +1,5 @@
 #include "DtGato.h"
+#include "TipoPelo.h"
 
 
 DtGato::DtGato(string nombre, Genero genero, float peso, float racionDiaria, TipoPelo tipoPelo):

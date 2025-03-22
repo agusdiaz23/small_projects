@@ -12,6 +12,7 @@ class Perro: public Mascota{
         RazaPerro raza;
         bool vacunaCachorro;
     public:
+        Perro();
         Perro(string, Genero, float, RazaPerro, bool);
 
         RazaPerro getRazaPerro();

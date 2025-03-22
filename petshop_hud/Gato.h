@@ -7,10 +7,11 @@
 
 using namespace std;
 
-class Gato: public Mascota{
-    public:
-        TipoPelo tipoPelo;
+class Gato : public Mascota{
     private:
+        TipoPelo tipoPelo;
+    public:
+        Gato();
         Gato(string, Genero, float, TipoPelo);
 
         TipoPelo gettipoPelo();
