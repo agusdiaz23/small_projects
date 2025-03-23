@@ -1,5 +1,6 @@
 #include "DtPerro.h"
 
+DtPerro::DtPerro(){}
 DtPerro::DtPerro(string nombre, Genero genero, float peso,float racionDiaria, RazaPerro raza, bool vacuna):
 DtMascota(nombre,genero,peso,racionDiaria){
     this->raza = raza; 
