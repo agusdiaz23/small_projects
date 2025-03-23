@@ -22,6 +22,15 @@ void liberarMemoria() {
     coleccionSocio.topeSocios = 0;
 }
 
+//Funciones a Implementar
+void registrarSocio() {}
+void agregarMascota() {}
+void ingresarConsulta() {}
+void verConsultasAntesDeFecha() {}
+void eliminarSocio() {}
+void obtenerMascotas() {}
+
+
 // Declaraciones de funciones
 void registrarSocio();
 void agregarMascota();
@@ -46,6 +55,7 @@ int main() {
         cout << "6) Obtener mascotas" << endl;
         cout << "0) Salir" << endl;
         cout << "Opcion: ";
+
         cin >> opcion;
 
         switch (opcion) {
@@ -71,7 +81,7 @@ int main() {
                 cout << "Saliendo..." << endl;
                 break;
             default:
-                cout << "Opción inválida, intente de nuevo..." << endl;
+                cout << "Opcion invalida, intente de nuevo..." << endl;
                 break;
         }
     } while (opcion != 0);

@@ -3,6 +3,7 @@
 
 #include <string>
 #include "DtMascota.h"
+#include "TipoPelo.h"
 
 
 using namespace std;
