@@ -157,7 +157,7 @@ void noExisteSocio(string ci) {
         i++;
     }
     if (existe)
-    throw invalid_argument("\nERROR: YA EXISTE USUARIO CON ESA CI EN EL SISTEMA\n");
+        throw invalid_argument("\nERROR: YA EXISTE USUARIO CON ESA CI EN EL SISTEMA\n");
 }
 
 void limpiarPantalla(){
