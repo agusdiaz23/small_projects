@@ -3,7 +3,6 @@
 
 #define CANT_MASCOTAS 10
 #define CANT_CONSULTAS 20
-#define MAX_SOCIOS 50
 
 
 #include <string>
@@ -20,7 +19,6 @@ class Socio{
         DtFecha fechaIngreso;
         Mascota* mascotas[CANT_MASCOTAS];
         Consulta* consultas[CANT_CONSULTAS];
-        Socio* socios[MAX_SOCIOS];
         int topeMascotas;
         int topeConsultas;
         int topeSocios;
