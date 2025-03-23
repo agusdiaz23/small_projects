@@ -148,6 +148,16 @@ void registrarSocio() {
 // OPERACIONES AUXILIARES
 void noExisteSocio(string ci) {
     int i=0;
+    bool existe=false;
+    while((i<arraySocios.topeS)&&(!existe)){
+
+        if(ci == arraySocios.socios[i]->getCI()){
+            existe=true;
+        }
+        i++;
+    }
+    if (existe)
+        throw invalid_argument("\nERROR: YA EXISTE USUARIO CON ESA CI EN EL SISTEMA\n");
 }
 
 void limpiarPantalla(){
