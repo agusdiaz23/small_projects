@@ -13,6 +13,7 @@ class DtGato : public DtMascota{
     private:
         TipoPelo tipoPelo;
     public: 
+        DtGato();
         DtGato(string nombre, Genero genero, float peso, float racionDiaria, TipoPelo tipoPelo);
         
         TipoPelo getTipoPelo();

@@ -29,5 +29,5 @@ clean-w:
 	del /Q main.exe
 
 clean:
-	rm -rf *.o 
+	rm -rf *.o main.exe
 	clear 

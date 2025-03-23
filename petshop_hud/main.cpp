@@ -26,17 +26,18 @@ struct{
 
 // OPERACION 1 (SEMI IMPLEMENTADA)
 void registrarSocio();
+void registrarSocio(string, string, DtFecha); // IMPLEMENTADA
+// OPERACION 2 (SEMI IMPLEMENTADA)
+void agregarMascota(); //  (SEMI IMPLEMENTADA)
+void agregarMascota(string ci, DtMascota& dtMascota);//SEMI IMPLEMENTADA
 
 // OPERACIONES POR IMPLEMENTAR
-void agregarMascota() {}
 void ingresarConsulta() {}
 void verConsultasAntesDeFecha() {}
 void eliminarSocio() {}
 void obtenerMascota() {}
 
 // Declaraciones de funciones
-void registrarSocio(string, string, DtFecha); // IMPLEMENTADA
-void agregarMascota(); // NO IMPLEMENTADA 
 void ingresarConsulta(); // NO IMPLEMENTADA 
 void verConsultasAntesDeFecha(); // NO IMPLEMENTADA 
 void eliminarSocio(); // NO IMPLEMENTADA 
@@ -45,6 +46,9 @@ void liberarMemoria(); // IMPLEMENTADA
 
 // OPERACIONES AUXILIARES
 void noExisteSocio(string ci);
+Socio* obtenerSocio(string ci);
+void pesoCorrecto(float);
+void racionDiariaCorrecta(float);
 void limpiarPantalla();
 void esperarPorInput();
 
@@ -144,10 +148,152 @@ void registrarSocio() {
     }
 }
 
+ // OPERACION 2
+ void agregarMascota() {
+
+    limpiarPantalla(); // Esta funcion limpia la pantalla en linux y windows
+    cout <<"________________________"<<endl;
+    cout <<"____REGISTRO_DE_MASCOTA____"<< endl;
+    
+    string nombre_mascota, socio_ci;
+    Genero genero;
+    float peso, racionDiaria;
+    bool vacunaCachorro;
+    RazaPerro raza;
+    TipoPelo tipoPelo;
+	DtPerro dtperro;
+	DtGato dtgato;
+
+    cout << "\nCI: ";
+    cin >> socio_ci;
+
+    try {
+        noExisteSocio(socio_ci);
+        
+        cout << "NOMBRE MASCOTA: ";
+        cin >> nombre_mascota;
+
+        int opGenero;
+        cout << "\nGENERO?\n\t1.Macho\n\t2.Hembra\nINDIQUE: ";
+							cin >> opGenero;
+							
+							switch(opGenero){
+								case 1: genero=MACHO;
+										break;
+								case 2: genero=HEMBRA;
+										break;
+							}
+
+        cout << "\nPESO:" << endl;
+        cin >> peso;
+        try{
+            pesoCorrecto(peso);
+            cout << "\nRACION DIARIA:" << endl;
+            cin >> racionDiaria;
+            try{
+                racionDiariaCorrecta(racionDiaria);
+
+                int opMascota, opVacuna, opPelo;				
+				cout << "\nTIPO DE MASCOTA" << endl << "\t1.Perro\n\t2.Gato\nINDIQUE: ";
+				cin >> opMascota;
+				
+				switch(opMascota){
+					case 1:	cout << "\nTIENE VACUNA?\n\t1.Si\n\t2.No\nINDIQUE: ";
+							cin >> opVacuna;							
+							vacunaCachorro = (opVacuna == 1);
+
+                            int opRaza;
+                            cout << "\nINGRESE RAZA:\n\t1.Labrador\n\t2.Ovejero\n\t3.Bulldog\n\t4.Pitbull\n\t5.Collie\n\t6.Pekines\n\t7.Otro\nINDIQUE: ";    
+							cin >> opRaza;
+							
+							switch(opRaza){
+								case 1: raza=LABRADOR;
+										break;
+								case 2: raza=OVEJERO;
+                                        break;
+                                case 3: raza=BULLDOG;
+										break;
+                                case 4: raza=PITBULL;
+                                        break;
+                                case 5: raza=COLLIE;
+                                        break;
+                                case 6: raza=PEKINES;
+                                        break;
+                                case 7: raza=OTRO;
+                                        break;
+							}
+
+							dtperro = DtPerro(nombre_mascota,genero,peso,racionDiaria,raza,vacunaCachorro);
+							agregarMascota(socio_ci, dtperro);
+							break;
+					case 2: cout << "\nTIPO DE PELO?\n\t1.Corto\n\t2.Mediano\n\t3.Largo\nINDIQUE: ";
+							cin >> opPelo;
+							
+							switch(opPelo){
+								case 1: tipoPelo=CORTO;
+										break;
+								case 2: tipoPelo=MEDIANO;
+										break;
+                                case 3: tipoPelo=LARGO;
+										break;
+							}
+
+							//AQUI VA CODIGO QUE LLAMA A FUNCION QUE AGREGA GATO
+							break;
+				}
+            }
+            catch(invalid_argument& e){
+                cout << e.what() << endl;
+            }  
+        }
+        catch(invalid_argument& e){
+            cout << e.what() << endl;
+        }                  
+      
+        esperarPorInput(); // lee el enter del usuario en linux y windows
+    }
+    catch(invalid_argument& e){
+        cout << e.what() << endl;
+    }
+}
+
+// OPERACIONES A IMPLEMENTAR
+void registrarSocio(string ci, string nombre, DtFecha fecha) {
+    Socio* socio = new Socio(ci,nombre,fecha);
+    arraySocios.socios[arraySocios.topeS] = socio;
+    arraySocios.topeS++;
+}
+void agregarMascota(string ci, DtMascota& mascota){
+    try{
+        DtPerro& dtPerro = dynamic_cast<DtPerro&>(mascota);
+        Perro* perro = new Perro(dtPerro.getnombre(),dtPerro.getgenero(),dtPerro.getpeso(),dtPerro.getraza(),dtPerro.getvacunaCachorro());
+        
+        //AQUI VA CODIGO QUE AGREGA EL PERRO COMO MASCOTA DEL SOCIO QUE OBTENGO POR CI
+    }catch(bad_cast){
+    try{
+        //AQUI VA CODIGO SIMILAR AL ANTERIOR PERO PARA AGREGAR GATO
+    }catch(bad_cast){}    
+    }
+}
+
 
 // OPERACIONES AUXILIARES
 void noExisteSocio(string ci) {
     int i=0;
+}
+
+Socio* obtenerSocio(string ci){
+	Socio* socioObtenido;
+	int i=0;
+	bool existe=false;
+	while((i<arraySocios.topeS)&&(!existe)){
+		if(ci == arraySocios.socios[i]->getCI()){
+			socioObtenido=arraySocios.socios[i];
+			existe=true;
+		}
+		i++;
+	}
+	return socioObtenido;
 }
 
 void limpiarPantalla(){
@@ -166,14 +312,6 @@ void esperarPorInput() {
     #endif
 }
 
-
-// DECLARACIONES DE FUNCIONES
-void registrarSocio(string ci, string nombre, DtFecha fecha) {
-    Socio* socio = new Socio(ci,nombre,fecha);
-    arraySocios.socios[arraySocios.topeS] = socio;
-    arraySocios.topeS++;
-}
-
 //Funcion para liberar los socios almacenados en arraySocios
 void liberarMemoria() {
     for (int i = 0; i < arraySocios.topeS; ++i) {
@@ -182,3 +320,11 @@ void liberarMemoria() {
     arraySocios.topeS = 0; 
 }
 
+void pesoCorrecto(float peso){
+	if (peso<=0)
+		throw invalid_argument("\nERROR: EL PESO DEBE SER MAYOR A CERO");
+}
+void racionDiariaCorrecta(float racion){
+	if (racion<=0)
+		throw invalid_argument("\nERROR: KA RACION DEBE SER MAYOR A CERO");
+}
